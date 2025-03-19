@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #define AUTOMATIC_ERROR_CHECK false
 using namespace std;
 
