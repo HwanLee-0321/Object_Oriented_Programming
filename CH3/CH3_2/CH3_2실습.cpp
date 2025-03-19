@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <string>
 using namespace std;
 
 class Person
@@ -49,12 +50,10 @@ void Person::set(const char *pname, int pid, double pweight, bool pmarried, cons
 }
 
 void Person::inputMembers(istream* pin) {
-    cout << "input person information:" << endl;
-    
     *pin >> name >> id >> weight >> married;
-    pin->ignore(); // ✅ 남아있는 개행 문자 제거
-
-    pin->getline(address, sizeof(address)); // ✅ 주소 입력
+    if (!(*pin)) return;
+    pin->getline(address, sizeof(address), ':');
+    pin->getline(address, sizeof(address), ':');
 }
 
 void Person::whatAreYouDoing() {
@@ -64,6 +63,7 @@ void Person::whatAreYouDoing() {
 bool Person::isSame(const char* pname, int pid) {
     return (strcmp(name, pname) == 0 && id == pid);
 }
+
 
 Person::Person(): name{}, id{}, weight{}, married{}, address{} {
     // 위 함수 서두(:와 함수 본체 사이)에서 각 멤버를 초기화하는데 이는 함수 진입하기 전에
@@ -91,11 +91,13 @@ Person::~Person() {
 
 void Person::printMembers(ostream* pout) {
     *pout << name << " " << id << " " << weight << " " 
-          << (married ? "true" : "false");
+          << (married ? "true" : "false") << " :";
     
     if (strlen(address) > 0) { // ✅ 주소가 있을 때만 출력
-        *pout << " :" << address << ":";
+        *pout << address;
     }
+
+    *pout << ":"; // ✅ 항상 `:` 추가
 }
 
 namespace UI {
@@ -196,14 +198,15 @@ void CurrentUser::getter() { // Menu item 2
 }
 
 void CurrentUser::setter() { // Menu item 3
-    Person ps("ps");
-    ps.setName(ps.getName());
-    ps.setId(user.getId());
-    ps.setWeight(user.getWeight());
-    ps.setMarried(user.getMarried());
-    ps.setAddress(user.getAddress());
-    cout << "ps.setMembers():"; ps.println();
+    Person ps("ps");  
+
+    // ✅ `user.getName()` 대신 `ps.getName()` 사용
+    ps.set(ps.getName(), user.getId(), user.getWeight(), user.getMarried(), user.getAddress());
+
+    cout << "ps.setMembers():"; 
+    ps.println();
 }
+
 
 void CurrentUser::set() { // Menu item 4
     Person ps("ps");
