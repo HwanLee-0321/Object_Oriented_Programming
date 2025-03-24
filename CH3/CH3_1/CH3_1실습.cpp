@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+// 만약 자동 오류 체크를 실행하고 싶다면 아래 행에서 false를 true로 바꿔야한다.
+#define AUTOMATIC_ERROR_CHECK false
 using namespace std;
 
 class Person
@@ -262,6 +264,11 @@ void run() {
     // MainMenu mm;
     // mm.run();
 }
+
+
+#if AUTOMATIC_ERROR_CHECK
+#include "check_error.h"
+#endif
 
 int main() {
     cout << boolalpha;  // 11장에서 배움; bool 타입 값을 0, 1 대신 true, false로 출력하도록 설정
