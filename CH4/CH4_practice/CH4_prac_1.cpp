@@ -20,20 +20,53 @@ public:
     void inputIntArray();
 };
 
+// Container 클래스의 멤버 함수: findDeleteTitle()
+// 설명: title에서 사용자가 입력한 특정 단어를 찾아서 모두 삭제한다.
+void Container::findDeleteTitle() {
+    string word;  // 삭제할 단어를 저장할 변수
+
+    cout << "word to delete? ";
+    cin >> word;  // 삭제할 단어 입력받기
+
+    size_t pos;  // 단어가 발견된 위치를 저장하는 변수
+
+    // 단어가 발견되지 않을 때까지 반복하여 삭제
+    while ((pos = title.find(word)) != string::npos) {
+        title.erase(pos, word.length()); // 찾은 위치(pos)부터 단어 길이만큼 삭제
+    }
+
+    // 삭제 후 결과(title) 출력
+    cout << title << endl;
+}
+
+void Container::rightRotateTitle() {
+    int len = title.length();
+
+    for (int i = 1; i <= len; i++) {
+        // 맨 뒤의 한 글자를 앞으로 옮기는 작업
+        title = title[len - 1] + title.substr(0, len - 1);
+        cout << title << endl;
+    }
+}
+
 void Container::average(){
-    int sum = 0;
+    double sum = 0;
     for(int i=0; i<size; i++){
         sum += arr[i];
     }
-    cout << "average: " << sum << endl;
+    cout << "average: " << sum/size << endl;
 }
 
 void Container::inputIntArray(){
     int i;
     cout << "input " << size << " integers: ";
-    for (i = 1; i < size + 1; i++){ cin >> arr[i-1]; }
+    for (i = 0; i < size; i++) {
+        cin >> arr[i];
+    }
     cout << "arr[" << size << "]:";
-    for (i = 0; i < size; i++){ cout << " " << arr[i]; }
+    for (i = 0; i < size; i++){
+        cout << " " << arr[i];
+    }
     cout << endl;
 }
 
@@ -86,12 +119,25 @@ void intArray() {
 }
 
 Container *newObjectArray(int size) {
-    Container *pArr = nullptr; // Container 객체 배열 시작 주소
-    /* 여기에 코드를 구현하라. */
+    Container *pArr = new Container[size]; // 1) size개의 Container 객체 배열 동적 할당
+    cout << "input " << size << " words: ";
+    cin.ignore(); // 이전 입력에서 남은 '\n' 제거
+
+    for(int i = 0; i < size; i++) {
+        string word;
+        cin >> word;                 // 2) 단어 입력
+        pArr[i].setTitle(word);     // title에 저장
+    }
+
     return pArr;
 }
 
 void printTitles(Container *pArr, int size) {
+    cout << "words: ";
+    for (int i = 0; i < size; i++) {
+        cout << pArr[i].getTitle() << " ";
+    }
+    cout << endl;
 }
 
 void objectArray() {
@@ -102,18 +148,28 @@ void objectArray() {
     pArr = newObjectArray(size);
     printTitles(pArr, size);
     /* 여기서 pArr이 포인터 하는 메모리를 반납하시오. */
+    delete[] pArr;
 }
 
 void inputTitle(Container* cp) {
     string s;
-    getline(cin, s); // 앞서 입력된 메뉴항목 번호 뒤의 [엔터]를 제거함
-    /* 여기에 코드를 구현하라. */
+    cout << "input title: ";
+    cin.ignore();
+    getline(cin,s);
+    cp -> setTitle(s);
 }
 
 void rotateTitle() {
+    Container c;
+    inputTitle(&c);
+    cout << "c.getTitle(): " << c.getTitle() << endl;
+    c.rightRotateTitle();
 }
 
 void findDelete() {
+    Container c;
+    inputTitle(&c);      // This AAis aAA AAtest AAtitle.
+    c.findDeleteTitle();
 }
 
 /******************************************************************************
