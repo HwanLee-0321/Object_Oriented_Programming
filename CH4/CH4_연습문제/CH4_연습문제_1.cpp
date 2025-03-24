@@ -20,9 +20,17 @@ public:
     void inputIntArray();
 };
 
+void Container::average(){
+    int sum = 0;
+    for(int i=0; i<size; i++){
+        sum += arr[i];
+    }
+    cout << "average: " << sum << endl;
+}
+
 void Container::inputIntArray(){
     int i;
-    cout << "input " << size << "integers: ";
+    cout << "input " << size << " integers: ";
     for (i = 1; i < size + 1; i++){ cin >> arr[i-1]; }
     cout << "arr[" << size << "]:";
     for (i = 0; i < size; i++){ cout << " " << arr[i]; }
@@ -74,7 +82,7 @@ void intArray() {
     Container c;
     c.newIntArray();
     c.inputIntArray();
-    //c.average();
+    c.average();
 }
 
 Container *newObjectArray(int size) {
