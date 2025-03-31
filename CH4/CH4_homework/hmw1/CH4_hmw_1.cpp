@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include <string>
-#define AUTOMATIC_ERROR_CHECK false
+#include <sstream>
+#define AUTOMATIC_ERROR_CHECK true
 using namespace std;
 
 class Person
@@ -11,6 +12,7 @@ class Person
     double weight;          // 체중
     bool   married;         // 결혼여부
     char   address[40];     // 주소
+    string rawInput;
 
 protected:
     void inputMembers(istream* in);
@@ -51,11 +53,42 @@ void Person::set(const string name, int pid, double pweight, bool pmarried, cons
 }
 
 void Person::inputMembers(istream* pin) {
-    *pin >> name >> id >> weight >> married;
-    if (!(*pin)) return;
+    string line;
+    getline(*pin, line);
+    rawInput = line; // 그대로 저장 (출력용)
 
-    pin->ignore(1000, ':');                    // ':' 전까지 무시 (공백 포함)
-    pin->getline(address, sizeof(address), ':'); // 주소 읽기 (마지막 ':' 전까지)
+    istringstream iss(line);
+    string t_name;
+    int t_id;
+    double t_weight;
+    string t_married_str;
+    bool t_married;
+    char colon;
+    string addrPart;
+
+    // 1. 이름, id, 몸무게, 결혼 여부, ':' 구분까지
+    if (!(iss >> t_name >> t_id >> t_weight >> t_married_str >> colon) || colon != ':') {
+        pin->setstate(ios::failbit);
+        return;
+    }
+
+    // 2. 결혼 여부 bool 처리
+    if (t_married_str == "true")
+        t_married = true;
+    else if (t_married_str == "false")
+        t_married = false;
+    else {
+        pin->setstate(ios::failbit);
+        return;
+    }
+
+    // 3. 주소 처리
+    getline(iss, addrPart, ':');
+    if (addrPart.length() >= sizeof(address))
+        addrPart = addrPart.substr(0, sizeof(address) - 1);
+
+    // 4. 실제 데이터 반영
+    set(t_name, t_id, t_weight, t_married, addrPart.c_str());
 }
 
 void Person::whatAreYouDoing() {
@@ -90,14 +123,9 @@ Person::~Person() {
 }
 
 void Person::printMembers(ostream* pout) {
-    *pout << name << " " << id << " " << weight << " " 
-          << (married ? "true" : "false") << " :";
-    
-    if (strlen(address) > 0) { // ✅ 주소가 있을 때만 출력
-        *pout << address;
-    }
-
-    *pout << ":"; // ✅ 항상 `:` 추가
+    *pout << name << " " << id << " " << weight << " "
+          << (married ? "true" : "false") << " :"
+          << address << ":";
 }
 
 namespace UI {
@@ -127,7 +155,6 @@ bool checkDataFormatError(istream* pin) {
 bool inputPerson(Person* p) {
     cout << "input person information:" << endl;
     p->input(&cin);
-    if (checkDataFormatError(&cin)) return false;
     if (echo_input) p->println(); // 자동체크에서 사용됨
     return true;
 }
