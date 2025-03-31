@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#define AUTOMATIC_ERROR_CHECK false
 using namespace std;
 
 class Person
@@ -41,27 +42,28 @@ public:
     bool isSame(const string name, int pid);         // ch3_2에서 추가
 };
 
-void Person::set(const char *pname,  int pid, double pweight, bool pmarried, const char *paddress) {
-    id = pid;                // ✅ id 값 설정
-    weight = pweight;        // ✅ weight 값 설정
-    married = pmarried;      // ✅ married 값 설정
-    name = pname;            // ✅ setName()을 사용하여 name 설정
-    setAddress(paddress);    // ✅ setAddress()을 사용하여 address 설정
+void Person::set(const string name, int pid, double pweight, bool pmarried, const char *paddress) {
+    setName(name);        // string으로 직접 설정
+    setId(pid);
+    setWeight(pweight);
+    setMarried(pmarried);
+    setAddress(paddress);
 }
 
 void Person::inputMembers(istream* pin) {
     *pin >> name >> id >> weight >> married;
     if (!(*pin)) return;
-    pin->getline(address, sizeof(address), ':');
-    pin->getline(address, sizeof(address), ':');
+
+    pin->ignore(1000, ':');                    // ':' 전까지 무시 (공백 포함)
+    pin->getline(address, sizeof(address), ':'); // 주소 읽기 (마지막 ':' 전까지)
 }
 
 void Person::whatAreYouDoing() {
     cout << name << " is taking a rest." << endl;
 }
 
-bool Person::isSame(const char* pname, int pid) {
-    return (this->name == name);
+bool Person::isSame(const string name, int pid) {
+    return (this->name == name && this->id == pid);
 }
 
 
@@ -72,14 +74,14 @@ Person::Person(): name{}, id{}, weight{}, married{}, address{} {
     cout << "Person::Person():"; println();
 }
 
-Person::Person(const char *name) : id(0), weight(0.0), married(false), address{} {
+Person::Person(const string name) : id(0), weight(0.0), married(false), address{} {
     setName(name);
     cout << "Person::Person(\"" << name << "\"):"; println();
 }
 
 Person::Person(const string name, int id, double weight, bool married, const char *address)
     : name(name), id{id}, weight{weight}, married{married} {
-    setAddress(address);  // setAddress는 여전히 필요할 수 있음
+    setAddress(address);  // 여전히 문자열 처리 및 복사가 필요한 경우
     cout << "Person::Person(...):"; println();
 }
 
@@ -113,6 +115,7 @@ bool checkInputError(istream* pin, const string msg) {
     }
     return false;
 }
+
 
 // 정수나 실수를 입력해야 하는 곳에 일반 문자열을 입력한 경우의 에러 체크
 bool checkDataFormatError(istream* pin) {
@@ -171,10 +174,10 @@ int selectMenu(const string menuStr, int menuItemCount) {
 
 class CurrentUser
 {
-    Person user;
+    Person* pUser;
 
 public:
-    CurrentUser(Person u): user(u) { }  // user(u)는 this->user = u 와 동일한 기능
+    CurrentUser(Person* pUser): pUser(pUser) { }  // user(u)는 this->user = u 와 동일한 기능
     void display();
     void setter();
     void getter();
@@ -186,46 +189,49 @@ public:
 };
 
 void CurrentUser::display() { // Menu item 1
-    user.println();
+    pUser->println();
 }
 
-void CurrentUser::getter() { // Menu item 2
-    cout << "name:" << user.getName() << ", id:" << user.getId() << ", weight:" <<
-            user.getWeight() << ", married:" << user.getMarried() <<
-            ", address:" << user.getAddress() << endl;
+void CurrentUser::getter() {  // Menu item 2
+    cout << "name:" << pUser->getName()
+         << ", id:" << pUser->getId()
+         << ", weight:" << pUser->getWeight()
+         << ", married:" << (pUser->getMarried() ? "true" : "false")
+         << ", address:" << pUser->getAddress() << endl;
 }
 
-void CurrentUser::setter() { // Menu item 3
-    Person ps("ps");  
-
-    // ✅ `user.getName()` 대신 `ps.getName()` 사용
-    ps.set(ps.getName(), user.getId(), user.getWeight(), user.getMarried(), user.getAddress());
-
-    cout << "ps.setMembers():"; 
-    ps.println();
+void CurrentUser::setter() {  // Menu item 3
+    Person ps("pp");
+    ps.setName(ps.getName());
+    ps.setId(pUser->getId());
+    ps.setWeight(pUser->getWeight());
+    ps.setMarried(pUser->getMarried());
+    ps.setAddress(pUser->getAddress());
+    cout << "pp->setMembers():"; ps.println();
 }
 
-
-void CurrentUser::set() { // Menu item 4
-    Person ps("ps");
-    ps.set(ps.getName(), user.getId(), user.getWeight(),
-              !user.getMarried(), user.getAddress());
-    cout << "ps.set():"; ps.println();
+void CurrentUser::set() {  // Menu item 4
+    Person ps("pp");  
+    ps.set(ps.getName(),
+           pUser->getId(),
+           pUser->getWeight(),
+           !pUser->getMarried(),
+           pUser->getAddress());
+    cout << "pp->set():"; ps.println();
 }
 
 void CurrentUser::whatAreYouDoing() {  // Menu item 5
-    user.whatAreYouDoing();
+    pUser->whatAreYouDoing();
 }
 
+
 void CurrentUser::isSame() { // Menu item 6
-    user.println();
-    Person ps("user"); ps.setId(1);
-    cout << "user.isSame(): "
-         << user.isSame(ps.getName(), ps.getId()) << endl;
+    pUser->println();
+    cout << "isSame(\"user\", 1): " << (pUser->isSame("user", 1) ? "true" : "false") << endl;
 }
 
 void CurrentUser::inputPerson() { // Menu item 7
-    if (UI::inputPerson(&user)) // GilDong 1 70.5 true :Jongno-gu, Seoul:
+    if (UI::inputPerson(pUser)) // GilDong 1 70.5 true :Jongno-gu, Seoul:
         display();              // user 1 71.1 true :Gwangju Nam-ro 21:
 }
 
@@ -258,10 +264,9 @@ void CurrentUser::run() {
 class MultiManager
 {
     Person person {"p0", 0, 70.0, false, "Gwangju Nam-gu Bongseon-dong 21"};
-
 public:
     void currentUser() {
-        CurrentUser(person).run();
+        CurrentUser(&person).run();
     }
 }; // ch3_2: MultiManager class
 
@@ -366,17 +371,17 @@ public:
  * Main Menu
  ******************************************************************************/
 
-class MainMenu
-{
+class MainMenu{
 public:
     void run() {
         int menuCount = 3; // 상수 정의
         string menuStr =
 "******************************* Main Menu *********************************\n"
 "* 0.Exit 1.CurrentUser(ch3_2, 4_1)                                        *\n"
+"* 2.Class:Object(ch3_1)                                                   *\n"
 "***************************************************************************\n";
 
-        while (true) {
+        while (true) { 
             int menuItem = UI::selectMenu(menuStr, menuCount);
             if (menuItem == 0) break;
 
@@ -399,10 +404,11 @@ void run() {
     // mm.run();
 }
 
-int main() {
-    cout << boolalpha;  // 11장에서 배움; bool 타입 값을 0, 1 대신 true, false로 출력하도록 설정
-    cin >> boolalpha;   // bool 타입 값을 0, 1 대신 true, false로 입력 받도록 설정
+#if AUTOMATIC_ERROR_CHECK
+#include "check_error.h"
+#endif
 
+int main() {
 #if AUTOMATIC_ERROR_CHECK
     evaluate(false);   // 각 문제에 대해 단순히 O, X만 확인하고자 할 때는 false
 #else

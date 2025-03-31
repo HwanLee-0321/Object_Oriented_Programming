@@ -1,0 +1,53 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.CurrentUser(ch3_2, 4_1)                                        *
+* 2.Class:Object(ch3_1)                                                   *
+***************************************************************************
+Menu item number? 1
+Person::Person(...):p0 0 70 false :Gwangju Nam-gu Bongseon-dong 21:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson                                       +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+p0 is taking a rest.
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson                                       +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+p0 0 70 false :Gwangju Nam-gu Bongseon-dong 21:
+isSame("user", 1): false
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson                                       +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+input person information:
+user 1 71.1 true :Gwangju Nam-ro 21:
+user 1 71.1 true :Gwangju Nam-ro 21:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson                                       +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+user 1 71.1 true :Gwangju Nam-ro 21:
+isSame("user", 1): true
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson                                       +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():user 1 71.1 true :Gwangju Nam-ro 21:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.CurrentUser(ch3_2, 4_1)                                        *
+* 2.Class:Object(ch3_1)                                                   *
+***************************************************************************
+Menu item number? 0
+Good bye!!
