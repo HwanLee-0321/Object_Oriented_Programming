@@ -17,9 +17,9 @@ protected:
     void inputMembers(istream* in);
     void printMembers(ostream* out);
     public:
-    // [문제 3-1, 3-2, 3-3] 위임 생성자들 선언부에서 정의
-    Person() : Person("") { }
-    Person(const string name) : Person(name, 0, 0.0, false, "") { }
+    // 문제 3-1, 3-2, 3-3 위임 생성자: 선언부에서 직접 타겟 생성자 호출
+    Person() : Person("", 0, 0.0, false, "") { }  // 문제 3-1
+    Person(const string name) : Person(name, 0, 0.0, false, "") { }  // 문제 3-2
 
     // 타겟 생성자
     Person(const string name, int id, double weight, bool married, const char *address)
@@ -98,6 +98,7 @@ public:
     void    push_back(Person* p); /* TODO 문제 [4, 7] */
 };
 
+
 // capacity는 할당해야 할 배열 원소의 개수
 VectorPerson::VectorPerson(int capacity)
     : count(0), allocSize(capacity) {
@@ -109,7 +110,17 @@ VectorPerson::~VectorPerson() {
     delete[] pVector;
     cout << "VectorPerson::~VectorPerson(): pVector deleted" << endl;
 }
-
+// 여기 아래에 추가
+void VectorPerson::push_back(Person* p) {
+    if (count >= allocSize) {
+        extend_capacity(); // (문제 7에서 구현 예정)
+    }
+    pVector[count++] = p;
+}
+// 🔽 이거 추가
+void VectorPerson::extend_capacity() {
+    // 문제 7에서 구현할 예정
+}
 namespace UI {
     bool echo_input = false;
     string line, emptyLine;
@@ -178,12 +189,32 @@ int selectMenu(const string menuStr, int menuItemCount) {
 }
 } // namespace UI
 /******************************************************************************
+ * ch4_2: Factory class
+ ******************************************************************************/
+class Factory
+{
+public:
+    // 동적으로 Person 객체를 할당 받은 후 키보드로부터 새로 추가하고자 하는 사람의
+    // 인적정보를 읽어 들여 해당 객체에 저장한 후 그 객체의 포인터를 반환한다.
+    Person* inputPerson(istream* in) {
+        Person* p = new Person();
+        p->input(in);  // 멤버들을 입력 받음
+        if (UI::checkDataFormatError(in)) { // 정수입력할 곳에 일반 문자 입력한 경우
+            delete p;         // 할당한 메모리 반납
+            return nullptr;   // nullptr 반환은 에러가 발생했다는 의미임
+        }
+        if (UI::echo_input) p->println(); // 자동체크에서 사용됨
+        return p;
+    }
+};
+/******************************************************************************
  * ch4_2: PersonManager class
  ******************************************************************************/
 
 class PersonManager
 {
     VectorPerson persons;
+    Factory factory;
 
     void deleteElemets();
     void printNotice(const string preMessage, const string postMessage);
@@ -201,7 +232,19 @@ public:
 
 PersonManager::PersonManager(Person* array[], int len) {
     cout << "PersonManager::PersonManager(array[], len)" << endl;
-    /* TODO 문제 [4] */
+
+    for (int i = 0; i < len; ++i) {
+        Person* s = array[i];
+        Person* copy = new Person(
+            s->getName(),
+            s->getId(),
+            s->getWeight(),
+            s->getMarried(),
+            s->getAddress()
+        );
+        persons.push_back(copy);
+    }
+
     display();
 }
 
@@ -210,8 +253,13 @@ PersonManager::~PersonManager() {
     display();
 }
 
+// 🔽 여기에 추가하세요!
 void PersonManager::deleteElemets() {
-    /* TODO 문제 [5] */
+    int n = persons.size();
+    for (int i = 0; i < n; ++i) {
+        delete persons.at(i);  // 동적으로 생성한 객체 해제
+    }
+    persons.clear();  // count 0으로 초기화
 }
 
 void PersonManager::display() { // Menu item 1
@@ -227,8 +275,15 @@ void PersonManager::display() { // Menu item 1
         << ", capacity():" << persons.capacity() << endl;
 }
 
-void PersonManager::append() { /* TODO 문제 [6] */ } // Menu item 2
-
+void PersonManager::append() {  // Menu item 2
+    int count = UI::getPositiveInt("The number of persons to append? ");
+    printNotice("Input "+to_string(count), ":");
+    for (int i = 0; i < count; ++i) {
+        Person* p = factory.inputPerson(&cin);
+        if (p) persons.push_back(p);
+    }
+    display();
+}
 void PersonManager::clear() { // Menu item 3
     deleteElemets();
     display();
@@ -236,8 +291,9 @@ void PersonManager::clear() { // Menu item 3
 void PersonManager::login() { // Menu item 4 
     /* TODO 문제 [8] */ 
 }
-
 void PersonManager::run() {
+    cout << "PersonManager::run() starts" << endl; // 여기에 위치해야 함
+
     using func_t = void (PersonManager::*)();
     using PM = PersonManager;
     func_t func_arr[] = {
@@ -252,7 +308,7 @@ void PersonManager::run() {
     while (true) {
         int menuItem = UI::selectMenu(menuStr, menuCount);
         if (menuItem == 0) {
-            cout << "PersonManager::run() returned" << endl; // ← 추가된 부분
+            cout << "PersonManager::run() returned" << endl;
             return;
         }
         (this->*func_arr[menuItem])();
@@ -281,7 +337,6 @@ class MultiManager {
 
 public:
     void run() {
-        cout << "MultiManager::run() starts" << endl;
         personMng.run();  // 메뉴 기반 Person 관리 기능 실행
     }
 };
