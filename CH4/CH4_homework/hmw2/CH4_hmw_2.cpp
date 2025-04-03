@@ -274,7 +274,11 @@ void PersonManager::display() { // Menu item 1
     cout << "empty():" << persons.empty() << ", size():" << persons.size()
         << ", capacity():" << persons.capacity() << endl;
 }
-
+void PersonManager::printNotice(const string preMessage, const string postMessage) {
+    cout << preMessage;
+    cout << " [person information] ";
+    cout << postMessage << endl;
+}
 void PersonManager::append() {  // Menu item 2
     int count = UI::getPositiveInt("The number of persons to append? ");
     printNotice("Input "+to_string(count), ":");
