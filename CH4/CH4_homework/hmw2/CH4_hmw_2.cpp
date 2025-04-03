@@ -16,27 +16,42 @@ class Person
 protected:
     void inputMembers(istream* in);
     void printMembers(ostream* out);
-public:
-    Person();
-    Person(const string name);
-    Person(const string name, int id, double weight, bool married, const char *address);
-    ~Person();
+    public:
+    // [문제 3-1, 3-2, 3-3] 위임 생성자들 선언부에서 정의
+    Person() : Person("") { }
+    Person(const string name) : Person(name, 0, 0.0, false, "") { }
+
+    // 타겟 생성자
+    Person(const string name, int id, double weight, bool married, const char *address)
+        : name(name), id{id}, weight{weight}, married{married} {
+        setAddress(address);
+        cout << "Person::Person(...):"; println();
+    }
+
+    ~Person() {
+        cout << "Person::~Person():"; println();
+    }
+
     void set(const string name, int pid, double pweight, bool pmarried, const char *paddress);
     void setName(const string name)       { this->name = name; }
     void setId(int pid)                   { id = pid; }
     void setWeight(double pweight)        { weight = pweight; }
     void setMarried(bool pmarried)        { married = pmarried; }
     void setAddress(const char* paddress) { strcpy(address, paddress); }
+
     string      getName()    { return name; }
     int         getId()      { return id; }
-    double      getWeight()  { return weight; }  // 구현 시
-    bool        getMarried() { return married; }  // 리턴 값들을
-    const char* getAddress() { return address; } // 수정하시오.
-    void input(istream* pin)  { inputMembers(pin); } // ch3_2에서 추가
+    double      getWeight()  { return weight; }
+    bool        getMarried() { return married; }
+    const char* getAddress() { return address; }
+
+    void input(istream* pin)  { inputMembers(pin); }
     void print(ostream* pout) { printMembers(pout); }
     void println()            { print(&cout); cout << endl; }
-    void whatAreYouDoing();                          // ch3_2에서 추가
-    bool isSame(const string name, int pid);         // ch3_2에서 추가
+
+    void whatAreYouDoing();
+    bool isSame(const string name, int pid);
+
     void setPasswd(const string& pw) { passwd = pw; }
     string getPasswd() const { return passwd; }
 };
@@ -91,7 +106,7 @@ VectorPerson::VectorPerson(int capacity)
 }
 
 VectorPerson::~VectorPerson() {
-    /* TODO 문제 [2]: 동적으로 할당된 배열 pVector 반납: pVector가 배열임을 명심하라. */
+    delete[] pVector;
     cout << "VectorPerson::~VectorPerson(): pVector deleted" << endl;
 }
 
@@ -154,7 +169,7 @@ int getIndex(const string msg, int size) {
         int index = getPositiveInt(msg);
         if (0 <= index  && index < size) return index;
         cout << index << ": OUT of selection range(0 ~ "
-             << size-1 << ")" << endl;
+            << size-1 << ")" << endl;
     }
 }
 int selectMenu(const string menuStr, int menuItemCount) {
@@ -206,6 +221,8 @@ void PersonManager::display() { // Menu item 1
         cout << "[" << i << "] ";
         persons.at(i)->println();
     }
+    cout << boolalpha; // 추가
+
     cout << "empty():" << persons.empty() << ", size():" << persons.size()
         << ", capacity():" << persons.capacity() << endl;
 }
@@ -222,11 +239,11 @@ void PersonManager::login() { // Menu item 4
 
 void PersonManager::run() {
     using func_t = void (PersonManager::*)();
-    using PM = PersonManager; // 코딩 길이를 줄이기 위해
+    using PM = PersonManager;
     func_t func_arr[] = {
         nullptr, &PM::display, &PM::append, &PM::clear, &PM::login,
     };
-    int menuCount = sizeof(func_arr) / sizeof(func_arr[0]); // func_arr[] 길이
+    int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
     string menuStr =
         "====================== Person Management Menu ===================\n"
         "= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch4_2) =\n"
@@ -234,7 +251,10 @@ void PersonManager::run() {
 
     while (true) {
         int menuItem = UI::selectMenu(menuStr, menuCount);
-        if (menuItem == 0) return;
+        if (menuItem == 0) {
+            cout << "PersonManager::run() returned" << endl; // ← 추가된 부분
+            return;
+        }
         (this->*func_arr[menuItem])();
     }
 }
@@ -263,7 +283,6 @@ public:
     void run() {
         cout << "MultiManager::run() starts" << endl;
         personMng.run();  // 메뉴 기반 Person 관리 기능 실행
-        cout << "MultiManager::run() ends" << endl;
     }
 };
 void Person::set(const string name, int pid, double pweight, bool pmarried, const char *paddress) {
@@ -310,25 +329,10 @@ void Person::whatAreYouDoing() {
 bool Person::isSame(const string name, int pid) {
     return (this->name == name && this->id == pid);
 }
-Person::Person(): name{}, id{}, weight{}, married{}, address{} {
-    cout << "Person::Person():"; println();
-}
-Person::Person(const string name) : id(0), weight(0.0), married(false), address{} {
-    setName(name);
-    cout << "Person::Person(\"" << name << "\"):"; println();
-}
-Person::Person(const string name, int id, double weight, bool married, const char *address)
-    : name(name), id{id}, weight{weight}, married{married} {
-    setAddress(address);  // 여전히 문자열 처리 및 복사가 필요한 경우
-    cout << "Person::Person(...):"; println();
-}
-Person::~Person() {
-    cout << "Person::~Person():"; println();
-}
 void Person::printMembers(ostream* pout) {
     *pout << name << " " << id << " " << weight << " "
-          << (married ? "true" : "false") << " :"
-          << address << ":";
+        << (married ? "true" : "false") << " :"
+        << address << ":";
 }
 class CurrentUser
 {
@@ -349,10 +353,10 @@ void CurrentUser::display() { // Menu item 1
 }
 void CurrentUser::getter() {  // Menu item 2
     cout << "name:" << pUser->getName()
-         << ", id:" << pUser->getId()
-         << ", weight:" << pUser->getWeight()
-         << ", married:" << (pUser->getMarried() ? "true" : "false")
-         << ", address:" << pUser->getAddress() << endl;
+        << ", id:" << pUser->getId()
+        << ", weight:" << pUser->getWeight()
+        << ", married:" << (pUser->getMarried() ? "true" : "false")
+        << ", address:" << pUser->getAddress() << endl;
 }
 void CurrentUser::setter() {  // Menu item 3
     Person ps("pp");
@@ -366,10 +370,10 @@ void CurrentUser::setter() {  // Menu item 3
 void CurrentUser::set() {  // Menu item 4
     Person ps("pp");  
     ps.set(ps.getName(),
-           pUser->getId(),
-           pUser->getWeight(),
-           !pUser->getMarried(),
-           pUser->getAddress());
+        pUser->getId(),
+        pUser->getWeight(),
+        !pUser->getMarried(),
+        pUser->getAddress());
     cout << "pp->set():"; ps.println();
 }
 void CurrentUser::whatAreYouDoing() {  // Menu item 5
@@ -424,7 +428,7 @@ class ClassAndObject
         Person("temp_ps_1"); // 임시객체(이름 없는 객체) 성성 및 소멸
         cout << endl;
         Person("temp_ps_2").setName("TEMP_PS_2"); // 임시객체 생성, 
-                                                  // setName() 호출, 임시객체 소멸
+                                                // setName() 호출, 임시객체 소멸
         cout << "- temporary object ends -\n" << endl;
         Person ps5("ps5");
     }

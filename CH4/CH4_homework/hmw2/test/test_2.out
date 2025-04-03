@@ -1,0 +1,31 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1)                                                   *
+***************************************************************************
+Menu item number? 2
+
++++++++++++ Person Class And Object Menu ++++++++++++
++ 0.Exit 1.DefualConstructor 2.Constructor          +
++ 3.ConstrucorDestructor 4.GlobalStaticLocalObjects +
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Person::Person(...): 0 0 false ::
+Person::Person(...):ps2 0 0 false ::
+Person::Person(...):ps3 3 70.3 true :ps3 address:
+Person::~Person():ps3 3 70.3 true :ps3 address:
+Person::~Person():ps2 0 0 false ::
+Person::~Person(): 0 0 false ::
+
++++++++++++ Person Class And Object Menu ++++++++++++
++ 0.Exit 1.DefualConstructor 2.Constructor          +
++ 3.ConstrucorDestructor 4.GlobalStaticLocalObjects +
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1)                                                   *
+***************************************************************************
+Menu item number? 0
+Good bye!!
