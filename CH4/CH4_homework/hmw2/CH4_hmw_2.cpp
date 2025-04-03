@@ -2,7 +2,7 @@
 #include <cstring>
 #include <string>
 #include <sstream>
-#define AUTOMATIC_ERROR_CHECK true
+#define AUTOMATIC_ERROR_CHECK false
 using namespace std;
 class Person
 {
