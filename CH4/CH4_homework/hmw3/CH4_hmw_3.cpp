@@ -4,6 +4,19 @@
 #include <sstream>
 #define AUTOMATIC_ERROR_CHECK false
 using namespace std;
+/*
+ * CH4_hmw_3.cpp
+ *
+ *  Created on: 2025.04.04
+ *      Author: Lee Jae Hwan
+ *
+ *  + class Memo 추가: string 클래스의 멤버함수 및 operator 활용법
+ *  + Person::memo_c_str[] 멤버 및 set, get 함수 추가
+ *  + CurrentUser::memo 멤버, 함수 및 메뉴 항목 추가
+ *  + PersonManager::~PersonManager()에서 display() 문장 삭제
+ *  + PersonManager::run()의 string menuStr 수정
+ *
+ */
 // *********************************************************
 // Persson class
 // ********************************************************* 
@@ -16,10 +29,13 @@ class Person
     char   address[40];     // 주소
     string rawInput;
     string passwd;
+    char memo_c_str[1024];
+
 protected:
     void inputMembers(istream* in);
     void printMembers(ostream* out);
-    public:
+
+public:
     // 문제 3-1, 3-2, 3-3 위임 생성자: 선언부에서 직접 타겟 생성자 호출
     Person() : Person("", 0, 0.0, false, "") { }  // 문제 3-1
     Person(const string name) : Person(name, 0, 0.0, false, "") { }  // 문제 3-2
@@ -57,6 +73,10 @@ protected:
 
     void setPasswd(const string& pw) { passwd = pw; }
     string getPasswd() const { return passwd; }
+
+    // [문제 11 - 메모 저장 및 반환 함수]
+    void setMemo(const char* c_str) { strcpy(memo_c_str, c_str); }
+    const char* getMemo() { return memo_c_str; }
 };
 // *********************************************************
 // Persson class end point
@@ -162,11 +182,11 @@ public:
 };
 //*****************************************************************************
 // VectorPerson class end point
-//*****************************************************************************/
+//*****************************************************************************
 
 //*****************************************************************************
 // VectorPerson objects 
-//*****************************************************************************/
+//*****************************************************************************
 // capacity는 할당해야 할 배열 원소의 개수
 VectorPerson::VectorPerson(int capacity)
     : count(0), allocSize(capacity) {
@@ -208,7 +228,7 @@ void VectorPerson::extend_capacity() {
 //*****************************************************************************
 
 //*****************************************************************************
-// Namespace
+// Namespace UI
 //*****************************************************************************
 namespace UI {
     bool echo_input = false;
@@ -241,7 +261,6 @@ namespace UI {
 //*****************************************************************************
 // Namespace UI end point
 //*****************************************************************************
-
 bool checkDataFormatError(istream* pin) {
     return checkInputError(pin, "Input-data format MISMATCHED\n");
 }
@@ -286,6 +305,265 @@ int selectMenu(const string menuStr, int menuItemCount) {
 //*****************************************************************************
 
 //*****************************************************************************
+// string and Memo class
+//*****************************************************************************
+class Memo{
+    string mStr; // 메모를 저장해 두는 문자열
+
+    string get_next_line(size_t* ppos);
+    bool find_line(int line, size_t* start, size_t* next);
+    size_t find_last_line();
+public:
+    string getNext(size_t* ppos);  
+    void displayMemo();
+    
+    const char *get_c_str() { return mStr.c_str(); }
+    void set_c_str(const char *c_str) { mStr = c_str;}
+
+    void findString();
+    void compareWord();
+    void dispByLine();
+    void deleteLine();
+    void replaceLine();
+    void scrollUp();
+    void scrollDown();
+    void inputMemo();
+    void run();
+};
+// 아래 R"( 와 )"는 그 사이에 있는 모든 문자를 하나의 문자열로 취급하라는 의미이다.
+// 따라서 행과 행 사이에 있는 줄바꾸기 \n 문자도 문자열에 그대로 포함된다.
+// 이런 방식을 사용하지 않으면 여러 행에 걸친 문자열을 만들려면 복잡해진다.
+const char* memoData = R"(The Last of the Mohicans
+James Fenimore Cooper
+Author's Introduction
+It is believed that the scene of this tale, and most of the information
+necessary to understand its allusions, are rendered sufficiently 
+obvious to the reader in the text itself, or in the accompanying notes.
+Still there is so much obscurity in the Indian traditions, and so much
+confusion in the Indian names, as to render some explanation useful.
+Few men exhibit greater diversity, or, if we may so express it, 
+greater antithesis of character, 
+than the native warrior of North America.
+)";
+//*****************************************************************************
+// string and Memo class end point
+//*****************************************************************************
+
+//*****************************************************************************
+// string and Memo objects 
+//*****************************************************************************
+bool Memo::find_line(int line_num, size_t* pstart, size_t* plen) {
+    size_t start = 0;
+    for (int i = 0; i < line_num; ++i) {
+        start = mStr.find('\n', start);
+        if (start == string::npos) return false;
+        ++start;
+    }
+
+    *pstart = start;
+    size_t end = mStr.find('\n', start);
+    if (end == string::npos)
+        *plen = mStr.size() - start;
+    else
+        *plen = end - start + 1; // 줄바꿈 포함
+
+    return true;
+}
+size_t Memo::find_last_line() {
+    for (size_t start = 0, pos = 0; true; start = pos) {
+        pos = mStr.find('\n', start);
+        if (pos == string::npos || ++pos >= mStr.size()) {
+            return start;
+        }
+    }
+}
+void Memo::displayMemo() { // Menu item 1
+    cout << "------- Memo -------" << endl;
+    cout << mStr;
+    if (mStr.length() > 0 && mStr[mStr.length()-1] != '\n')
+        cout << endl; // 메모 끝에 줄바꾸기 문자가 없을 경우 출력
+    cout << "--------------------" << endl;
+}
+void Memo::run() {
+    using func_t = void (Memo::*)();
+    func_t func_arr[] = {
+        nullptr, &Memo::displayMemo, &Memo::findString,
+        &Memo::compareWord, &Memo::dispByLine, &Memo::deleteLine,
+        &Memo::replaceLine, &Memo::scrollUp, &Memo::scrollDown,
+        &Memo::inputMemo
+    };
+    int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
+
+    string menuStr =
+        "++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++\n"
+        "+ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +\n"
+        "+ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +\n"
+        "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+
+    if (mStr == "") mStr = memoData;
+
+    while (true) {
+        int menuItem = UI::selectMenu(menuStr, menuCount);
+        if (menuItem == 0) return;
+        (this->*func_arr[menuItem])();
+    }
+}
+// 사용자로부터 찾을 단어를 입력받고 메모 문자열에서 해당 단어의 출현 회수를 세어서 출력한다.
+// 찾을 단어가 다른 단어의 일부분일지라도 모두 카운트하라.
+void Memo::findString() {
+    string word = UI::getNext("Word to find? ");
+    int count = 0, len = word.length();
+    size_t pos = 0;
+
+    while (true) {
+        pos = mStr.find(word, pos);  // word를 pos 위치부터 탐색
+        if (pos == string::npos) break;  // 더 이상 찾을 수 없음
+        ++count;
+        pos += len;  // 다음 위치로 이동 (중복 방지)
+    }
+
+    cout << "Found count: " << count << endl;
+}
+string Memo::getNext(size_t* ppos) {
+    size_t pos = *ppos, end;
+
+    // 공백 문자들 스킵
+    while (pos < mStr.size() && isspace(mStr[pos])) ++pos;
+
+    end = pos;
+
+    // 구두점이면 그 하나만 단어로 처리
+    if (end < mStr.size() && ispunct(mStr[end])) {
+        ++end;
+    } else {
+        // 구두점, 공백 전까지 단어
+        while (end < mStr.size() && !isspace(mStr[end]) && !ispunct(mStr[end]))
+            ++end;
+    }
+
+    *ppos = end;
+
+    // 단어 길이 0이면 빈 문자열 반환
+    if (end <= pos) return "";
+
+    return mStr.substr(pos, end - pos);
+}
+void Memo::compareWord() {
+    string next, word = UI::getNext("Word to compare? ");
+    int less = 0, same = 0, larger = 0;
+
+    for (size_t pos = 0; ; ) {
+        next = getNext(&pos);
+        if (next == "") break;
+
+        if (next < word) ++less;
+        else if (next == word) ++same;
+        else ++larger;
+    }
+
+    cout << "less: "   << less   << endl;
+    cout << "same: "   << same   << endl;
+    cout << "larger: " << larger << endl;
+}
+void Memo::dispByLine() { // Menu item 4
+    cout << "--- Memo by line ---" << endl;
+
+    size_t pos = 0;
+    int lineNum = 0;
+
+    while (pos < mStr.length()) {
+        size_t next = mStr.find('\n', pos);
+        if (next == string::npos) {
+            cout << "[" << lineNum++ << "] " << mStr.substr(pos) << endl;
+            break;
+        } else {
+            cout << "[" << lineNum++ << "] " << mStr.substr(pos, next - pos) << endl;
+            pos = next + 1;
+        }
+    }
+
+    // 마지막 개행이 없었으면, 빈 줄 출력 필요 없음
+    cout << "--------------------" << endl;
+}
+void Memo::deleteLine() {
+    size_t start, len;
+    size_t line_num = UI::getPositiveInt("Line number to delete? ");
+
+    if (mStr.empty() || !find_line(line_num, &start, &len) || start == mStr.size()) {
+        cout << "Out of line range" << endl;
+        return;
+    }
+
+    mStr.erase(start, len);
+    dispByLine();
+}
+void Memo::replaceLine() {
+    size_t start, len;
+    size_t line_num = UI::getPositiveInt("Line number to replace? ");
+
+    if (!find_line(line_num, &start, &len)) {
+        cout << "Out of line range" << endl;
+        return;
+    }
+
+    string line = UI::getNextLine("Input a line to replace:\n");
+    line += '\n';
+    mStr.replace(start, len, line);
+    dispByLine();
+}
+void Memo::scrollUp() {
+    size_t start, len;
+
+    if (mStr.empty() || !find_line(0, &start, &len)) {
+        dispByLine(); // ✅ 반드시 호출하여 라벨 출력
+        return;
+    }
+
+    string firstLine = mStr.substr(start, len);
+    mStr.erase(start, len);
+
+    if (!mStr.empty() && mStr.back() != '\n') {
+        mStr += '\n';
+    }
+
+    mStr += firstLine;
+    dispByLine(); // ✅ 항상 호출
+}
+void Memo::scrollDown() {
+    if (mStr.empty()) {
+        dispByLine(); // ✅ 반드시 호출하여 라벨 출력
+        return;
+    }
+
+    size_t last = find_last_line();
+    size_t len = mStr.size() - last;
+
+    string lastLine = mStr.substr(last, len);
+    mStr.erase(last, len);
+    mStr = lastLine + mStr;
+
+    dispByLine(); // ✅ 항상 호출
+}
+void Memo::inputMemo() {
+    mStr.clear(); // 기존 메모 삭제
+
+    string line;
+    cout << "--- Input memo lines, and then input empty line at the end ---" << endl;
+
+    while (true) {
+        getline(cin, line);
+        if (UI::echo_input) cout << line << endl;
+
+        if (line.empty()) break; // 빈 줄이면 종료
+
+        mStr += line + '\n'; // 줄 끝에 '\n' 붙여 추가
+    }
+}
+//*****************************************************************************
+// string and Memo class objects end point
+//*****************************************************************************
+
+//*****************************************************************************
 // Factory class
 // ****************************************************************************
 class Factory
@@ -311,11 +589,14 @@ public:
 //*****************************************************************************
 // CurrentUser class
 //*****************************************************************************
-class CurrentUser
+class CurrentUser 
 {
     Person* pUser;
+    Memo memo;
 public:
-    CurrentUser(Person* pUser): pUser(pUser) { }  // user(u)는 this->user = u 와 동일한 기능
+    CurrentUser(Person* pUser) : pUser(pUser) {
+        memo.set_c_str(pUser->getMemo());
+    }
     void display();
     void setter();
     void getter();
@@ -325,7 +606,8 @@ public:
     void inputPerson();
     void run();
     void changePasswd();
-};
+    void manageMemo();
+}; 
 //*****************************************************************************
 // CurrentUser class end point
 //*****************************************************************************
@@ -383,19 +665,24 @@ void CurrentUser::run() {
     func_t func_arr[] = {
         nullptr, &CU::display, &CU::getter, &CU::setter,
         &CU::set, &CU::whatAreYouDoing,
-        &CU::isSame, &CU::inputPerson, &CU::changePasswd
+        &CU::isSame, &CU::inputPerson, &CU::changePasswd,
+        &CU::manageMemo
     };
     int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
     string menuStr =
         "+++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++\n"
         "+ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +\n"
-        "+ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2)                   +\n"
+        "+ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +\n"
         "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
     while (true) {
         int menuItem = UI::selectMenu(menuStr, menuCount);
         if (menuItem == 0) return;
         (this->*func_arr[menuItem])();
     }
+}
+void CurrentUser::manageMemo() { // Menu item 9
+    memo.run();
+    pUser->setMemo(memo.get_c_str());
 }
 //*****************************************************************************
 // CurrentUser class end point
@@ -438,27 +725,33 @@ Person* PersonManager::findByName(const string name) {
     cout << name << ": NOT found" << endl;
     return nullptr;
 }
-PersonManager::PersonManager(Person* array[], int len) {
+PersonManager::PersonManager(Person* array[], int len)
+{
     cout << "PersonManager::PersonManager(array[], len)" << endl;
 
-    for (int i = 0; i < len; ++i) {
+    for (int i = 0; i < len; ++i)
+    {
         Person* s = array[i];
-        Person* copy = new Person(
-            s->getName(),
-            s->getId(),
-            s->getWeight(),
-            s->getMarried(),
-            s->getAddress()
-        );
+
+        // 각 멤버를 하나씩 복사해서 생성자 인자로 전달
+        const string& name = s->getName();
+        int id = s->getId();
+        double weight = s->getWeight();
+        bool married = s->getMarried();
+        const char* address = s->getAddress();
+
+        Person* copy = new Person(name, id, weight, married, address);
+
+        // memo 문자열도 복사
+        copy->setMemo(s->getMemo());
+
         persons.push_back(copy);
     }
 
     display();
 }
-
 PersonManager::~PersonManager() {
     deleteElemets();
-    display();
 }
 void PersonManager::deleteElemets() {
     int n = persons.size();
@@ -519,7 +812,7 @@ void PersonManager::run() {
     int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
     string menuStr =
         "====================== Person Management Menu ===================\n"
-        "= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch4_2) =\n"
+        "= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch4)   =\n"
         "=================================================================\n";
 
     while (true) {
