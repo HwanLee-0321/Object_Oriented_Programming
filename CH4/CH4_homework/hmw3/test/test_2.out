@@ -1,0 +1,115 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1)                                                   *
+***************************************************************************
+Menu item number? 1
+Person::Person(...):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+VectorPerson::VectorPerson(10)
+PersonManager::PersonManager(array[], len)
+Person::Person(...):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+empty():false, size():5, capacity():10
+PersonManager::run() starts
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch4)   =
+=================================================================
+Menu item number? 4
+user name: p0
+password: 
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Word to find? or
+Found count: 7
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Word to find? o
+Found count: 36
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Word to find? is
+Found count: 4
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Word to find? i
+Found count: 39
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Word to find? er
+Found count: 11
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch4)   =
+=================================================================
+Menu item number? 0
+PersonManager::run() returned
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+VectorPerson::~VectorPerson(): pVector deleted
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1)                                                   *
+***************************************************************************
+Menu item number? 0
+Good bye!!

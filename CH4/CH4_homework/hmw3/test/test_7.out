@@ -1,0 +1,284 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1)                                                   *
+***************************************************************************
+Menu item number? 1
+Person::Person(...):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+VectorPerson::VectorPerson(10)
+PersonManager::PersonManager(array[], len)
+Person::Person(...):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+empty():false, size():5, capacity():10
+PersonManager::run() starts
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch4)   =
+=================================================================
+Menu item number? 4
+user name: p0
+password: 
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] James Fenimore Cooper
+[1] Author's Introduction
+[2] It is believed that the scene of this tale, and most of the information
+[3] necessary to understand its allusions, are rendered sufficiently 
+[4] obvious to the reader in the text itself, or in the accompanying notes.
+[5] Still there is so much obscurity in the Indian traditions, and so much
+[6] confusion in the Indian names, as to render some explanation useful.
+[7] Few men exhibit greater diversity, or, if we may so express it, 
+[8] greater antithesis of character, 
+[9] than the native warrior of North America.
+[10] The Last of the Mohicans
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] Author's Introduction
+[1] It is believed that the scene of this tale, and most of the information
+[2] necessary to understand its allusions, are rendered sufficiently 
+[3] obvious to the reader in the text itself, or in the accompanying notes.
+[4] Still there is so much obscurity in the Indian traditions, and so much
+[5] confusion in the Indian names, as to render some explanation useful.
+[6] Few men exhibit greater diversity, or, if we may so express it, 
+[7] greater antithesis of character, 
+[8] than the native warrior of North America.
+[9] The Last of the Mohicans
+[10] James Fenimore Cooper
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] It is believed that the scene of this tale, and most of the information
+[1] necessary to understand its allusions, are rendered sufficiently 
+[2] obvious to the reader in the text itself, or in the accompanying notes.
+[3] Still there is so much obscurity in the Indian traditions, and so much
+[4] confusion in the Indian names, as to render some explanation useful.
+[5] Few men exhibit greater diversity, or, if we may so express it, 
+[6] greater antithesis of character, 
+[7] than the native warrior of North America.
+[8] The Last of the Mohicans
+[9] James Fenimore Cooper
+[10] Author's Introduction
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] necessary to understand its allusions, are rendered sufficiently 
+[1] obvious to the reader in the text itself, or in the accompanying notes.
+[2] Still there is so much obscurity in the Indian traditions, and so much
+[3] confusion in the Indian names, as to render some explanation useful.
+[4] Few men exhibit greater diversity, or, if we may so express it, 
+[5] greater antithesis of character, 
+[6] than the native warrior of North America.
+[7] The Last of the Mohicans
+[8] James Fenimore Cooper
+[9] Author's Introduction
+[10] It is believed that the scene of this tale, and most of the information
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] obvious to the reader in the text itself, or in the accompanying notes.
+[1] Still there is so much obscurity in the Indian traditions, and so much
+[2] confusion in the Indian names, as to render some explanation useful.
+[3] Few men exhibit greater diversity, or, if we may so express it, 
+[4] greater antithesis of character, 
+[5] than the native warrior of North America.
+[6] The Last of the Mohicans
+[7] James Fenimore Cooper
+[8] Author's Introduction
+[9] It is believed that the scene of this tale, and most of the information
+[10] necessary to understand its allusions, are rendered sufficiently 
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] Still there is so much obscurity in the Indian traditions, and so much
+[1] confusion in the Indian names, as to render some explanation useful.
+[2] Few men exhibit greater diversity, or, if we may so express it, 
+[3] greater antithesis of character, 
+[4] than the native warrior of North America.
+[5] The Last of the Mohicans
+[6] James Fenimore Cooper
+[7] Author's Introduction
+[8] It is believed that the scene of this tale, and most of the information
+[9] necessary to understand its allusions, are rendered sufficiently 
+[10] obvious to the reader in the text itself, or in the accompanying notes.
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] confusion in the Indian names, as to render some explanation useful.
+[1] Few men exhibit greater diversity, or, if we may so express it, 
+[2] greater antithesis of character, 
+[3] than the native warrior of North America.
+[4] The Last of the Mohicans
+[5] James Fenimore Cooper
+[6] Author's Introduction
+[7] It is believed that the scene of this tale, and most of the information
+[8] necessary to understand its allusions, are rendered sufficiently 
+[9] obvious to the reader in the text itself, or in the accompanying notes.
+[10] Still there is so much obscurity in the Indian traditions, and so much
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] Few men exhibit greater diversity, or, if we may so express it, 
+[1] greater antithesis of character, 
+[2] than the native warrior of North America.
+[3] The Last of the Mohicans
+[4] James Fenimore Cooper
+[5] Author's Introduction
+[6] It is believed that the scene of this tale, and most of the information
+[7] necessary to understand its allusions, are rendered sufficiently 
+[8] obvious to the reader in the text itself, or in the accompanying notes.
+[9] Still there is so much obscurity in the Indian traditions, and so much
+[10] confusion in the Indian names, as to render some explanation useful.
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] greater antithesis of character, 
+[1] than the native warrior of North America.
+[2] The Last of the Mohicans
+[3] James Fenimore Cooper
+[4] Author's Introduction
+[5] It is believed that the scene of this tale, and most of the information
+[6] necessary to understand its allusions, are rendered sufficiently 
+[7] obvious to the reader in the text itself, or in the accompanying notes.
+[8] Still there is so much obscurity in the Indian traditions, and so much
+[9] confusion in the Indian names, as to render some explanation useful.
+[10] Few men exhibit greater diversity, or, if we may so express it, 
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] than the native warrior of North America.
+[1] The Last of the Mohicans
+[2] James Fenimore Cooper
+[3] Author's Introduction
+[4] It is believed that the scene of this tale, and most of the information
+[5] necessary to understand its allusions, are rendered sufficiently 
+[6] obvious to the reader in the text itself, or in the accompanying notes.
+[7] Still there is so much obscurity in the Indian traditions, and so much
+[8] confusion in the Indian names, as to render some explanation useful.
+[9] Few men exhibit greater diversity, or, if we may so express it, 
+[10] greater antithesis of character, 
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] The Last of the Mohicans
+[1] James Fenimore Cooper
+[2] Author's Introduction
+[3] It is believed that the scene of this tale, and most of the information
+[4] necessary to understand its allusions, are rendered sufficiently 
+[5] obvious to the reader in the text itself, or in the accompanying notes.
+[6] Still there is so much obscurity in the Indian traditions, and so much
+[7] confusion in the Indian names, as to render some explanation useful.
+[8] Few men exhibit greater diversity, or, if we may so express it, 
+[9] greater antithesis of character, 
+[10] than the native warrior of North America.
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch4)   =
+=================================================================
+Menu item number? 0
+PersonManager::run() returned
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+VectorPerson::~VectorPerson(): pVector deleted
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1)                                                   *
+***************************************************************************
+Menu item number? 0
+Good bye!!
