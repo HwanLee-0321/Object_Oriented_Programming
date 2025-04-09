@@ -141,9 +141,7 @@ void refRet1() {
 
     cout << "---" << endl;
 
-    changeTitle(c);  // 사용자로부터 새로운 제목 입력받음
-
-    cout << "appendTitle(c).getTitle(): " << c.getTitle() << endl;
+    cout << "appendTitle(c).getTitle(): " << changeTitle(c).getTitle() << endl;
     cout << "             c.getTitle(): " << c.getTitle() << endl;
     cout << "            rc.getTitle(): " << rc.getTitle() << endl;
 }
