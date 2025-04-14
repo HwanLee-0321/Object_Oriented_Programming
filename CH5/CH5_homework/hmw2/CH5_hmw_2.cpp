@@ -5,17 +5,21 @@
 #define AUTOMATIC_ERROR_CHECK false
 using namespace std;
 /*
- * CH5_hmw_1.cpp
+ * CH5_hmw_2.cpp
  *
- *  Created on: 2025.04.04
+ *  Created on: 2025.04.15
  *      Author: Lee Jae Hwan
- *
- *  + Person(const Person& p) 복사생성자 추가
- *  + PersonManager::PersonManager(Person array[], int len)에서 복사 생성자 사용으로 변경
- *  + 다양한 call by value, call by address, call by reference의 차이점 확인
- *  + 함수의 return 값으로 value, address, reference를 리턴할 때의 차이점
- *  + 명시적 복사 생성자 호출과 묵시적 복사 생성자 호출 확인
- *  + MainMenu에 새로운 메뉴 항목 추가
+  *
+ *  + MainMenu 수정
+ *  + class Person의 두 멤버의 타입을 배열[]에서 포인터로 즉, char* address, char* memo_c_str로 변경
+ *  + Person 클래스에 copyAddress(), copyMemo() 추가
+ *  + Person 생성자, inputMembers(), printMembers(), setAddress(), setMemo() 수정
+ *  + Person(const Person& p) 복사생성자 수정
+ *  + Memo::set_c_str(): 매개변수 c_str==nullptr일 경우 ""로 설정
+ *  + Person::printMembers(): address==nullptr일 경우 "" 출력
+ *  + Person::inputMembers(): 지역변수 char address[40] 추가
+ *  + Person::assign() 추가
+ *  + CopyConstructor 멤버 함수에서 u = backup 대신 u.assign(backup)
  */
 // *********************************************************
 // Persson class
