@@ -1,0 +1,221 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1)                          *
+***************************************************************************
+Menu item number? 3
+Person::Person(...):u 1 70 true :Gwangju:
+Person::Person(const Person&):u 1 70 true :Gwangju:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+u: u 1 70 true :Gwangju:
+input person information:
+PERSON 33 77 false :SEO-GU, SEOUL:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+p: p 2 80 false :Seoul:
+Person::~Person():p 2 80 false :Seoul:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+p: Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+p: PERSON 33 77 false :SEO-GU, SEOUL:
+r: PERSON 33 77 false :SEO-GU, SEOUL:
+p: r 2 80 false :Seoul:
+r: r 2 80 false :Seoul:
+p: p 1 70 true :Gwangju:
+r: p 1 70 true :Gwangju:
+Person::~Person():p 1 70 true :Gwangju:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 3
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+
+implicit copy constructor 1: operator =
+Person p = u
+p: Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+p.setName(p)
+p: p 33 77 false :SEO-GU, SEOUL:
+
+implicit copy constructor 2: function argument
+call function_argument(u)
+Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+a: PERSON 33 77 false :SEO-GU, SEOUL:
+a.setName(a)
+a: a 33 77 false :SEO-GU, SEOUL:
+Person::~Person():a 33 77 false :SEO-GU, SEOUL:
+function_argument(u) returned
+
+implicit copy constructor 3: return object
+call return_member_object().println()
+Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+PERSON 33 77 false :SEO-GU, SEOUL:
+Person::~Person():PERSON 33 77 false :SEO-GU, SEOUL:
+return_member_object() returned
+Person::~Person():p 33 77 false :SEO-GU, SEOUL:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 4
+temporary object 1: Person(p0, 10, 70, true, Gwangju)
+Person::Person(...):p0 10 70 true :Gwangju:
+Person::~Person():p0 10 70 true :Gwangju:
+
+temporary object 2: Person(p1, 11, 60, false, Seoul).println()
+Person::Person(...):p1 11 60 false :Seoul:
+p1 11 60 false :Seoul:
+Person::~Person():p1 11 60 false :Seoul:
+
+return_member_object().println()
+Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+PERSON 33 77 false :SEO-GU, SEOUL:
+Person::~Person():PERSON 33 77 false :SEO-GU, SEOUL:
+return_member_object() returned
+
+return_local_object().println()
+Person::Person(...):pL 0 70 true :Gwangju Nam-gu:
+return_local_object() returns pL
+pL 0 70 true :Gwangju Nam-gu:
+Person::~Person():pL 0 70 true :Gwangju Nam-gu:
+return_local_object() returned
+
+Person pL = return_local_object()
+Person::Person(...):pL 0 70 true :Gwangju Nam-gu:
+return_local_object() returns pL
+return_local_object() returned
+pL 0 70 true :Gwangju Nam-gu:
+
+return_temporary_object().println()
+return_temporary_object() returns Person(pT, 0, 70, true, Gwangju Nam-gu)
+Person::Person(...):pT 0 70 true :Gwangju Nam-gu:
+pT 0 70 true :Gwangju Nam-gu:
+Person::~Person():pT 0 70 true :Gwangju Nam-gu:
+return_temporary_object() returned
+
+Person pT = return_temporary_object()
+return_temporary_object() returns Person(pT, 0, 70, true, Gwangju Nam-gu)
+Person::Person(...):pT 0 70 true :Gwangju Nam-gu:
+return_temporary_object() returned
+pT 0 70 true :Gwangju Nam-gu:
+Person::~Person():pT 0 70 true :Gwangju Nam-gu:
+Person::~Person():pL 0 70 true :Gwangju Nam-gu:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+call_by_value
+Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+p: PERSON 33 77 false :SEO-GU, SEOUL:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+p.set(p, 2, 80, false, Seoul)
+p: p 2 80 false :Seoul:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+Person::~Person():p 2 80 false :Seoul:
+
+call_by_reference
+p: PERSON 33 77 false :SEO-GU, SEOUL:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+p.set(p, 2, 80, false, Seoul)
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+
+call_by_address
+p: PERSON 33 77 false :SEO-GU, SEOUL:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+p->set(p, 2, 80, false, Seoul)
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+--- return_value_test() ---
+call return_value()
+p: Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+return_value() returned
+p: PERSON 33 77 false :SEO-GU, SEOUL:
+p.set(p, 2, 80, false, Seoul)
+p: p 2 80 false :Seoul:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+Person::~Person():p 2 80 false :Seoul:
+
+--- return_reference_test() ---
+call return_reference()
+p: Person::Person(const Person&):PERSON 33 77 false :SEO-GU, SEOUL:
+return_reference() returned
+p.set(p, 2, 80, false, Seoul)
+p: p 2 80 false :Seoul:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+
+call return_reference()
+return_reference() returned
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+r.set(p, 2, 80, false, Seoul)
+r: r 2 80 false :Seoul:
+u: r 2 80 false :Seoul:
+Person::~Person():p 2 80 false :Seoul:
+
+--- return_address_test() ---
+call return_address()
+return_address() returned
+p: PERSON 33 77 false :SEO-GU, SEOUL:
+u: PERSON 33 77 false :SEO-GU, SEOUL:
+p.set(p, 2, 80, false, Seoul)
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():PERSON 33 77 false :SEO-GU, SEOUL:
+Person::~Person():PERSON 33 77 false :SEO-GU, SEOUL:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1)                          *
+***************************************************************************
+Menu item number? 0
+Good bye!!

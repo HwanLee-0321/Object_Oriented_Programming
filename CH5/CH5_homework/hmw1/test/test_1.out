@@ -1,0 +1,25 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1)                          *
+***************************************************************************
+Menu item number? 3
+Person::Person(...):u 1 70 true :Gwangju:
+Person::Person(const Person&):u 1 70 true :Gwangju:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():u 1 70 true :Gwangju:
+Person::~Person():u 1 70 true :Gwangju:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1)                          *
+***************************************************************************
+Menu item number? 0
+Good bye!!

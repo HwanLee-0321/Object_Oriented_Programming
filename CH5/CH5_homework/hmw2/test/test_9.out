@@ -1,0 +1,128 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 3
+Person::Person(...):u 1 70 true :Gwangju:
+Person::Person(const Person&):u 1 70 true :Gwangju:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+call_by_value
+Person::Person(const Person&):u 1 70 true :Gwangju:
+p: u 1 70 true :Gwangju:
+u: u 1 70 true :Gwangju:
+p.set(p, 2, 80, false, Seoul)
+old address(Gwangju) deleted
+p: p 2 80 false :Seoul:
+u: u 1 70 true :Gwangju:
+Person::~Person():p 2 80 false :Seoul:
+address deleted
+
+call_by_reference
+p: u 1 70 true :Gwangju:
+u: u 1 70 true :Gwangju:
+p.set(p, 2, 80, false, Seoul)
+old address(Gwangju) deleted
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+old address(Seoul) deleted
+
+call_by_address
+p: u 1 70 true :Gwangju:
+u: u 1 70 true :Gwangju:
+p->set(p, 2, 80, false, Seoul)
+old address(Gwangju) deleted
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+old address(Seoul) deleted
+
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+--- return_value_test() ---
+call return_value()
+p: Person::Person(const Person&):u 1 70 true :Gwangju:
+return_value() returned
+p: u 1 70 true :Gwangju:
+p.set(p, 2, 80, false, Seoul)
+old address(Gwangju) deleted
+p: p 2 80 false :Seoul:
+u: u 1 70 true :Gwangju:
+Person::~Person():p 2 80 false :Seoul:
+address deleted
+
+--- return_reference_test() ---
+call return_reference()
+p: Person::Person(const Person&):u 1 70 true :Gwangju:
+return_reference() returned
+p.set(p, 2, 80, false, Seoul)
+old address(Gwangju) deleted
+p: p 2 80 false :Seoul:
+u: u 1 70 true :Gwangju:
+
+call return_reference()
+return_reference() returned
+u: u 1 70 true :Gwangju:
+r.set(p, 2, 80, false, Seoul)
+old address(Gwangju) deleted
+r: r 2 80 false :Seoul:
+u: r 2 80 false :Seoul:
+old address(Seoul) deleted
+Person::~Person():p 2 80 false :Seoul:
+address deleted
+
+--- return_address_test() ---
+call return_address()
+return_address() returned
+p: u 1 70 true :Gwangju:
+u: u 1 70 true :Gwangju:
+p.set(p, 2, 80, false, Seoul)
+old address(Gwangju) deleted
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+old address(Seoul) deleted
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+u: u 1 70 true :Gwangju:
+input person information:
+old address(Gwangju) deleted
+USER 11 88 false :DONG-GU, DAEGU:
+old address(Gwangju) deleted
+u: USER 11 88 false :DONG-GU, DAEGU:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():USER 11 88 false :DONG-GU, DAEGU:
+address deleted
+Person::~Person():USER 11 88 false :DONG-GU, DAEGU:
+address deleted
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 0
+Good bye!!

@@ -1,0 +1,75 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1)                          *
+***************************************************************************
+Menu item number? 3
+Person::Person(...):u 1 70 true :Gwangju:
+Person::Person(const Person&):u 1 70 true :Gwangju:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 4
+temporary object 1: Person(p0, 10, 70, true, Gwangju)
+Person::Person(...):p0 10 70 true :Gwangju:
+Person::~Person():p0 10 70 true :Gwangju:
+
+temporary object 2: Person(p1, 11, 60, false, Seoul).println()
+Person::Person(...):p1 11 60 false :Seoul:
+p1 11 60 false :Seoul:
+Person::~Person():p1 11 60 false :Seoul:
+
+return_member_object().println()
+Person::Person(const Person&):u 1 70 true :Gwangju:
+u 1 70 true :Gwangju:
+Person::~Person():u 1 70 true :Gwangju:
+return_member_object() returned
+
+return_local_object().println()
+Person::Person(...):pL 0 70 true :Gwangju Nam-gu:
+return_local_object() returns pL
+pL 0 70 true :Gwangju Nam-gu:
+Person::~Person():pL 0 70 true :Gwangju Nam-gu:
+return_local_object() returned
+
+Person pL = return_local_object()
+Person::Person(...):pL 0 70 true :Gwangju Nam-gu:
+return_local_object() returns pL
+return_local_object() returned
+pL 0 70 true :Gwangju Nam-gu:
+
+return_temporary_object().println()
+return_temporary_object() returns Person(pT, 0, 70, true, Gwangju Nam-gu)
+Person::Person(...):pT 0 70 true :Gwangju Nam-gu:
+pT 0 70 true :Gwangju Nam-gu:
+Person::~Person():pT 0 70 true :Gwangju Nam-gu:
+return_temporary_object() returned
+
+Person pT = return_temporary_object()
+return_temporary_object() returns Person(pT, 0, 70, true, Gwangju Nam-gu)
+Person::Person(...):pT 0 70 true :Gwangju Nam-gu:
+return_temporary_object() returned
+pT 0 70 true :Gwangju Nam-gu:
+Person::~Person():pT 0 70 true :Gwangju Nam-gu:
+Person::~Person():pL 0 70 true :Gwangju Nam-gu:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():u 1 70 true :Gwangju:
+Person::~Person():u 1 70 true :Gwangju:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1)                          *
+***************************************************************************
+Menu item number? 0
+Good bye!!

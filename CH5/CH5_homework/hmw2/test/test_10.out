@@ -1,0 +1,268 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 4
+Person::Person(...):u 1 70 true :NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA:
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+u: u 1 70 true :NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA:
+input person information:
+old address(NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA) deleted
+USER 11 88 false :DONG-GU, DAEGU:
+u: USER 11 88 false :DONG-GU, DAEGU:
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+Person::Person(...):p 1 70 true :Gwangju:
+p.setAddress(short address)
+old address(Gwangju) deleted
+p 1 70 true :short address:
+
+p.setAddress(middle length Address, Seoul)
+old address(short address) deleted
+p 1 70 true :middle length Address, Seoul:
+
+p.setAddress(long length Address Seoul Mapo-gu Korea)
+old address(middle length Address, Seoul) deleted
+p 1 70 true :long length Address Seoul Mapo-gu Korea:
+
+p.setAddress(DONG-GU, DAEGU)
+old address(long length Address Seoul Mapo-gu Korea) deleted
+p 1 70 true :DONG-GU, DAEGU:
+
+Person::~Person():p 1 70 true :DONG-GU, DAEGU:
+address deleted
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Person::Person(...):p 1 70 true :Gwangju:
+p.setMemo(memo)
+------ p memo ------
+short memo
+--------------------
+
+p.setMemo(memo)
+old memo_c_str deleted
+------ p memo ------
+middle long memo: The Last of the Mohicans
+--------------------
+
+p.setMemo(memo)
+old memo_c_str deleted
+------ p memo ------
+It is believed that the Aborigines of the American continent
+--------------------
+
+Person::~Person():p 1 70 true :Gwangju:
+address, memo_c_str deleted
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 4
+u: USER 11 88 false :DONG-GU, DAEGU:
+------ USER memo ------
+It is believed that the Aborigines of the American continent
+--------------------
+
+Person p1(u)
+p1: Person::Person(const Person&):USER 11 88 false :DONG-GU, DAEGU:
+p1 11 88 false :DONG-GU, DAEGU:
+------ p1 memo ------
+It is believed that the Aborigines of the American continent
+--------------------
+
+Person p2 = call_by_value_and_return_value(p1)
+p: Person::Person(const Person&):p1 11 88 false :DONG-GU, DAEGU:
+p.setName(p)
+p2: Person::Person(const Person&):p 11 88 false :DONG-GU, DAEGU:
+Person::~Person():p 11 88 false :DONG-GU, DAEGU:
+address, memo_c_str deleted
+call_by_value_and_return_value(p1) returned
+
+p2.setName(p2)
+p2 11 88 false :DONG-GU, DAEGU:
+------ p2 memo ------
+It is believed that the Aborigines of the American continent
+--------------------
+
+copyConstructor() returns
+Person::~Person():p2 11 88 false :DONG-GU, DAEGU:
+address, memo_c_str deleted
+Person::~Person():p1 11 88 false :DONG-GU, DAEGU:
+address, memo_c_str deleted
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+USER 11 88 false :DONG-GU, DAEGU:
+------ USER memo ------
+It is believed that the Aborigines of the American continent
+--------------------
+
+set address = memo_c_str = nullptr
+old address(DONG-GU, DAEGU) deleted
+old memo_c_str deleted
+USER 11 88 false ::
+------ USER memo ------
+--------------------
+
+memo.set_c_str(u.getMemo())
+------- Memo -------
+--------------------
+
+u.setMemo(memo.get_c_str())
+------ USER memo ------
+--------------------
+
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():USER 11 88 false ::
+memo_c_str deleted
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 3
+Person::Person(...):u 1 70 true :Gwangju:
+Person::Person(const Person&):u 1 70 true :Gwangju:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+u: u 1 70 true :Gwangju:
+input person information:
+old address(Gwangju) deleted
+USER 11 88 false :DONG-GU, DAEGU:
+old address(Gwangju) deleted
+u: USER 11 88 false :DONG-GU, DAEGU:
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+call_by_value
+Person::Person(const Person&):USER 11 88 false :DONG-GU, DAEGU:
+p: USER 11 88 false :DONG-GU, DAEGU:
+u: USER 11 88 false :DONG-GU, DAEGU:
+p.set(p, 2, 80, false, Seoul)
+old address(DONG-GU, DAEGU) deleted
+p: p 2 80 false :Seoul:
+u: USER 11 88 false :DONG-GU, DAEGU:
+Person::~Person():p 2 80 false :Seoul:
+address deleted
+
+call_by_reference
+p: USER 11 88 false :DONG-GU, DAEGU:
+u: USER 11 88 false :DONG-GU, DAEGU:
+p.set(p, 2, 80, false, Seoul)
+old address(DONG-GU, DAEGU) deleted
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+old address(Seoul) deleted
+
+call_by_address
+p: USER 11 88 false :DONG-GU, DAEGU:
+u: USER 11 88 false :DONG-GU, DAEGU:
+p->set(p, 2, 80, false, Seoul)
+old address(DONG-GU, DAEGU) deleted
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+old address(Seoul) deleted
+
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+--- return_value_test() ---
+call return_value()
+p: Person::Person(const Person&):USER 11 88 false :DONG-GU, DAEGU:
+return_value() returned
+p: USER 11 88 false :DONG-GU, DAEGU:
+p.set(p, 2, 80, false, Seoul)
+old address(DONG-GU, DAEGU) deleted
+p: p 2 80 false :Seoul:
+u: USER 11 88 false :DONG-GU, DAEGU:
+Person::~Person():p 2 80 false :Seoul:
+address deleted
+
+--- return_reference_test() ---
+call return_reference()
+p: Person::Person(const Person&):USER 11 88 false :DONG-GU, DAEGU:
+return_reference() returned
+p.set(p, 2, 80, false, Seoul)
+old address(DONG-GU, DAEGU) deleted
+p: p 2 80 false :Seoul:
+u: USER 11 88 false :DONG-GU, DAEGU:
+
+call return_reference()
+return_reference() returned
+u: USER 11 88 false :DONG-GU, DAEGU:
+r.set(p, 2, 80, false, Seoul)
+old address(DONG-GU, DAEGU) deleted
+r: r 2 80 false :Seoul:
+u: r 2 80 false :Seoul:
+old address(Seoul) deleted
+Person::~Person():p 2 80 false :Seoul:
+address deleted
+
+--- return_address_test() ---
+call return_address()
+return_address() returned
+p: USER 11 88 false :DONG-GU, DAEGU:
+u: USER 11 88 false :DONG-GU, DAEGU:
+p.set(p, 2, 80, false, Seoul)
+old address(DONG-GU, DAEGU) deleted
+p: p 2 80 false :Seoul:
+u: p 2 80 false :Seoul:
+old address(Seoul) deleted
+
++++++++++ Reference And Copy Constructor Menu ++++++++++
++ 0.Exit 1.ExplicitCopyConstructor 2.ReferenceVariable +
++ 3.ImplicitCopyConstructor 4.TemporaryObject          +
++ 5.FunctionParameterType 6.FunctionReturnType         +
++ 7.inputPerson                                        +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():USER 11 88 false :DONG-GU, DAEGU:
+address deleted
+Person::~Person():USER 11 88 false :DONG-GU, DAEGU:
+address deleted
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 0
+Good bye!!

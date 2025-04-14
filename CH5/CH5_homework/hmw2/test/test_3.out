@@ -1,0 +1,47 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 4
+Person::Person(...):u 1 70 true :NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA:
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+Person::Person(...):p 1 70 true :Gwangju:
+p.setAddress(short address)
+old address(Gwangju) deleted
+p 1 70 true :short address:
+
+p.setAddress(middle length Address, Seoul)
+old address(short address) deleted
+p 1 70 true :middle length Address, Seoul:
+
+p.setAddress(long length Address Seoul Mapo-gu Korea)
+old address(middle length Address, Seoul) deleted
+p 1 70 true :long length Address Seoul Mapo-gu Korea:
+
+p.setAddress(NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA)
+old address(long length Address Seoul Mapo-gu Korea) deleted
+p 1 70 true :NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA:
+
+Person::~Person():p 1 70 true :NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA:
+address deleted
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():u 1 70 true :NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA:
+address, memo_c_str deleted
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 0
+Good bye!!

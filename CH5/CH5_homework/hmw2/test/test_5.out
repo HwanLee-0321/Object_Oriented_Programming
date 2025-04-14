@@ -1,0 +1,73 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 4
+Person::Person(...):u 1 70 true :NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA:
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 3
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+------- Memo -------
+It is believed that the Aborigines of the American continent
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+--- Input memo lines, and then input empty line at the end ---
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+and self-devoted; in peace, just, generous, hospitable, revengeful,
+superstitious, modest, and commonly chaste.
+These are qualities, it is true, which do not distinguish all alike;
+but they are so far the predominating traits of these remarkable people
+as to be characteristic.
+It is generally believed that the Aborigines of the American continent
+have an Asiatic origin.
+
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+memo.run() returned
+old memo_c_str deleted
+------ u memo ------
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+and self-devoted; in peace, just, generous, hospitable, revengeful,
+superstitious, modest, and commonly chaste.
+These are qualities, it is true, which do not distinguish all alike;
+but they are so far the predominating traits of these remarkable people
+as to be characteristic.
+It is generally believed that the Aborigines of the American continent
+have an Asiatic origin.
+--------------------
+
+
+++++++++++++++++ Allocated Member Menu ++++++++++++++++
++ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +
++ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Person::~Person():u 1 70 true :NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA:
+address, memo_c_str deleted
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4)                                        *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 0
+Good bye!!
