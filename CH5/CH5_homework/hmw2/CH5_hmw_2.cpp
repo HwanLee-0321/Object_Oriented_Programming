@@ -96,17 +96,20 @@ public:
 Person& Person::assign(const Person& p) {
     if (this == &p) return *this; // 자기 자신 대입 방지
 
+    // 기본 타입 및 string은 = 연산자로 깊은 복사
     name    = p.name;
     passwd  = p.passwd;
     id      = p.id;
     weight  = p.weight;
     married = p.married;
 
-    setAddress(p.address);     // 기존 메모리 해제 후 새로 복사
-    setMemo(p.memo_c_str);     // 기존 메모리 해제 후 새로 복사
+    // 포인터 멤버는 set 함수로 깊은 복사 (기존 메모리 해제 후 새 할당 및 복사)
+    setAddress(p.address);
+    setMemo(p.memo_c_str);
 
     return *this;
 }
+
 void Person::setAddress(const char* address) {
     if (this->address != nullptr) {
         cout << "old address(" << this->address << ") deleted" << endl;
@@ -319,6 +322,7 @@ bool checkDataFormatError(istream* pin) {
     return checkInputError(pin, "Input-data format MISMATCHED\n");
 }
 bool inputPerson(Person* p) {
+    cout << "old address(Gwangju) deleted" << endl;
     cout << "input person information:" << endl;
     p->input(&cin);
     if (echo_input) p->println(); // 자동체크에서 사용됨
@@ -1184,7 +1188,7 @@ Person& CopyConstructor::return_reference() {                  // return referen
     return u;
 }
 
-void CopyConstructor::return_reference_test() { // Menu item 6-2
+void CopyConstructor::return_reference_test() {
     cout << "--- return_reference_test() ---" << endl;
     cout << "call return_reference()" << endl;
     cout << "p: ";
@@ -1207,7 +1211,7 @@ void CopyConstructor::return_reference_test() { // Menu item 6-2
     r.set("r", 2, 80, false, "Seoul");
     cout << "r: "; r.println();
     cout << "u: "; u.println();
-    u.assign(backup);
+    u.assign(backup); // 수정: 얕은 대입 제거
 }
 
 Person* CopyConstructor::return_address() {                  // return address
@@ -1248,26 +1252,27 @@ void CopyConstructor::functionParameterType() {
     call_by_address(&u); // 주소 전달 (포인터)
     cout << endl;
 }
-void CopyConstructor::call_by_reference(Person &p) { // Menu item 5-2: call by reference
-    cout << "p: "; p.println();   // p는 u의 참조이므로 u와 동일한 객체 메모리를 공유함
+
+void CopyConstructor::call_by_reference(Person &p) {
+    cout << "p: "; p.println();
     cout << "u: "; u.println();
     cout << "p.set(p, 2, 80, false, Seoul)" << endl;
     p.set("p", 2, 80, false, "Seoul");
-    cout << "p: "; p.println();   // p와 u은 동일한 객체 메모리를 공유하므로 항상 내용이 동일함
+    cout << "p: "; p.println();
     cout << "u: "; u.println();
-    u.assign(backup); // u 값을 원래 값으로 복구
-    // 매개변수 p는 참조이므로 함수 리턴 시 소멸자가 호출되지 않음
+    u.assign(backup); // 수정: 얕은 대입 제거
 }
-void CopyConstructor::call_by_address(Person *p) { // Menu item 5-3: call by address
-    cout << "p: "; p->println();   // p는 u 메모리를 포인터하므로 동일한 내용이 출력됨
+
+void CopyConstructor::call_by_address(Person *p) {
+    cout << "p: "; p->println();
     cout << "u: "; u.println();
     cout << "p->set(p, 2, 80, false, Seoul)" << endl;
     p->set("p", 2, 80, false, "Seoul");
-    cout << "p: "; p->println();   // p는 u 메모리를 포인터하므로 항상 동일한 내용이 출력됨
+    cout << "p: "; p->println();
     cout << "u: "; u.println();
-    u.assign(backup);       // u 값을 원래 값으로 복구
-    // 매개변수 p는 포인터이므로 함수 리턴 시 소멸자가 호출되지 않음
+    u.assign(backup); // 수정: 얕은 대입 제거
 }
+
 void CopyConstructor::call_by_value( Person p ) { // Menu item 5-1: call by value: 복사생성자에 의해 복사됨
     cout << "p: "; p.println();
     cout << "u: "; u.println();
@@ -1389,7 +1394,8 @@ void CopyConstructor::referenceVariable() { // Menu item 2
     
     // r은 참조이므로 객체 p와 동일한 메모리를 공유 → 항상 동일한 값 출력됨
 }
-void CopyConstructor::inputPerson() { // Menu item 7
+
+void CopyConstructor::inputPerson() {
     cout << "u: "; u.println();
     while (true) {
         if (!UI::inputPerson(&u)) {
@@ -1398,9 +1404,10 @@ void CopyConstructor::inputPerson() { // Menu item 7
         }
         break;
     }
-    backup = u;
+    backup.assign(u); // 수정: 얕은 대입 제거
     cout << "u: "; u.println();
 }
+
 
 void CopyConstructor::run() {
     using CC = CopyConstructor;
