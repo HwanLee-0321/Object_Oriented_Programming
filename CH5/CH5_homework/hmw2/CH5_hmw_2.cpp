@@ -2,7 +2,7 @@
 #include <cstring>
 #include <string>
 #include <sstream>
-#define AUTOMATIC_ERROR_CHECK false
+#define AUTOMATIC_ERROR_CHECK true
 using namespace std;
 // *********************************************************
 // Persson class
@@ -321,13 +321,21 @@ namespace UI {
 bool checkDataFormatError(istream* pin) {
     return checkInputError(pin, "Input-data format MISMATCHED\n");
 }
+
 bool inputPerson(Person* p) {
-    cout << "old address(Gwangju) deleted" << endl;
     cout << "input person information:" << endl;
+
+    // [안전 처리] 먼저 주소 백업
+    const char* oldAddr = p->getAddress();
+
+    // [강제 삭제 유도] 주소를 nullptr로 설정 → 내부에서 old address delete 유도됨
+    p->setAddress(nullptr); // 이로써 oldAddr은 delete[]됨
+
     p->input(&cin);
-    if (echo_input) p->println(); // 자동체크에서 사용됨
+    if (echo_input) p->println();
     return true;
 }
+
 int getInt(const string msg) {
     for (int value; true; ) {
         cout << msg;
