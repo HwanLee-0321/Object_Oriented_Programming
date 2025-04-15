@@ -2,25 +2,8 @@
 #include <cstring>
 #include <string>
 #include <sstream>
-#define AUTOMATIC_ERROR_CHECK false
+#define AUTOMATIC_ERROR_CHECK true
 using namespace std;
-/*
- * CH5_hmw_2.cpp
- *
- *  Created on: 2025.04.15
- *      Author: Lee Jae Hwan
-  *
- *  + MainMenu 수정
- *  + class Person의 두 멤버의 타입을 배열[]에서 포인터로 즉, char* address, char* memo_c_str로 변경
- *  + Person 클래스에 copyAddress(), copyMemo() 추가
- *  + Person 생성자, inputMembers(), printMembers(), setAddress(), setMemo() 수정
- *  + Person(const Person& p) 복사생성자 수정
- *  + Memo::set_c_str(): 매개변수 c_str==nullptr일 경우 ""로 설정
- *  + Person::printMembers(): address==nullptr일 경우 "" 출력
- *  + Person::inputMembers(): 지역변수 char address[40] 추가
- *  + Person::assign() 추가
- *  + CopyConstructor 멤버 함수에서 u = backup 대신 u.assign(backup)
- */
 // *********************************************************
 // Persson class
 // ********************************************************* 
@@ -30,37 +13,47 @@ class Person
     int    id;              // Identifier
     double weight;          // 체중
     bool   married;         // 결혼여부
-    char   address[40];     // 주소
+    char*   address;     // 주소
     string rawInput;
     string passwd;
-    char memo_c_str[1024];
+    char* memo_c_str;
 
 protected:
     void inputMembers(istream* in);
     void printMembers(ostream* out);
-
+    void copyAddress(const char* address); // 추가
+    void copyMemo(const char* c_str);      // 추가
 public:
-    Person() : Person("", 0, 0.0, false, "") { }
-    Person(const string name) : Person(name, 0, 0.0, false, "") { }
-
-    Person(const string name, int id, double weight, bool married, const char *address)
-        : name(name), id{id}, weight{weight}, married{married} {
-        setAddress(address);
+    Person() : Person("", 0, 0.0, false, "") {}
+    Person(const string name) : Person(name, 0, 0.0, false, "") {}
+    Person(const string name, int id, double weight, bool married, const char* address)
+        : name(name), id(id), weight(weight), married(married), address(nullptr), memo_c_str(nullptr) {
+        copyAddress(address);
         cout << "Person::Person(...):"; println();
     }
 
+    // 복사 생성자 구현
     Person(const Person& p);
 
     ~Person() {
         cout << "Person::~Person():"; println();
+        if (address) cout << "address";
+        if (address && memo_c_str) cout << ", ";
+        if (memo_c_str) cout << "memo_c_str";
+        if (address || memo_c_str) cout << " deleted" << endl;
+
+        if (address) delete[] address;
+        if (memo_c_str) delete[] memo_c_str;
     }
+
+    Person& assign(const Person& p);
 
     void set(const string name, int pid, double pweight, bool pmarried, const char *paddress);
     void setName(const string name)       { this->name = name; }
     void setId(int pid)                   { id = pid; }
     void setWeight(double pweight)        { weight = pweight; }
     void setMarried(bool pmarried)        { married = pmarried; }
-    void setAddress(const char* paddress) { strcpy(address, paddress); }
+    void setAddress(const char* address); // 5_2에서 수정
 
     string      getName()    { return name; }
     int         getId()      { return id; }
@@ -78,8 +71,13 @@ public:
     void setPasswd(const string& pw) { passwd = pw; }
     string getPasswd() const { return passwd; }
 
-    // [문제 11 - 메모 저장 및 반환 함수]
-    void setMemo(const char* c_str) { strcpy(memo_c_str, c_str); }
+    void setMemo(const char* c_str) {
+        if (memo_c_str != nullptr) {
+            cout << "old memo_c_str deleted" << endl;
+            delete[] memo_c_str;
+        }
+        copyMemo(c_str);
+    }
     const char* getMemo() { return memo_c_str; }
 };
 // *********************************************************
@@ -87,8 +85,42 @@ public:
 // ********************************************************* 
 
 // *********************************************************
-// Persson objects
+// Persson member func start point
 // ********************************************************* 
+Person& Person::assign(const Person& p) {
+    name = p.name;
+    passwd = p.passwd;
+    id = p.id;
+    weight = p.weight;
+    married = p.married;
+    setAddress(p.address);   // 기존 메모리 해제 + 복사
+    setMemo(p.memo_c_str);   // 기존 메모리 해제 + 복사
+    return *this;
+}
+void Person::setAddress(const char* address) {
+    if (this->address != nullptr) {
+        cout << "old address(" << this->address << ") deleted" << endl;
+        delete[] this->address;
+    }
+    copyAddress(address);
+}
+void Person::copyAddress(const char* addr) {
+    if (addr == nullptr) {
+        address = nullptr;
+        return;
+    }
+    address = new char[strlen(addr) + 1];
+    strcpy(address, addr);
+}
+
+void Person::copyMemo(const char* c_str) {
+    if (c_str == nullptr) {
+        memo_c_str = nullptr;
+        return;
+    }
+    memo_c_str = new char[strlen(c_str) + 1];
+    strcpy(memo_c_str, c_str);
+}
 void Person::whatAreYouDoing() {
     cout << name << " is taking a rest." << endl;
 }
@@ -97,8 +129,8 @@ bool Person::isSame(const string name, int pid) {
 }
 void Person::printMembers(ostream* pout) {
     *pout << name << " " << id << " " << weight << " "
-        << (married ? "true" : "false") << " :"
-        << address << ":";
+          << (married ? "true" : "false") << " :"
+          << (address ? address : "") << ":";
 }
 void Person::set(const string name, int pid, double pweight, bool pmarried, const char *paddress) {
     setName(name);        // string으로 직접 설정
@@ -107,12 +139,13 @@ void Person::set(const string name, int pid, double pweight, bool pmarried, cons
     setMarried(pmarried);
     setAddress(paddress);
 }
-Person::Person(const Person& p):
-    name(p.name), id{p.id}, weight{p.weight}, married{p.married}  {
-    setAddress(p.address);
-    setMemo(p.memo_c_str);
+Person::Person(const Person& p)
+    : name(p.name), id{p.id}, weight{p.weight}, married{p.married} {
+    copyAddress(p.address);
+    copyMemo(p.memo_c_str);
     cout << "Person::Person(const Person&):"; println();
 }
+
 void Person::inputMembers(istream* pin) {
     string line;
     getline(*pin, line);
@@ -145,7 +178,7 @@ void Person::inputMembers(istream* pin) {
     set(t_name, t_id, t_weight, t_married, addrPart.c_str());
 }
 // *********************************************************
-// Persson objects end point
+// Persson member func end point
 // ********************************************************* 
 
 //*****************************************************************************
@@ -328,7 +361,9 @@ public:
     void displayMemo();
     
     const char *get_c_str() { return mStr.c_str(); }
-    void set_c_str(const char *c_str) { mStr = c_str;}
+    void set_c_str(const char *c_str) {
+        mStr = (c_str == nullptr) ? "" : c_str;
+    }
 
     void findString();
     void compareWord();
@@ -360,7 +395,7 @@ than the native warrior of North America.
 //*****************************************************************************
 
 //*****************************************************************************
-// string and Memo objects 
+// string and Memo member func start point
 //*****************************************************************************
 bool Memo::find_line(int line_num, size_t* pstart, size_t* plen) {
     size_t start = 0;
@@ -931,6 +966,149 @@ public:
 // MultiManager class end point
 //******************************************************************************
 
+/******************************************************************************
+ * ch5_2: AllocatedMember, new을 이용한 동적 메모리 할당한 멤버 취급
+ ******************************************************************************/
+class AllocatedMember {
+    Person  u;
+    Memo    memo;
+
+    void set_print_address(Person& p, const char* address) {
+        cout << "p.setAddress(" << (address ? address : "") << ")" << endl;
+        p.setAddress(address);
+        p.println();
+        cout << endl;
+    }
+
+    void print_memo(Person& p) { // 객체 p의 메모 출력
+        cout << "------ " << p.getName() << " memo ------" << endl;
+        const char *pmemo = p.getMemo();
+        cout << (pmemo ? pmemo : "");
+        cout << "--------------------" << endl << endl;
+    }
+
+    void set_print_memo(Person& p, const char* memo) {
+        cout << "p.setMemo(memo)" << endl;
+        p.setMemo(memo);
+        print_memo(p);
+    }
+
+    void changeAddress() {
+        Person p("p", 1, 70, true, "Gwangju");
+        set_print_address(p, "short address");
+        set_print_address(p, "middle length Address, Seoul");
+        set_print_address(p, "long length Address Seoul Mapo-gu Korea");
+        set_print_address(p, u.getAddress());
+    }
+
+    void changeMemo() {
+        Person p("p", 1, 70, true, "Gwangju");
+        set_print_memo(p, "short memo\n");
+        set_print_memo(p, "middle long memo: The Last of the Mohicans\n");
+        set_print_memo(p, u.getMemo());
+    }
+
+    void manageMemo() {
+        memo.set_c_str(u.getMemo());
+        memo.run();
+        cout << "\nmemo.run() returned" << endl;
+        u.setMemo(memo.get_c_str());
+        print_memo(u);
+    }
+
+    Person call_by_value_and_return_value(Person p) {
+        cout << "p.setName(p)" << endl;
+        p.setName("p");
+        cout << "p2: ";
+        return p;
+    }
+
+    void copyConstructor() {
+        cout << "u: "; u.println();
+        print_memo(u);
+
+        cout << "Person p1(u)" << endl;
+        cout << "p1: ";
+        Person p1(u);
+        p1.setName("p1");
+        p1.println();
+        print_memo(p1);
+
+        cout << "Person p2 = call_by_value_and_return_value(p1)" << endl;
+        cout << "p: ";
+        Person p2 = call_by_value_and_return_value(p1);
+        cout << "call_by_value_and_return_value(p1) returned\n" << endl;
+        cout << "p2.setName(p2)" << endl;
+        p2.setName("p2");
+        p2.println();
+        print_memo(p2);
+        cout << "copyConstructor() returns" << endl;
+    }
+
+    void nullptrMember() { // Menu Item 5
+        u.println();
+        print_memo(u);
+        cout << "set address = memo_c_str = nullptr" << endl;
+        u.setAddress(nullptr);
+        u.setMemo(nullptr);
+        u.println();
+        print_memo(u);
+
+        cout << "memo.set_c_str(u.getMemo())" << endl;
+        memo.set_c_str(u.getMemo());
+        memo.displayMemo();
+
+        cout << endl << "u.setMemo(memo.get_c_str())" << endl;
+        u.setMemo(memo.get_c_str());
+        print_memo(u);
+    }
+
+    void inputPerson() { // Menu Item 6
+        cout << "u: "; u.println();
+        while (!UI::inputPerson(&u)) ;  // 사용자 입력 오류 시 재입력
+        cout << "u: "; u.println();
+    }
+
+public:
+    AllocatedMember():
+        u("u", 1, 70, true, "NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA") {
+        u.setMemo("It is believed that the Aborigines of the American continent");
+    }
+
+    void run() {
+        using func_t = void (AllocatedMember::*)();
+        func_t func_arr[] = {
+            nullptr,
+            &AllocatedMember::changeAddress,
+            &AllocatedMember::changeMemo,
+            &AllocatedMember::manageMemo,
+            &AllocatedMember::copyConstructor,
+            &AllocatedMember::nullptrMember,
+            &AllocatedMember::inputPerson
+        };
+
+        int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
+        string menuStr =
+            "++++++++++++++++ Allocated Member Menu ++++++++++++++++\n"
+            "+ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +\n"
+            "+ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +\n"
+            "+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+
+        while (true) {
+            int menuItem = UI::selectMenu(menuStr, menuCount);
+            if (menuItem == 0) return;
+            if (menuItem >= menuCount || func_arr[menuItem] == nullptr) {
+                cout << menuItem << ": OUT of selection range(0 ~ " << menuCount - 1 << ")" << endl;
+                continue;
+            }
+            (this->*func_arr[menuItem])();
+        }
+    }
+};
+//******************************************************************************
+//* ch5_2: AllocatedMember, new을 이용한 동적 메모리 할당한 멤버 취급
+//******************************************************************************
+
 //******************************************************************************
 // CopyConstructor class
 //******************************************************************************
@@ -1254,11 +1432,11 @@ void CopyConstructor::run() {
 class MainMenu{
 public:
     void run() {
-        int menuCount = 4; // 상수 정의
+        int menuCount = 5; // 상수 정의
         string menuStr =
 "******************************* Main Menu *********************************\n"
 "* 0.Exit 1.PersonManager(ch3_2, 4)                                        *\n"
-"* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1)                          *\n"
+"* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *\n"
 "***************************************************************************\n";
         while (true) { 
             int menuItem = UI::selectMenu(menuStr, menuCount);
@@ -1266,7 +1444,8 @@ public:
             switch(menuItem) {
             case 1: MultiManager().run();             break;
             case 2: ClassAndObject().run();           break;    
-            case 3: CopyConstructor().run();          break;    
+            case 3: CopyConstructor().run();          break;  
+            case 4: AllocatedMember().run();          break;  
             }
         }
         cout << "Good bye!!" << endl;
@@ -1275,6 +1454,7 @@ public:
 //******************************************************************************
 // MainMenu class end point
 //******************************************************************************
+
 
 //******************************************************************************
 // Run func
