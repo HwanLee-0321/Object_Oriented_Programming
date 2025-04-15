@@ -2,7 +2,7 @@
 #include <cstring>
 #include <string>
 #include <sstream>
-#define AUTOMATIC_ERROR_CHECK true
+#define AUTOMATIC_ERROR_CHECK false
 using namespace std;
 // *********************************************************
 // Persson class
@@ -39,12 +39,12 @@ public:
         cout << "Person::~Person():"; println();
         if (address) cout << "address";
         if (address && memo_c_str) cout << ", ";
-        if (memo_c_str) cout << "memo_c_str";
-        if (address || memo_c_str) cout << " deleted" << endl;
-
+        if (memo_c_str && memo_c_str != address) cout << "memo_c_str";
+        if (address || (memo_c_str && memo_c_str != address)) cout << " deleted" << endl;
+    
         if (address) delete[] address;
-        if (memo_c_str) delete[] memo_c_str;
-    }
+        if (memo_c_str && memo_c_str != address) delete[] memo_c_str;
+    }    
 
     Person& assign(const Person& p);
 
@@ -72,10 +72,16 @@ public:
     string getPasswd() const { return passwd; }
 
     void setMemo(const char* c_str) {
-        if (memo_c_str != nullptr) {
+        if (memo_c_str != nullptr && memo_c_str != address) {
             cout << "old memo_c_str deleted" << endl;
             delete[] memo_c_str;
         }
+    
+        if (c_str == address) {
+            memo_c_str = address;
+            return;
+        }
+    
         copyMemo(c_str);
     }
     const char* getMemo() { return memo_c_str; }
@@ -88,13 +94,17 @@ public:
 // Persson member func start point
 // ********************************************************* 
 Person& Person::assign(const Person& p) {
-    name = p.name;
-    passwd = p.passwd;
-    id = p.id;
-    weight = p.weight;
+    if (this == &p) return *this; // 자기 자신 대입 방지
+
+    name    = p.name;
+    passwd  = p.passwd;
+    id      = p.id;
+    weight  = p.weight;
     married = p.married;
-    setAddress(p.address);   // 기존 메모리 해제 + 복사
-    setMemo(p.memo_c_str);   // 기존 메모리 해제 + 복사
+
+    setAddress(p.address);     // 기존 메모리 해제 후 새로 복사
+    setMemo(p.memo_c_str);     // 기존 메모리 해제 후 새로 복사
+
     return *this;
 }
 void Person::setAddress(const char* address) {
@@ -140,7 +150,7 @@ void Person::set(const string name, int pid, double pweight, bool pmarried, cons
     setAddress(paddress);
 }
 Person::Person(const Person& p)
-    : name(p.name), id{p.id}, weight{p.weight}, married{p.married} {
+    : name(p.name), id{p.id}, weight{p.weight}, married{p.married}, address(nullptr), memo_c_str(nullptr) {
     copyAddress(p.address);
     copyMemo(p.memo_c_str);
     cout << "Person::Person(const Person&):"; println();
@@ -172,8 +182,9 @@ void Person::inputMembers(istream* pin) {
     }
     // 3. 주소 처리
     getline(iss, addrPart, ':');
-    if (addrPart.length() >= sizeof(address))
-        addrPart = addrPart.substr(0, sizeof(address) - 1);
+    const int MAX_ADDRESS_LEN = 100;
+    if (addrPart.length() >= MAX_ADDRESS_LEN)
+        addrPart = addrPart.substr(0, MAX_ADDRESS_LEN - 1);
     // 4. 실제 데이터 반영
     set(t_name, t_id, t_weight, t_married, addrPart.c_str());
 }
@@ -364,6 +375,7 @@ public:
     void set_c_str(const char *c_str) {
         mStr = (c_str == nullptr) ? "" : c_str;
     }
+    
 
     void findString();
     void compareWord();
@@ -1195,7 +1207,7 @@ void CopyConstructor::return_reference_test() { // Menu item 6-2
     r.set("r", 2, 80, false, "Seoul");
     cout << "r: "; r.println();
     cout << "u: "; u.println();
-    u = backup;
+    u.assign(backup);
 }
 
 Person* CopyConstructor::return_address() {                  // return address
@@ -1215,7 +1227,7 @@ void CopyConstructor::return_address_test() { // Menu item 6-3
     p->set("p", 2, 80, false, "Seoul");
     cout << "p: "; p->println();
     cout << "u: "; u.println();
-    u = backup;
+    u.assign(backup);
 }
 
 void CopyConstructor::returnDataType() { // Menu item 6
@@ -1243,7 +1255,7 @@ void CopyConstructor::call_by_reference(Person &p) { // Menu item 5-2: call by r
     p.set("p", 2, 80, false, "Seoul");
     cout << "p: "; p.println();   // p와 u은 동일한 객체 메모리를 공유하므로 항상 내용이 동일함
     cout << "u: "; u.println();
-    u = backup;       // u 값을 원래 값으로 복구
+    u.assign(backup); // u 값을 원래 값으로 복구
     // 매개변수 p는 참조이므로 함수 리턴 시 소멸자가 호출되지 않음
 }
 void CopyConstructor::call_by_address(Person *p) { // Menu item 5-3: call by address
@@ -1253,7 +1265,7 @@ void CopyConstructor::call_by_address(Person *p) { // Menu item 5-3: call by add
     p->set("p", 2, 80, false, "Seoul");
     cout << "p: "; p->println();   // p는 u 메모리를 포인터하므로 항상 동일한 내용이 출력됨
     cout << "u: "; u.println();
-    u = backup;       // u 값을 원래 값으로 복구
+    u.assign(backup);       // u 값을 원래 값으로 복구
     // 매개변수 p는 포인터이므로 함수 리턴 시 소멸자가 호출되지 않음
 }
 void CopyConstructor::call_by_value( Person p ) { // Menu item 5-1: call by value: 복사생성자에 의해 복사됨
@@ -1389,6 +1401,7 @@ void CopyConstructor::inputPerson() { // Menu item 7
     backup = u;
     cout << "u: "; u.println();
 }
+
 void CopyConstructor::run() {
     using CC = CopyConstructor;
     using func_t = void (CopyConstructor::*)();
@@ -1422,6 +1435,7 @@ void CopyConstructor::run() {
         (this->*func_arr[menuItem])();
     }
 }
+
 //******************************************************************************
 // CopyConstructor member func end point
 //******************************************************************************
