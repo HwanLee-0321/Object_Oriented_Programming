@@ -250,6 +250,7 @@ private:
     static string line, emptyLine;
 public:
     static bool echo_input;
+    static string& getEmptyLine() { return emptyLine; }
     static string getNext(const string msg);
     static string getNextLine(const string msg);
     static bool checkInputError(istream* pin, const string msg);
@@ -300,7 +301,7 @@ bool checkDataFormatError(istream* pin) {
     return UI::checkInputError(pin, "Input-data format MISMATCHED\n");
 }
 
-bool inputPerson(Person* p) {
+bool inputPersonFromUser(Person* p) {
     cout << "input person information:" << endl;
 
     // [안전 처리] 먼저 주소 백업
@@ -318,13 +319,16 @@ int getInt(const string msg) {
     for (int value; true; ) {
         cout << msg;
         cin >> value;
-        if (UI::echo_input) cout << value << endl; // 자동체크 시 출력됨
+        if (UI::echo_input) cout << value << endl;
         if (UI::checkInputError(&cin, "Input an INTEGER.\n"))
             continue;
-        getline(cin, UI::emptyLine); // skip [enter] after the number
+
+        string dummy;
+        getline(cin, dummy); // 여기서 pin → cin 으로 수정
         return value;
     }
 }
+
 int getPositiveInt(const string msg) {
     int value;
     while ((value = getInt(msg)) < 0)
@@ -704,10 +708,12 @@ void CurrentUser::isSame() { // Menu item 6
     pUser->println();
     cout << "isSame(\"user\", 1): " << (pUser->isSame("user", 1) ? "true" : "false") << endl;
 }
-void CurrentUser::inputPerson() { // Menu item 7
-    if (inputPerson(pUser))  // pUser를 인자로 넘겨서 호출
-        display();           // user 1 71.1 true :Gwangju Nam-ro 21:
+
+void CurrentUser::inputPerson() {
+    if (inputPersonFromUser(pUser))  // 👈 함수 이름 명확하게!
+        display();
 }
+
 void CurrentUser::defaultParameter() { // Menu item 10
     Person ps1;
     Person ps2("ps2");
@@ -1101,7 +1107,7 @@ class AllocatedMember {
 
     void inputPerson() { // Menu Item 6
         cout << "u: "; u.println();
-        while (!inputPerson(&u)) ;  // 사용자 입력 오류 시 재입력
+        while (!inputPersonFromUser(&u)) ;  // 사용자 입력 오류 시 재입력
         cout << "u: "; u.println();
     }
 
@@ -1418,7 +1424,7 @@ void CopyConstructor::referenceVariable() { // Menu item 2
 void CopyConstructor::inputPerson() {
     cout << "u: "; u.println();
     while (true) {
-        if (!inputPerson(&u)) {
+        if (!inputPersonFromUser(&u)) {
             cout << "Input-data format MISMATCHED" << endl;
             continue;
         }
