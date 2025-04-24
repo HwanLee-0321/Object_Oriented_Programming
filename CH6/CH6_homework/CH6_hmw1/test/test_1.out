@@ -1,0 +1,142 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 1
+Person::Person(...):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+VectorPerson::VectorPerson(10)
+PersonManager::PersonManager(array[], len)
+Person::Person(const Person&):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(const Person&):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(const Person&):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(const Person&):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(const Person&):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+empty():false, size():5, capacity():10
+PersonManager::run() starts
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+=================================================================
+Menu item number? 4
+user name: p0
+password: 
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 10
+Person::Person(...): 0 0 false ::
+Person::Person(...):ps2 0 0 false ::
+Person::Person(...):ps3 3 0 false ::
+Person::Person(...):ps4 4 70.4 false ::
+Person::Person(...):ps5 5 70.5 true ::
+Person::Person(...):ps6 6 70.6 true :ps6 address:
+
+Memo m1;
+------- Memo -------
+--------------------
+
+Memo m2(rUser.getMemo())
+------- Memo -------
+--------------------
+Person::~Person():ps6 6 70.6 true :ps6 address:
+Person::~Person():ps5 5 70.5 true ::
+Person::~Person():ps4 4 70.4 false ::
+Person::~Person():ps3 3 0 false ::
+Person::~Person():ps2 0 0 false ::
+Person::~Person(): 0 0 false ::
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 10
+Person::Person(...): 0 0 false ::
+Person::Person(...):ps2 0 0 false ::
+Person::Person(...):ps3 3 0 false ::
+Person::Person(...):ps4 4 70.4 false ::
+Person::Person(...):ps5 5 70.5 true ::
+Person::Person(...):ps6 6 70.6 true :ps6 address:
+
+Memo m1;
+------- Memo -------
+--------------------
+
+Memo m2(rUser.getMemo())
+------- Memo -------
+The Last of the Mohicans
+James Fenimore Cooper
+Author's Introduction
+It is believed that the scene of this tale, and most of the information
+necessary to understand its allusions, are rendered sufficiently 
+obvious to the reader in the text itself, or in the accompanying notes.
+Still there is so much obscurity in the Indian traditions, and so much
+confusion in the Indian names, as to render some explanation useful.
+Few men exhibit greater diversity, or, if we may so express it, 
+greater antithesis of character, 
+than the native warrior of North America.
+--------------------
+Person::~Person():ps6 6 70.6 true :ps6 address:
+Person::~Person():ps5 5 70.5 true ::
+Person::~Person():ps4 4 70.4 false ::
+Person::~Person():ps3 3 0 false ::
+Person::~Person():ps2 0 0 false ::
+Person::~Person(): 0 0 false ::
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+=================================================================
+Menu item number? 0
+PersonManager::run() returned
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+VectorPerson::~VectorPerson(): pVector deleted
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 0
+Good bye!!

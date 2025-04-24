@@ -1,0 +1,413 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 1
+Person::Person(...):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+VectorPerson::VectorPerson(10)
+PersonManager::PersonManager(array[], len)
+Person::Person(const Person&):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(const Person&):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(const Person&):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(const Person&):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(const Person&):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+empty():false, size():5, capacity():10
+PersonManager::run() starts
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+=================================================================
+Menu item number? 1
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+empty():false, size():5, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+=================================================================
+Menu item number? 2
+The number of persons to append? 3
+Input 3 [person information] :
+Person::Person(...): 0 0 false ::
+HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...): 0 0 false ::
+LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...): 0 0 false ::
+LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+display(): count 8
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[5] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+[6] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[7] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+empty():false, size():8, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+=================================================================
+Menu item number? 4
+user name: p4
+password: 
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+name:p4, id:14, weight:64.4, married:false, address:88 Gongpyeong-ro, Jung-gu, Daegu
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 3
+Person::Person(...):rp 0 0 false ::
+rp.setMembers():rp 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():rp 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 4
+Person::Person(...):rp 0 0 false ::
+rp.set():rp 14 64.4 true :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():rp 14 64.4 true :88 Gongpyeong-ro, Jung-gu, Daegu:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+p4 is taking a rest.
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+isSame("user", 1): false
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+input person information:
+user 1 71.1 true :Gwangju Nam-ro 21:
+user 1 71.1 true :Gwangju Nam-ro 21:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 8
+New password: p4
+Password changed
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+------- Memo -------
+The Last of the Mohicans
+James Fenimore Cooper
+Author's Introduction
+It is believed that the scene of this tale, and most of the information
+necessary to understand its allusions, are rendered sufficiently 
+obvious to the reader in the text itself, or in the accompanying notes.
+Still there is so much obscurity in the Indian traditions, and so much
+confusion in the Indian names, as to render some explanation useful.
+Few men exhibit greater diversity, or, if we may so express it, 
+greater antithesis of character, 
+than the native warrior of North America.
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Word to find? it
+Found count: 8
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 3
+Word to compare? it
+less: 52
+same: 1
+larger: 53
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 4
+--- Memo by line ---
+[0] The Last of the Mohicans
+[1] James Fenimore Cooper
+[2] Author's Introduction
+[3] It is believed that the scene of this tale, and most of the information
+[4] necessary to understand its allusions, are rendered sufficiently 
+[5] obvious to the reader in the text itself, or in the accompanying notes.
+[6] Still there is so much obscurity in the Indian traditions, and so much
+[7] confusion in the Indian names, as to render some explanation useful.
+[8] Few men exhibit greater diversity, or, if we may so express it, 
+[9] greater antithesis of character, 
+[10] than the native warrior of North America.
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+Line number to delete? 10
+--- Memo by line ---
+[0] The Last of the Mohicans
+[1] James Fenimore Cooper
+[2] Author's Introduction
+[3] It is believed that the scene of this tale, and most of the information
+[4] necessary to understand its allusions, are rendered sufficiently 
+[5] obvious to the reader in the text itself, or in the accompanying notes.
+[6] Still there is so much obscurity in the Indian traditions, and so much
+[7] confusion in the Indian names, as to render some explanation useful.
+[8] Few men exhibit greater diversity, or, if we may so express it, 
+[9] greater antithesis of character, 
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+Line number to delete? 0
+--- Memo by line ---
+[0] James Fenimore Cooper
+[1] Author's Introduction
+[2] It is believed that the scene of this tale, and most of the information
+[3] necessary to understand its allusions, are rendered sufficiently 
+[4] obvious to the reader in the text itself, or in the accompanying notes.
+[5] Still there is so much obscurity in the Indian traditions, and so much
+[6] confusion in the Indian names, as to render some explanation useful.
+[7] Few men exhibit greater diversity, or, if we may so express it, 
+[8] greater antithesis of character, 
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+Line number to replace? 8
+Input a line to replace:
+This is a replaced line.
+--- Memo by line ---
+[0] James Fenimore Cooper
+[1] Author's Introduction
+[2] It is believed that the scene of this tale, and most of the information
+[3] necessary to understand its allusions, are rendered sufficiently 
+[4] obvious to the reader in the text itself, or in the accompanying notes.
+[5] Still there is so much obscurity in the Indian traditions, and so much
+[6] confusion in the Indian names, as to render some explanation useful.
+[7] Few men exhibit greater diversity, or, if we may so express it, 
+[8] This is a replaced line.
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] Author's Introduction
+[1] It is believed that the scene of this tale, and most of the information
+[2] necessary to understand its allusions, are rendered sufficiently 
+[3] obvious to the reader in the text itself, or in the accompanying notes.
+[4] Still there is so much obscurity in the Indian traditions, and so much
+[5] confusion in the Indian names, as to render some explanation useful.
+[6] Few men exhibit greater diversity, or, if we may so express it, 
+[7] This is a replaced line.
+[8] James Fenimore Cooper
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] It is believed that the scene of this tale, and most of the information
+[1] necessary to understand its allusions, are rendered sufficiently 
+[2] obvious to the reader in the text itself, or in the accompanying notes.
+[3] Still there is so much obscurity in the Indian traditions, and so much
+[4] confusion in the Indian names, as to render some explanation useful.
+[5] Few men exhibit greater diversity, or, if we may so express it, 
+[6] This is a replaced line.
+[7] James Fenimore Cooper
+[8] Author's Introduction
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+--- Memo by line ---
+[0] necessary to understand its allusions, are rendered sufficiently 
+[1] obvious to the reader in the text itself, or in the accompanying notes.
+[2] Still there is so much obscurity in the Indian traditions, and so much
+[3] confusion in the Indian names, as to render some explanation useful.
+[4] Few men exhibit greater diversity, or, if we may so express it, 
+[5] This is a replaced line.
+[6] James Fenimore Cooper
+[7] Author's Introduction
+[8] It is believed that the scene of this tale, and most of the information
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 8
+--- Memo by line ---
+[0] It is believed that the scene of this tale, and most of the information
+[1] necessary to understand its allusions, are rendered sufficiently 
+[2] obvious to the reader in the text itself, or in the accompanying notes.
+[3] Still there is so much obscurity in the Indian traditions, and so much
+[4] confusion in the Indian names, as to render some explanation useful.
+[5] Few men exhibit greater diversity, or, if we may so express it, 
+[6] This is a replaced line.
+[7] James Fenimore Cooper
+[8] Author's Introduction
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 8
+--- Memo by line ---
+[0] Author's Introduction
+[1] It is believed that the scene of this tale, and most of the information
+[2] necessary to understand its allusions, are rendered sufficiently 
+[3] obvious to the reader in the text itself, or in the accompanying notes.
+[4] Still there is so much obscurity in the Indian traditions, and so much
+[5] confusion in the Indian names, as to render some explanation useful.
+[6] Few men exhibit greater diversity, or, if we may so express it, 
+[7] This is a replaced line.
+[8] James Fenimore Cooper
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 8
+--- Memo by line ---
+[0] James Fenimore Cooper
+[1] Author's Introduction
+[2] It is believed that the scene of this tale, and most of the information
+[3] necessary to understand its allusions, are rendered sufficiently 
+[4] obvious to the reader in the text itself, or in the accompanying notes.
+[5] Still there is so much obscurity in the Indian traditions, and so much
+[6] confusion in the Indian names, as to render some explanation useful.
+[7] Few men exhibit greater diversity, or, if we may so express it, 
+[8] This is a replaced line.
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+--- Input memo lines, and then input empty line at the end ---
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+and self-devoted; in peace, just, generous, hospitable, revengeful,
+superstitious, modest, and commonly chaste.
+
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+=================================================================
+Menu item number? 0
+PersonManager::run() returned
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():user 1 71.1 true :Gwangju Nam-ro 21:
+Person::~Person():HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::~Person():LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+VectorPerson::~VectorPerson(): pVector deleted
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 0
+Good bye!!
