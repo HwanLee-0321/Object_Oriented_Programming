@@ -2,7 +2,7 @@
 #include <cstring>
 #include <string>
 #include <sstream>
-#define AUTOMATIC_ERROR_CHECK false
+#define AUTOMATIC_ERROR_CHECK true
 using namespace std;
 
 // *********************************************************
@@ -10,64 +10,60 @@ using namespace std;
 // *********************************************************
 class Person
 {
-    string name;            // 이름
-    int    id;              // Identifier
-    double weight;          // 체중
-    bool   married;         // 결혼여부
-    char*   address;        // 주소
-    string rawInput;
-    string passwd;
-    char* memo_c_str;
+    string     name;           // 이름
+    int        id;             // Identifier
+    double     weight;         // 체중
+    bool       married;        // 결혼여부
+    char*      address;        // 주소
+    string     rawInput;       // 입력값
+    string     passwd;         // 비밀번호
+    char*      memo_c_str;     // 메모
 
 protected:
-    void inputMembers(istream* in);
-    void printMembers(ostream* out);
-    void copyAddress(const char* address); // 추가
-    void copyMemo(const char* c_str);      // 추가
+    void inputMembers       (istream& in);
+    void printMembers       (ostream& out);
+    void copyAddress        (const char* address);
+    void copyMemo           (const char* c_str);
 public:
+    // 생성자
     Person(const string name = "", int id = 0, double weight = 0.0,
-               bool married = false, const char* address = nullptr)
-            : name(name), id(id), weight(weight), married(married) {
-            copyAddress(address);  // 문자열 복사
-            cout << "Person::Person(...):"; println();
+        bool married = false, const char* address = nullptr)
+     : name(name), id(id), weight(weight), married(married),
+       address(nullptr), memo_c_str(nullptr)
+    {
+        copyAddress(address);
+        cout << "Person::Person(...):"; println();
     }
-
-    // 복사 생성자 구현
     Person(const Person& p);
-
-    ~Person() {
-        cout << "Person::~Person():"; println();
-    }
-
     Person& assign(const Person& p);
+    ~Person() { cout << "Person::~Person():"; println(); }
 
-    void set(const string name, int pid, double pweight, bool pmarried, const char *paddress);
-    void setName(const string name)       { this->name = name; }
-    void set(int pid)                   { id = pid; }
-    void set(double pweight)        { weight = pweight; }
-    void set(bool pmarried)        { married = pmarried; }
-    void setAddress(const char* address); // 5_2에서 수정
+    // setter 함수
+    void set(const string& name, int pid, double weight, bool married, const char* addr);
+    void setName(const string& name)       { this->name = name; }
+    void set(int pid)                      { id = pid; }
+    void set(double pweight)               { weight = pweight; }
+    void set(bool pmarried)                { married = pmarried; }
+    void setAddress(const char* address); 
+    void setPasswd(const string& pw)       { passwd = pw; }
+    void setMemo(const char* c_str)        { copyMemo(c_str); }
 
-    string      getName()    { return name; }
-    int         getId()      { return id; }
-    double      getWeight()  { return weight; }
-    bool        getMarried() { return married; }
-    const char* getAddress() { return address; }
+    // getter 함수
+    const string& getName()   const { return name; }
+    const string& getPasswd() const { return passwd; }
+    int         getId()             { return id; }
+    double      getWeight()         { return weight; }
+    bool        getMarried()        { return married; }
+    const char* getAddress()        { return address; }
+    const char* getMemo()           { return memo_c_str; }
+    
 
-    void input(istream* pin)  { inputMembers(pin); }
-    void print(ostream* pout) { printMembers(pout); }
-    void println()            { print(&cout); cout << endl; }
-
+    // 기능 함수
+    void input(istream& in)         { inputMembers(in); }
+    void print(ostream& out)        { printMembers(out); }
+    void println()                  { print(cout); cout << endl; }
     void whatAreYouDoing();
-    bool isSame(const string name, int pid);
-
-    void setPasswd(const string& pw) { passwd = pw; }
-    string getPasswd() const { return passwd; }
-
-    void setMemo(const char* c_str) {
-        copyMemo(c_str);
-    }
-    const char* getMemo() { return memo_c_str; }
+    bool isSame(const string& name, int pid);
 };
 // *********************************************************
 // Persson class end point
@@ -97,6 +93,7 @@ void Person::setAddress(const char* address) {
 }
 
 void Person::copyAddress(const char* addr) {
+    delete[] address;  // ✅ 기존 주소 삭제
     if (addr == nullptr) {
         address = nullptr;
         return;
@@ -106,6 +103,7 @@ void Person::copyAddress(const char* addr) {
 }
 
 void Person::copyMemo(const char* c_str) {
+    delete[] memo_c_str;  // ✅ 기존 메모 삭제
     if (c_str == nullptr) {
         memo_c_str = nullptr;
         return;
@@ -118,22 +116,22 @@ void Person::whatAreYouDoing() {
     cout << name << " is taking a rest." << endl;
 }
 
-bool Person::isSame(const string name, int pid) {
+bool Person::isSame(const string& name, int pid) {
     return (this->name == name && this->id == pid);
 }
 
-void Person::printMembers(ostream* pout) {
-    *pout << name << " " << id << " " << weight << " "
+void Person::printMembers(ostream& out) {
+    out << name << " " << id << " " << weight << " "
           << (married ? "true" : "false") << " :"
           << (address ? address : "") << ":";
 }
 
-void Person::set(const string name, int pid, double pweight, bool pmarried, const char *paddress) {
-    setName(name);        // string으로 직접 설정
+void Person::set(const string& name, int pid, double weight, bool married, const char* addr) {
+    setName(name);
     set(pid);
-    set(pweight);
-    set(pmarried);
-    setAddress(paddress);
+    set(weight);
+    set(married);
+    setAddress(addr);
 }
 
 Person::Person(const Person& p)
@@ -143,20 +141,21 @@ Person::Person(const Person& p)
     cout << "Person::Person(const Person&):"; println();
 }
 
-void Person::inputMembers(istream* pin) {
+void Person::inputMembers(istream& in) {
     string line;
-    getline(*pin, line);
-    rawInput = line; // 그대로 저장 (출력용)
-    istringstream iss(line);
     string t_name;
+    string t_married_str;
+    char colon;
     int t_id;
     double t_weight;
-    string t_married_str;
     bool t_married;
-    char colon;
+
+    getline(in, line);
+    rawInput = line; // 그대로 저장 (출력용)
+    istringstream iss(line);
     string addrPart;
     if (!(iss >> t_name >> t_id >> t_weight >> t_married_str >> colon) || colon != ':') {
-        pin->setstate(ios::failbit);
+        in.setstate(ios::failbit);
         return;
     }
     if (t_married_str == "true")
@@ -164,7 +163,7 @@ void Person::inputMembers(istream* pin) {
     else if (t_married_str == "false")
         t_married = false;
     else {
-        pin->setstate(ios::failbit);
+        in.setstate(ios::failbit);
         return;
     }
     getline(iss, addrPart, ':');
@@ -197,18 +196,17 @@ public:
     }
     ~VectorPerson();
 
-    Person* at(int index) const { if (index < 0 || index >= count) return nullptr;
-        return pVector[index];
+    Person* at(int index) const { 
+    if (index < 0 || index >= count) 
+        return nullptr;
+        
+    return pVector[index];
     }
 
     int     capacity()    const { return allocSize; }
-
     void    clear()             { count = 0; }
-
     bool    empty()       const { return count == 0; }
-
     int     size()        const { return count; }
-
     void    push_back(Person* p);
 };
 //*****************************************************************************
@@ -220,7 +218,7 @@ public:
 //*****************************************************************************
 
 VectorPerson::~VectorPerson() {
-    delete[] pVector;
+    delete[] pVector;  // 배열만 삭제 (각 Person 객체는 PersonManager에서 처리)
     cout << "VectorPerson::~VectorPerson(): pVector deleted" << endl;
 }
 
@@ -251,50 +249,74 @@ void VectorPerson::extend_capacity() {
 //*****************************************************************************
 
 //*****************************************************************************
-// class UI
+// class UI start point
 //*****************************************************************************
 class UI {
 private:
     static string line, emptyLine;
-public:
-    static bool echo_input;
-    static string& getEmptyLine() { return emptyLine; }
-    static string getNext(const string msg);
-    static string getNextLine(const string msg);
-    static bool checkInputError(istream* pin, const string msg);
-};
 
-bool UI::echo_input = false;
-string UI::line, UI::emptyLine; // ""로 초기화됨
+public:
+    // static variable
+    static bool echo_input;
+
+    static string&          getEmptyLine()          { return emptyLine; }
+    static const string&    getNext                 (const string& msg);
+    static const string&    getNextLine             (const string& msg);
+    static bool             checkInputError         (istream* pin, const string& msg);
+    static int              getInt                  (const string& msg);
+    static int              getPositiveInt          (const string& msg);
+    static int              getIndex                (const string& msg, int size);
+    static int              selectMenu              (const string& menuStr, int menuItemCount);
+
+    static bool inputPerson(Person& p) {
+        cout << "input person information:" << endl;
+    
+        p.setAddress(NULL);
+    
+        p.input(cin);
+        if (!cin) {
+            checkInputError(&cin, "Input-data format MISMATCHED\n");
+            return false;
+        }
+        if (echo_input) p.println();
+        return true;
+    }
+
+};
 //*****************************************************************************
 // class UI end point
 //*****************************************************************************
 
+// static variable init
+bool UI::echo_input = false;
+string UI::line, UI::emptyLine;
+
 //*****************************************************************************
 // class UI Member func start point
 //*****************************************************************************
-string UI::getNext(const string msg){
+
+const string& UI::getNext(const string& msg) {
     cout << msg;
     cin >> line;
     if (echo_input) cout << line << endl;
-    getline(cin, emptyLine); // flush rest of line
+    getline(cin, emptyLine);
     return line;
 }
 
-string UI::getNextLine(const string msg) {
-	cout << msg;
-	getline(cin, line);
-	if ((line.size() > 0) && (line.back() == '\r'))
-		line.pop_back();
-	if (echo_input) cout << line << endl;
-	return line;
+const string& UI::getNextLine(const string& msg) {
+    cout << msg;
+    getline(cin, line);
+    if ((line.size() > 0) && (line.back() == '\r'))
+        line.pop_back();
+    if (echo_input) cout << line << endl;
+    return line;
 }
 
-bool UI::checkInputError(istream* pin, const string msg) {
-    if (!(*pin)) { // 에러가 발생했다면
-        cout << msg;  // 에러 메시지를 출력
-        pin->clear(); // 에러 상태 초기화
-        getline(*pin, emptyLine); // 에러 행 무시
+bool UI::checkInputError(istream* pin, const string& msg) {
+    if (!(*pin)) {
+        cout << msg;
+        pin->clear();
+        getline(*pin, emptyLine);
         return true;
     }
     return false;
@@ -306,20 +328,14 @@ bool UI::checkInputError(istream* pin, const string msg) {
 //*****************************************************************************
 // public func start point
 //*****************************************************************************
-bool checkDataFormatError(istream* pin) {
-    return UI::checkInputError(pin, "Input-data format MISMATCHED\n");
+bool checkDataFormatError(istream& in) {
+    return UI::checkInputError(&in, "Input-data format MISMATCHED\n");
 }
 
 bool inputPersonFromUser(Person* p) {
     cout << "input person information:" << endl;
-
-    // [안전 처리] 먼저 주소 백업
-    const char* oldAddr = p->getAddress();
-
-    // [강제 삭제 유도] 주소를 nullptr로 설정 → 내부에서 old address delete 유도됨
-    p->setAddress(nullptr); // 이로써 oldAddr은 delete[]됨
-
-    p->input(&cin);
+    p->setAddress(nullptr);
+    p->input(cin);
     if (UI::echo_input) p->println();
     return true;
 }
@@ -363,22 +379,16 @@ int selectMenu(const string menuStr, int menuItemCount) {
 //*****************************************************************************
 // string and Memo class
 //*****************************************************************************
-class Memo{
-    string mStr; // 메모를 저장해 두는 문자열
+class Memo {
+    string mStr; // 메모 문자열 저장
 
-    string get_next_line(size_t* ppos);
-    bool find_line(int line, size_t* start, size_t* next);
     size_t find_last_line();
+    bool find_line(int line, size_t& start, size_t& len);
+
 public:
-    string getNext(size_t* ppos);
+    Memo(const char* c_str = nullptr) : mStr(c_str ? c_str : "") {}
+
     void displayMemo();
-
-    const char *c_str() { return mStr.c_str(); }
-    void c_str(const char *c_str) {
-        mStr = (c_str == nullptr) ? "" : c_str;
-    }
-
-    Memo(const char* c_str = nullptr ) : mStr(c_str ? c_str : "") { }
     void findString();
     void compareWord();
     void dispByLine();
@@ -388,7 +398,14 @@ public:
     void scrollDown();
     void inputMemo();
     void run();
+
+    const char*  c_str() const { return mStr.c_str(); }
+    void         c_str(const char* c_str) { mStr = (c_str ? c_str : ""); }
+
+    string&     getNext(size_t& pos, string& word);
+    string&     get_next_line(size_t& pos, string& line);
 };
+
 
 // 아래 R"( 와 )"는 그 사이에 있는 모든 문자를 하나의 문자열로 취급하라는 의미이다.
 // 따라서 행과 행 사이에 있는 줄바꾸기 \n 문자도 문자열에 그대로 포함된다.
@@ -413,21 +430,15 @@ than the native warrior of North America.
 //*****************************************************************************
 // string and Memo member func start point
 //*****************************************************************************
-bool Memo::find_line(int line_num, size_t* pstart, size_t* plen) {
-    size_t start = 0;
+bool Memo::find_line(int line_num, size_t& start, size_t& len) {
+    start = 0;
     for (int i = 0; i < line_num; ++i) {
         start = mStr.find('\n', start);
-        if (start == string::npos) return false;
+        if (start == std::string::npos) return false;
         ++start;
     }
-
-    *pstart = start;
     size_t end = mStr.find('\n', start);
-    if (end == string::npos)
-        *plen = mStr.size() - start;
-    else
-        *plen = end - start + 1; // 줄바꿈 포함
-
+    len = (end == std::string::npos) ? mStr.size() - start : end - start + 1;
     return true;
 }
 
@@ -490,47 +501,34 @@ void Memo::findString() {
     cout << "Found count: " << count << endl;
 }
 
-string Memo::getNext(size_t* ppos) {
-    size_t pos = *ppos, end;
+string& Memo::getNext(size_t& pos, std::string& word) {
+    size_t end = pos;
+    while (end < mStr.size() && isspace(mStr[end])) ++end;
 
-    // 공백 문자들 스킵
-    while (pos < mStr.size() && isspace(mStr[pos])) ++pos;
-
-    end = pos;
-
-    // 구두점이면 그 하나만 단어로 처리
-    if (end < mStr.size() && ispunct(mStr[end])) {
-        ++end;
+    if (ispunct(mStr[end])) {
+        word = mStr.substr(end, 1);
+        pos = end + 1;
     } else {
-        // 구두점, 공백 전까지 단어
-        while (end < mStr.size() && !isspace(mStr[end]) && !ispunct(mStr[end]))
-            ++end;
+        size_t start = end;
+        while (end < mStr.size() && !isspace(mStr[end]) && !ispunct(mStr[end])) ++end;
+        word = mStr.substr(start, end - start);
+        pos = end;
     }
-
-    *ppos = end;
-
-    // 단어 길이 0이면 빈 문자열 반환
-    if (end <= pos) return "";
-
-    return mStr.substr(pos, end - pos);
+    return word;
 }
 
+
 void Memo::compareWord() {
-    string next, word = UI::getNext("Word to compare? ");
+    std::string word = UI::getNext("Word to compare? ");
     int less = 0, same = 0, larger = 0;
-
     for (size_t pos = 0; ; ) {
-        next = getNext(&pos);
-        if (next == "") break;
-
+        std::string next;
+        if (getNext(pos, next).empty()) break;
         if (next < word) ++less;
         else if (next == word) ++same;
         else ++larger;
     }
-
-    cout << "less: "   << less   << endl;
-    cout << "same: "   << same   << endl;
-    cout << "larger: " << larger << endl;
+    std::cout << "less: " << less << "\nsame: " << same << "\nlarger: " << larger << std::endl;
 }
 
 void Memo::dispByLine() { // Menu item 4
@@ -555,27 +553,23 @@ void Memo::dispByLine() { // Menu item 4
 }
 
 void Memo::deleteLine() {
-    size_t start, len;
     size_t line_num = getPositiveInt("Line number to delete? ");
-
-    if (mStr.empty() || !find_line(line_num, &start, &len) || start == mStr.size()) {
-        cout << "Out of line range" << endl;
+    size_t start, len;
+    if (!find_line(line_num, start, len)) {
+        std::cout << "Out of line range" << std::endl;
         return;
     }
-
     mStr.erase(start, len);
     dispByLine();
 }
 
 void Memo::replaceLine() {
-    size_t start, len;
     size_t line_num = getPositiveInt("Line number to replace? ");
-
-    if (!find_line(line_num, &start, &len)) {
-        cout << "Out of line range" << endl;
+    size_t start, len;
+    if (!find_line(line_num, start, len)) {
+        std::cout << "Out of line range" << std::endl;
         return;
     }
-
     string line = UI::getNextLine("Input a line to replace:\n");
     line += '\n';
     mStr.replace(start, len, line);
@@ -584,21 +578,12 @@ void Memo::replaceLine() {
 
 void Memo::scrollUp() {
     size_t start, len;
-
-    if (mStr.empty() || !find_line(0, &start, &len)) {
-        dispByLine(); // ✅ 반드시 호출하여 라벨 출력
-        return;
-    }
-
-    string firstLine = mStr.substr(start, len);
+    if (!find_line(0, start, len)) return dispByLine();
+    string first = mStr.substr(start, len);
     mStr.erase(start, len);
-
-    if (!mStr.empty() && mStr.back() != '\n') {
-        mStr += '\n';
-    }
-
-    mStr += firstLine;
-    dispByLine(); // ✅ 항상 호출
+    if (!mStr.empty() && mStr.back() != '\n') mStr += '\n';
+    mStr += first;
+    dispByLine();
 }
 
 void Memo::scrollDown() {
@@ -643,7 +628,7 @@ class Factory
 {
 public:
     // ✅ static으로 변경
-    static Person* inputPerson(istream* in) {
+    static Person* inputPerson(istream& in) {
         Person* p = new Person();
         p->input(in);
         if (checkDataFormatError(in)) {
@@ -708,24 +693,27 @@ void CurrentUser::getter() {  // Menu item 2
         << ", address:" << rUser.getAddress() << endl;
 }
 
-void CurrentUser::setter() {  // Menu item 3
-    Person ps("pp");
-    ps.setName(ps.getName());
-    ps.set(rUser.getId());
-    ps.set(rUser.getWeight());
-    ps.set(rUser.getMarried());
-    ps.setAddress(rUser.getAddress());
-    cout << "pp->setMembers():"; ps.println();
+void CurrentUser::set() {  // 메뉴 4번
+    Person* ps = new Person("rp");  // ✅ "pp" 대신 "rp"
+    ps->set(ps->getName(), 
+            rUser.getId(), 
+            rUser.getWeight(), 
+            !rUser.getMarried(), 
+            rUser.getAddress());
+    cout << "rp.set():";  // ✅ "pp->set()" 대신 "rp.set()"
+    ps->println();
+    delete ps;
 }
 
-void CurrentUser::set() {  // Menu item 4
-    Person ps("pp");
-    ps.set(ps.getName(),
-        rUser.getId(),
-        rUser.getWeight(),
-        !rUser.getMarried(),
-        rUser.getAddress());
-    cout << "pp->set():"; ps.println();
+void CurrentUser::setter() {
+    Person* ps = new Person("rp");
+    ps->set(rUser.getId());
+    ps->set(rUser.getWeight());
+    ps->set(rUser.getMarried());
+    ps->setAddress(rUser.getAddress());
+    cout << "rp.setMembers():";
+    ps->println();
+    delete ps;
 }
 
 void CurrentUser::whatAreYouDoing() {  // Menu item 5
@@ -738,8 +726,9 @@ void CurrentUser::isSame() { // Menu item 6
 }
 
 void CurrentUser::inputPerson() {
-    if (inputPersonFromUser(&rUser))  // 👈 함수 이름 명확하게!
+    if (inputPersonFromUser(&rUser)) {
         display();
+    }
 }
 
 void CurrentUser::defaultParameter() { // Menu item 10
@@ -888,7 +877,7 @@ void PersonManager::append() {  // Menu item 2
     int count = getPositiveInt("The number of persons to append? ");
     printNotice("Input " + to_string(count), ":");
     for (int i = 0; i < count; ++i) {
-        Person* p = Factory::inputPerson(&cin); // ✅ static 방식 호출
+        Person* p = Factory::inputPerson(cin); // ✅ static 방식 호출
         if (p) persons.push_back(p);
     }
     display();
