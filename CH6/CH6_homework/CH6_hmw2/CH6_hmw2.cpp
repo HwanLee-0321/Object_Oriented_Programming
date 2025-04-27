@@ -2,7 +2,7 @@
 #include <cstring>
 #include <string>
 #include <sstream>
-#define AUTOMATIC_ERROR_CHECK true
+#define AUTOMATIC_ERROR_CHECK false
 using namespace std;
 
 // *********************************************************
@@ -21,7 +21,7 @@ class Person
 
 protected:
     void inputMembers       (istream& in);
-    void printMembers       (ostream& out);
+    void printMembers(ostream& out) const;
     void copyAddress        (const char* address);
     void copyMemo           (const char* c_str);
 public:
@@ -51,17 +51,17 @@ public:
     // getter 함수
     const string& getName()   const { return name; }
     const string& getPasswd() const { return passwd; }
-    int         getId()             { return id; }
-    double      getWeight()         { return weight; }
-    bool        getMarried()        { return married; }
+    int         getId()       const { return id; }
+    double      getWeight()   const { return weight; }
+    bool        getMarried()  const { return married; }
     const char* getAddress()        { return address; }
     const char* getMemo()           { return memo_c_str; }
     
 
     // 기능 함수
     void input(istream& in)         { inputMembers(in); }
-    void print(ostream& out)        { printMembers(out); }
-    void println()                  { print(cout); cout << endl; }
+    void print(ostream& out) const;
+    void println() const;
     void whatAreYouDoing();
     bool isSame(const string& name, int pid);
 };
@@ -72,6 +72,23 @@ public:
 // *********************************************************
 // Persson member func start point
 // *********************************************************
+
+void Person::printMembers(ostream& out) const {
+    out << name << " " << id << " " << weight << " "
+          << (married ? "true" : "false") << " :"
+          << (address ? address : "") << ":";
+}
+
+// Person 클래스 바깥 정의부
+void Person::print(ostream& out) const {
+    printMembers(out);
+}
+
+void Person::println() const {
+    print(cout);
+    cout << endl;
+}
+
 Person& Person::assign(const Person& p) {
     if (this == &p) return *this; // 자기 자신 대입 방지
 
@@ -118,12 +135,6 @@ void Person::whatAreYouDoing() {
 
 bool Person::isSame(const string& name, int pid) {
     return (this->name == name && this->id == pid);
-}
-
-void Person::printMembers(ostream& out) {
-    out << name << " " << id << " " << weight << " "
-          << (married ? "true" : "false") << " :"
-          << (address ? address : "") << ":";
 }
 
 void Person::set(const string& name, int pid, double weight, bool married, const char* addr) {
@@ -187,7 +198,7 @@ class VectorPerson
     int count;        // pVector 배열에 현재 삽입된 객체 포인터의 개수
     int allocSize;    // 할당 받의 pVector의 총 배열 원소의 개수
 
-    void extend_capacity(); /* TODO 문제 [7] */
+    void extend_capacity();
 
 public:
     VectorPerson(int capacity = DEFAULT_SIZE): count(0), allocSize(capacity) {
@@ -204,10 +215,12 @@ public:
     }
 
     int     capacity()    const { return allocSize; }
-    void    clear()             { count = 0; }
-    bool    empty()       const { return count == 0; }
     int     size()        const { return count; }
+    bool    empty()       const { return count == 0; }
+    void    clear()             { count = 0; }
     void    push_back(Person* p);
+    void    erase(int index);
+    void    insert(int index, Person* p);
 };
 //*****************************************************************************
 // VectorPerson class end point
@@ -216,6 +229,31 @@ public:
 //*****************************************************************************
 // VectorPerson objects
 //*****************************************************************************
+
+void VectorPerson::erase(int index) {
+    // 경계 체크
+    if (index < 0 || index >= count) return;
+
+    // 원소 이동
+    for (int i = index; i < count - 1; ++i) {
+        pVector[i] = pVector[i + 1];
+    }
+
+    // 마지막 원소는 그대로 두고, count만 감소
+    --count;
+}
+
+void VectorPerson::insert(int index, Person* p) {  
+    if (count >= allocSize) {
+        extend_capacity();
+    }
+    for (int i = count; i > index; --i) { // ✅ 올바른 방향
+        pVector[i] = pVector[i-1];
+    }
+    pVector[index] = p;
+    ++count;
+}
+
 
 VectorPerson::~VectorPerson() {
     delete[] pVector;  // 배열만 삭제 (각 Person 객체는 PersonManager에서 처리)
@@ -264,7 +302,6 @@ public:
     static const string&    getNextLine             (const string& msg);
     static bool             checkInputError         (istream* pin, const string& msg);
     static int              getInt                  (const string& msg);
-    static int              getPositiveInt          (const string& msg);
     static int              getIndex                (const string& msg, int size);
     static int              selectMenu              (const string& menuStr, int menuItemCount);
 
@@ -281,7 +318,13 @@ public:
         if (echo_input) p.println();
         return true;
     }
-
+    
+    static int getPositiveInt(const string& msg) {
+        int value;
+        while ((value = getInt(msg)) < 0)
+            cout << "Input a positive INTEGER." << endl;
+        return value;
+    }
 };
 //*****************************************************************************
 // class UI end point
@@ -321,6 +364,28 @@ bool UI::checkInputError(istream* pin, const string& msg) {
     }
     return false;
 }
+
+int UI::getIndex(const string& msg, int size) {
+    while (true) {
+        int index = getPositiveInt(msg);
+        if (0 <= index && index < size) return index;
+        cout << index << ": OUT of selection range(0 ~ " << size - 1 << ")" << endl;
+    }
+}
+
+int UI::getInt(const string& msg) {
+    for (int value;;) {
+        cout << msg;
+        cin >> value;
+        if (UI::echo_input) cout << value << endl;
+        if (UI::checkInputError(&cin, "Input an INTEGER.\n"))
+            continue;
+
+        string dummy;
+        getline(cin, dummy);
+        return value;
+    }
+}
 //*****************************************************************************
 // class UI Member func end point
 //*****************************************************************************
@@ -340,26 +405,14 @@ bool inputPersonFromUser(Person* p) {
     return true;
 }
 
-int getInt(const string msg) {
-    for (int value; true; ) {
-        cout << msg;
-        cin >> value;
-        if (UI::echo_input) cout << value << endl;
-        if (UI::checkInputError(&cin, "Input an INTEGER.\n"))
-            continue;
-
-        string dummy;
-        getline(cin, dummy); // 여기서 pin → cin 으로 수정
-        return value;
-    }
-}
 
 int getPositiveInt(const string msg) {
     int value;
-    while ((value = getInt(msg)) < 0)
+    while ((value = UI::getInt(msg)) < 0)
         cout << "Input a positive INTEGER." << endl;
     return value;
 }
+
 int getIndex(const string msg, int size) {
     while (true) {
         int index = getPositiveInt(msg);
@@ -812,6 +865,8 @@ public:
     void clear();
     void login();
     void run();
+    void insert();
+    void remove();
 };
 //******************************************************************************
 // PersonManager class end point
@@ -820,6 +875,8 @@ public:
 //******************************************************************************
 // PersonManager member func start point
 //******************************************************************************
+
+
 Person* PersonManager::findByName(const string name) {
     for (int i = 0; i < persons.size(); ++i) {
         if (persons.at(i)->getName() == name) {
@@ -900,18 +957,58 @@ void PersonManager::login() {
         CurrentUser(*p).run();
 }
 
+void PersonManager::insert() { // Menu item 5
+    int index = 0;
+    if (!persons.empty()) {
+        index = getPositiveInt("Index to insert in front? ");
+        if (index > persons.size()) {
+            cout << index << ": OUT of selection range(0 ~ " << persons.size() << ")" << endl;
+            return;
+        }
+    }
+    cout << "Input [person information] to insert:" << endl;
+
+    Person* p = Factory::inputPerson(cin);
+    if (p == nullptr) return;
+
+    persons.insert(index, p);
+
+    display();
+}
+
+void PersonManager::remove() {
+    if (persons.empty()) {
+        cout << "No entry to remove" << endl;
+        return;
+    }
+
+    int index = UI::getIndex("Index to delete? ", persons.size());
+
+    delete persons.at(index);
+    persons.erase(index);
+
+    display();
+}
+
 void PersonManager::run() {
     cout << "PersonManager::run() starts" << endl; // 여기에 위치해야 함
 
     using func_t = void (PersonManager::*)();
     using PM = PersonManager;
     func_t func_arr[] = {
-        nullptr, &PM::display, &PM::append, &PM::clear, &PM::login,
+        nullptr, 
+        &PM::display, 
+        &PM::append, 
+        &PM::clear, 
+        &PM::login,
+        &PM::insert,
+        &PM::remove
     };
     int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
     string menuStr =
         "====================== Person Management Menu ===================\n"
         "= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =\n"
+        "= 5.Insert(6_2) 6.Delete(6_2)                                   =\n"
         "=================================================================\n";
 
     while (true) {
@@ -923,6 +1020,7 @@ void PersonManager::run() {
         (this->*func_arr[menuItem])();
     }
 }
+
 //******************************************************************************
 // PersonManager objects end point
 //******************************************************************************
@@ -1004,29 +1102,242 @@ class ClassAndObject
     void global_static_local_objects_inner() {
         cout << "\n--- global_static_local_objects_inner() begins ---" << endl;
     }
+
+    class Init1 {
+        Person p;
+        int i = 0;
+        int j = 0;
+        double d = 0.0;
+        char name[5] = "";
+    public:
+        void print() {
+            cout << "Init1 i: " << i << ", j: " << j << ", d: " << d << ", name: " << name << endl;
+        }
+    };
+
+    class Init2 {
+        Person p;
+        int i = 6; // 수정됨
+        int j = 6; // 추가 수정
+        double d = 0.0;
+    public:
+        void print() {
+            cout << "Init2 i: " << i << ", j: " << j << ", d: " << d << endl;
+        }
+    };
+
+    class Init3 {
+        Person p { "p-Init3" };
+        int i = 3;
+        int j = 6;
+        double d = 0.0;
+    public:
+        void print() {
+            cout << "Init3 i: " << i << ", j: " << j << ", d: " << d << endl;
+        }
+    };
+
+    class Init4 {
+        Person p;
+        int i;
+        int j;
+        double d;
+    public:
+        Init4(): p{"p-Init4-head"}, i{4}, j{6}, d{0.0} {}
+        void print() {
+            cout << "Init4 i: " << i << ", j: " << j << ", d: " << d << endl;
+        }
+    };
+
+    class Init5 {
+        Person p { "p-Init5" };
+        int i;
+        int j;
+        double d;
+    public:
+        Init5(): p{"p-Init5-head"}, i{5}, j{6}, d{0.0} {}
+        void print() {
+            cout << "Init5 i: " << i << ", j: " << j << ", d: " << d << endl;
+        }
+    };
+
+    class Init6 {
+        Person p;
+        int i, j;
+        double d;
+    public:
+        // 여기서는 p.set(...) 대신 편의상 p.setName(...)을 호출했다.
+        Init6() { i = j = 6; d = 0; p.setName("p-Init6-body"); p.println(); }
+        void print() { 
+            cout << "Init6 i: " << i << ", j: " << j << ", d: " << d << endl; 
+        }
+    };
+
+    void memberInitialization() { // Menu item 5
+        int i = 0, i2 = i; i = i2; // 의미 없는 문장이지만, 삭제하지 말 것
+        
+        // 임시객체 생성 후 print()를 호출하고 바로 소멸된다.
+        Init1().print(); cout << endl;
+        Init2().print(); cout << endl;
+        Init3().print(); cout << endl;
+        Init4().print(); cout << endl;
+        Init5().print(); cout << endl;
+        Init6().print();
+    }
+//******************************************************************************
+// sub class Parameter class start point
+//******************************************************************************
+    class Parameter {
+    public:
+        // 아래 각 함수 선언에서 const가 있는 매개변수는 해당 함수에서 객체 p를 수정하지 않는다는 의미이고,
+        // const가 없는 매개변수는 해당 함수에서 객체 p를 수정할 수 있다는 의미임
+        // 함수 호출한 곳에서 함수의 실행 결과를 매개변수를 통해 넘겨 받아야 하는 경우는 const가 없어야 함
+        void normalValue(Person p)           { cout << "normalValue(Person p)" << endl; }
+        void constValue(const Person p)      { cout << "constValue(const Person p)" << endl; }
+        void normalReference(Person& p)      { cout << "normalReference(Person& p)" << endl; }
+        void constReference(const Person& p) { cout << "constReference(const Person& p)" << endl; }
+
+        void printStr(string& s)             { cout << "printStr(string& s): " << s << endl; }
+        void printConstStr(const string& s)  { cout << "printConstStr(const string& s): " << s << endl; }
+        void printPerson(const Person& p) { // const Person p로 선언해도 동일한 결과가 나옴
+            cout << "printPerson(const Person& p)" << endl;
+            p.println();
+            // 위 const Person& p 선언의 의미: 이 함수에서 객체 p를 수정하지 않겠다는 의미임
+            // 따라서 아래의 p.setName("const-value")처럼 p의 멤버함수를 호출하면 에러로 처리함; 
+            // 이유는 이 함수가 const 객체인 p의 멤버 name를 수정하기기 때문에.
+
+            /* p.setName("const-value"); */ // 명백히 이름을 수정하는 것이므로 컴파일 에러 발생
+            /* cout << p.getName() << " " << p.getId() << " " << p.getWeight() << " " <<
+                    p.getMarried() << " :" << ((p.getAddress()==nullptr)?"":p.getAddress()) <<
+                    ":" << endl; */
+
+            // 주석을 풀 경우 발생하는 컴파일 에러는 매개변수가 const로 선언되었기 때문에  
+            // 발생하는 것이다. 컴파일러 입장에서는 위 멤버함수들이 p의 멤버를 수정하는지 아니면 
+            // 읽기만하는지 알 수 없기 때문에 컴파일 시 에러로 처리함; 
+        }
+    };
+//******************************************************************************
+// sub class Parameter class end point
+//******************************************************************************    
+    Parameter cp;
+
+    void normalParameter() {
+        cout << "normalParameter()" << endl;
+        cout << "Person p1(\"p1-name\")" << endl;
+
+        // 요점: 아래 Person p1처럼 p1이 일반적인 객체일 경우 
+        //      함수의 매개변수 타입에 상관없이 이 객체를 함수 인자로 넘겨 줄 수 있다.
+        Person p1("p1-name");
+
+        cp.normalValue(p1);     // 복사생성자 통해 매개변수 p에 p1을 복사해서 넘겨 줌
+        cp.constValue(p1);      // 복사생성자 통해 매개변수 p에 p1을 복사해서 넘겨 줌
+        cp.normalReference(p1); // 매개변수 p에 단순히 p1의 참조만 넘겨 줌
+        cp.constReference(p1);  // 매개변수 p에 단순히 p1의 참조만 넘겨 줌
+    }
+
+    void constParameter() {
+        cout << "constParameter()" << endl;
+        cout << "const Person p2(\"const-p2-name\")" << endl;
+    
+        const Person p2("const-p2-name");
+    
+        // ❌ 아래 코드를 지워야 합니다!!!
+        // normalParameter();
+    
+        cp.normalValue(p2); 
+        cp.constValue(p2);  
+        //cp.normalReference(p2); // 컴파일 에러라 주석
+        cp.constReference(p2); 
+    }
+
+    void temporaryParameter() {
+        cout << "temporaryParameter()" << endl;
+
+        // 요점: 아래의 Person("Person-name")는 임시객체가 생성되며, 
+        //      이 임시객체는 컴파일러에 의해 const로 취급된다.
+        //      따라서 이 임시객체는 위 [문제 10]의 const p2와 동일하게 취급된다.
+
+        cp.normalValue(Person("Person-name"));       // 불필요한 객체 복사 일어남
+        cp.constValue(Person("Person-name"));        // 불필요한 객체 복사 일어남
+        //cp.normalReference(Person("Person-name")); // 컴파일 에러 발생
+        cp.constReference(Person("Person-name"));    // 임시 객체 참조만 넘어감
+
+        // 결론: 일반적으로 객체는 함수의 매개변수로 value로 복사해서 넘기지 않고 객체의 참조를 넘긴다.
+        //      이유는 객체의 크기가 커지면 복사 오버헤드가 발생하기 때문이다. 
+        //      그런데 함수의 매개변수가 const가 아닌 일반 참조 변수로 선언된 경우 
+        //      그 함수에서 이 참조변수를 통해 원본 객체를 수정할 수 있기 때문에
+        //      const p2 또는 위 임시객체(const 취급)와 같은 객체들을 함수 인자로 넘길 수 없다. 
+        //      따라서 [만약 함수 내에서 매개변수인 객체를 수정하지 않는다면]
+        //      일반 & 매개변수로 선언하기 보다는 const &로 습관적으로 선언하는 것이 유리하다.
+        //      (이렇게 선언하면 위 cp.constReference()처럼 
+        //       임시객체의 참조를 함수의 매개변수로 바로 넘길 수 있다.)
+    }
+
+    void stringParameter() {
+        cout << "stringParameter()" << endl;
+
+        string s("name1"); // string s = "name1"; 과 동일
+
+        cp.printStr(s);
+        cp.printConstStr(s);
+        // 아래는 임시 string 객체 생성 (임시객체는 항상 const): 컴파일 에러
+        //cp.printStr(string("name")); 
+        cp.printConstStr(string("name2")); // const 임시 객체 생성
+        // 아래 "name"은 자동으로 임시 string("name") 객체 생성: 컴파일 에러
+        //cp.printStr("name"); 
+        cp.printConstStr("name3"); // const 임시 객체 생성
+        // 결론: 함수의 매개변수로 "name3"처럼 문자열을 직접 넘겨 주고 싶으면
+        //      함수 매개변수를 const string& 으로 선언해야 한다. string&로 선언시 에러.
+        //      함수 내에서 매개변수 객체를 수정하지 않을 경우 습관적으로 항상 이렇게 선언하라.
+        // 매개변수를 const string으로 선언해도 되지만 이 경우 문자열 전체가 복사되므로 비효율적임
+    }
+
+    void parameters() {
+        normalParameter();
+        cout << endl;
+        constParameter();
+        cout << endl;
+        temporaryParameter();
+        cout << endl;
+        stringParameter();
+        cout << endl;
+        cp.printPerson(Person("name", 10, 77.7, true, "address"));
+    }
+
     void globalStaticLocalObjects() { // Menu item 4
         global_static_local_objects_inner();
         cout << "--- global_static_local_objects_inner() returned ---" << endl;
         global_static_local_objects_inner();
         cout << "--- global_static_local_objects_inner() returned ---" << endl;
     }
-public:
+    public:
     void run() {
-        using func_t = void (ClassAndObject::*)();
-        func_t func_arr[] = { // 메뉴항목을 실행하는 멤버 함수를 배열에 미리 저장(등록)해 둠
-            nullptr, &ClassAndObject::defualConstructor, &ClassAndObject::constructor,
-            &ClassAndObject::construcorDestructor, &ClassAndObject::globalStaticLocalObjects,
+        using CO = ClassAndObject;
+        using func_t = void (CO::*)();
+
+        func_t func_arr[] = {
+            nullptr,
+            &CO::defualConstructor,
+            &CO::constructor,
+            &CO::construcorDestructor,
+            &CO::globalStaticLocalObjects,
+            &CO::memberInitialization,
+            &CO::parameters
         };
+
         int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
+
         string menuStr =
             "+++++++++++ Person Class And Object Menu ++++++++++++\n"
             "+ 0.Exit 1.DefualConstructor 2.Constructor          +\n"
             "+ 3.ConstrucorDestructor 4.GlobalStaticLocalObjects +\n"
+            "+ 5.MemberInitialization 6.constParameter           +\n"
             "+++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+
         while (true) {
-            int menuItem = selectMenu(menuStr, menuCount); // 메뉴 번호 입력 받음
+            int menuItem = selectMenu(menuStr, menuCount);
             if (menuItem == 0) return;
-            (this->*func_arr[menuItem])(); // 선택된 메뉴 항목을 실행할 멤버 함수를 호출함
+            (this->*func_arr[menuItem])();
         }
     }
 };
