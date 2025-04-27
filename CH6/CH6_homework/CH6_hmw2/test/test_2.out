@@ -1,0 +1,282 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 1
+Person::Person(...):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+VectorPerson::VectorPerson(10)
+PersonManager::PersonManager(array[], len)
+Person::Person(const Person&):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(const Person&):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(const Person&):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(const Person&):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(const Person&):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+empty():false, size():5, capacity():10
+PersonManager::run() starts
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 0
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+display(): count 6
+[0] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[2] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[3] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[4] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[5] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+empty():false, size():6, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 6
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+display(): count 7
+[0] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[2] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[3] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[4] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[5] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[6] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+empty():false, size():7, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 0
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+display(): count 8
+[0] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[1] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+[2] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[3] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[4] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[5] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[6] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[7] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+empty():false, size():8, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 1
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+Won 5 64 true :Busan:
+display(): count 9
+[0] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[1] Won 5 64 true :Busan:
+[2] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+[3] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[4] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[5] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[6] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[7] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[8] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+empty():false, size():9, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 9
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+Ryong 6 75 false :Incheon:
+display(): count 10
+[0] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[1] Won 5 64 true :Busan:
+[2] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+[3] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[4] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[5] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[6] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[7] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[8] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[9] Ryong 6 75 false :Incheon:
+empty():false, size():10, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 1
+display(): count 10
+[0] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[1] Won 5 64 true :Busan:
+[2] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+[3] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[4] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[5] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[6] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[7] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[8] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[9] Ryong 6 75 false :Incheon:
+empty():false, size():10, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 3
+Person::~Person():LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():Won 5 64 true :Busan:
+Person::~Person():HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():Ryong 6 75 false :Incheon:
+display(): count 0
+empty():true, size():0, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 1
+display(): count 0
+empty():true, size():0, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+display(): count 1
+[0] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+empty():false, size():1, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 0
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+display(): count 2
+[0] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[1] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+empty():false, size():2, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 0
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+display(): count 3
+[0] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[1] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+empty():false, size():3, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 0
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+Won 5 64 true :Busan:
+display(): count 4
+[0] Won 5 64 true :Busan:
+[1] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[2] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[3] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+empty():false, size():4, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 5
+Index to insert in front? 0
+Input [person information] to insert:
+Person::Person(...): 0 0 false ::
+Ryong 6 75 false :Incheon:
+display(): count 5
+[0] Ryong 6 75 false :Incheon:
+[1] Won 5 64 true :Busan:
+[2] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[4] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+empty():false, size():5, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 1
+display(): count 5
+[0] Ryong 6 75 false :Incheon:
+[1] Won 5 64 true :Busan:
+[2] LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[4] HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+empty():false, size():5, capacity():10
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 0
+PersonManager::run() returned
+Person::~Person():Ryong 6 75 false :Incheon:
+Person::~Person():Won 5 64 true :Busan:
+Person::~Person():LeeSoonShin 2 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():LeeMongRyong 1 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():HongGilDong 0 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+VectorPerson::~VectorPerson(): pVector deleted
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+***************************************************************************
+Menu item number? 0
+Good bye!!
