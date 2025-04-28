@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 using namespace std;
@@ -8,18 +7,18 @@ class Room {
     int roomNO;    // 방 번호
 public:
     Room(string name, int roomNO);  // 생성자
-    Room();                                 // 기본 생성자
+    Room();                         // 기본 생성자
 
-    int getRoomNO();                     // 방 번호 반환
-    void setRoomNO(int roomNO);    // 방 번호 설정
+    int getRoomNO();                // 방 번호 반환
+    void setRoomNO(int roomNO);     // 방 번호 설정
     void changeName(string name);   // 사용자 이름 변경
-    void showRoom();                    // 방 정보 출력
+    void showRoom();                // 방 정보 출력
 };
 
 // Room 클래스 생성자: 파라미터로 이름과 방 번호를 받음
 Room::Room(string name, int roomNO) : name(name), roomNO(roomNO) {}
 
-//    Room 클래스 기본 생성자  완성 
+// Room 클래스 기본 생성자  완성 
 // Room 클래스 기본 생성자  // "Chosun"이라는 기본 이름과 0번 방 번호로 초기화
 Room::Room() : Room("Chosun", 0) {}
 
@@ -60,7 +59,6 @@ public:
 // House 클래스 생성자: 집 이름, 주소, 그리고 방 개수를 파라미터로 받음
 House::House(int size, string houseName, string address)
     : size(size), houseName(houseName), address(address) {  // 멤버 변수 초기화
-
 
     // 문제 1
     // 방 정보 저장을 위한 roomList 생성 
