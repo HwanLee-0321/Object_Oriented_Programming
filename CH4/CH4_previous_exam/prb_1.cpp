@@ -3,7 +3,6 @@
 #include <string>
 using namespace std;
 
-/******************************* Room 클래스 정의: 방의 정보를 나타내는 클래스 *********************************/
 class Room {
     string name;   // 방 사용자 이름
     int roomNO;    // 방 번호
@@ -17,17 +16,12 @@ public:
     void showRoom();                    // 방 정보 출력
 };
 
-
 // Room 클래스 생성자: 파라미터로 이름과 방 번호를 받음
 Room::Room(string name, int roomNO) : name(name), roomNO(roomNO) {}
-
 
 //    Room 클래스 기본 생성자  완성 
 // Room 클래스 기본 생성자  // "Chosun"이라는 기본 이름과 0번 방 번호로 초기화
 Room::Room() : Room("Chosun", 0) {}
-
-
-
 
 // Room 클래스의 사용자 이름 변경 메소드
 void Room::changeName( string name) {
@@ -77,10 +71,6 @@ House::House(int size, string houseName, string address)
     for (int i=0; i < size; i++){
         roomList[i].setRoomNO(i+1);
     }
-
-
-
-
 }
 
 // House 클래스 소멸자: 메모리 해제
@@ -103,10 +93,6 @@ bool House::rentRoom(string name, int roomNO) {
     roomList[roomNO - 1].changeName(name);  // 방 번호는 1부터 시작, 인덱스는 0부터
     return true;  // 렌트 성공
 }
-
-
-
-
 
 // House 클래스의 집 정보 출력 메소드
 void House::showHouse()  {
