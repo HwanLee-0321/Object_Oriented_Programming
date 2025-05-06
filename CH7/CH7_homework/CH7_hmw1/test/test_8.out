@@ -1,0 +1,231 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 5
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 8
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+p 1 65.4 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+input person information:
+user 100 41.6 true :Gwangju Nam-ro 21:
+user 100 41.6 true :Gwangju Nam-ro 21:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+user 100 41.6 true :Gwangju Nam-ro 21:
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+--- Input memo lines, and then input empty line at the end ---
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+------- Memo -------
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+--------------------
+
+++++++++++++++++++++++ Memo Management Menu +++++++++++++++++++++
++ 0.Exit 1.DisplayMemo 2.FindString 3.CompareWord 4.DispByLine  +
++ 5.DeleteLine 6.RepaceLine 7.ScrollUp 8.ScrollDown 9.InputMemo +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+p: user 100 41.6 true :Gwangju Nam-ro 21:
+------- Memo -------
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+--------------------
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+m1
+------- Memo -------
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+--------------------
+
+m2
+------- Memo -------
+James Fenimore Cooper
+--------------------
+
+m3 = m1 + m2
+------- Memo -------
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+James Fenimore Cooper
+--------------------
+
+m3 += Memo(...)
+------- Memo -------
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+James Fenimore Cooper
+1st const added memo line.
+--------------------
+
+m3 = m3 + m2 + Memo(...)
+------- Memo -------
+In war, he is daring, boastful, cunning, ruthless, self-denying,
+James Fenimore Cooper
+1st const added memo line.
+James Fenimore Cooper
+2nd const added memo line.
+--------------------
+
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+p1: user 100 41.6 true :Gwangju Nam-ro 21:
+p2: user 100 41.6 true :Gwangju Nam-ro 21:
+p1 == p2 : true
+p2: user 2 41.6 true :Gwangju Nam-ro 21:
+p1 == p2 : false
+p2: user 1 41.6 true :Gwangju Nam-ro 21:
+p1 == p2 : false
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 3
+p1:  user 100 41.6 true ::
+p2 = p1 + 5.0
+p2:  user 100 46.6 true ::
+(p2 + 10.0).println()
+tmp: user 100 56.6 true ::
+p2:  user 100 46.6 true ::
+p3 = 15.0 + p1
+p3:  user 100 56.6 true ::
+(20.0 + p3).println()
+tmp: user 100 76.6 true ::
+p3:  user 100 56.6 true ::
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 4
+p:  user 100 41.6 true :Gwangju Nam-ro 21:
+p2 = p
+p2: user 100 41.6 true :Gwangju Nam-ro 21:
+p3: Hong 0 72.1 false :Gwangju Nam-gu Bongseon-dong 21:
+p3 = 20.0 + p2 + 30.5
+p3: user 100 92.1 true :Gwangju Nam-ro 21:
+p == p3 : true
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+p1  : user 100 41.6 true ::
+++p1: user 100 42.6 true ::
+p1++: user 100 42.6 true ::
+p1  : user 100 43.6 true ::
+p2 = p1++
+p2  : user 100 43.6 true ::
+p1  : user 100 44.6 true ::
+p2 = (++p1)++
+p2  : user 100 45.6 true ::
+p1  : user 100 46.6 true ::
+p2 = ++(p1++)
+p2  : user 100 47.6 true ::
+p1  : user 100 47.6 true ::
+p2 = ++p1++
+p2  : user 100 48.6 true ::
+p1  : user 100 48.6 true ::
+(p2 = 2.0 + ++p1++ + 3.0) == p : true
+p2  : user 100 54.6 true ::
+p1  : user 100 49.6 true ::
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 6
+p1: user 100 41.6 true ::
+p1 << "p1" << 11
+p1: p1 11 41.6 true ::
+p1 << name << 12
+p1: p1-12 12 41.6 true ::
+p1 >> name >> id >> c_name
+name:p1-12, id:12, c_name:p1-12
+(p1 << "p" << 1) == p : false
+p1: p 1 41.6 true ::
+p : user 100 41.6 true :Gwangju Nam-ro 21:
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 7
+p1: Hong 1 41.6 true :Gwangju Nam-ro 21:
+p2: Dong 2 41.6 true :Gwangju Nam-ro 21:
+p1 name:Hong, id:1
+p2 name:Dong, id:2
+print_name_id() name:Hong, id:1
+print_name_id() name:Dong, id:2
+p2 name:Dong, id:2
+p1+p2 name:HongDong, id:3
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 0
+Good bye!!

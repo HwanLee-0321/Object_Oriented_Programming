@@ -1,0 +1,34 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 5
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 4
+p:  p 1 65.4 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+p2 = p
+p2: p 1 65.4 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+p3: Hong 0 72.1 false :Gwangju Nam-gu Bongseon-dong 21:
+p3 = 20.0 + p2 + 30.5
+p3: p 1 115.9 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+p == p3 : true
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 0
+Good bye!!

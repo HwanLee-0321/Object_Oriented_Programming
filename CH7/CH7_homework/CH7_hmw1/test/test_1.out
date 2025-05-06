@@ -1,0 +1,59 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 5
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+m1
+------- Memo -------
+The Last of the Mohicans
+--------------------
+
+m2
+------- Memo -------
+James Fenimore Cooper
+--------------------
+
+m3 = m1 + m2
+------- Memo -------
+The Last of the Mohicans
+James Fenimore Cooper
+--------------------
+
+m3 += Memo(...)
+------- Memo -------
+The Last of the Mohicans
+James Fenimore Cooper
+1st const added memo line.
+--------------------
+
+m3 = m3 + m2 + Memo(...)
+------- Memo -------
+The Last of the Mohicans
+James Fenimore Cooper
+1st const added memo line.
+James Fenimore Cooper
+2nd const added memo line.
+--------------------
+
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 0
+Good bye!!
