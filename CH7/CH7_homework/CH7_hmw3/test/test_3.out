@@ -1,0 +1,189 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_3)                                *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 1
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+PersonManager::run() starts
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 7
+display(): count 10
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[5] pp0 30 71 true :Gwangju Nam-gu Bongseon-dong 21:
+[6] pp1 31 62.1 false :Jong-ro 1-gil, Jongno-gu, Seoul:
+[7] pp2 32 53.2 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[8] pp3 33 84.3 false :100 Dunsan-ro Seo-gu Daejeon:
+[9] pp4 34 65.4 true :88 Gongpyeong-ro, Jung-gu, Daegu:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 7
+VectorPerson: capacity extended to 20
+display(): count 20
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[5] pp0 30 71 true :Gwangju Nam-gu Bongseon-dong 21:
+[6] pp1 31 62.1 false :Jong-ro 1-gil, Jongno-gu, Seoul:
+[7] pp2 32 53.2 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[8] pp3 33 84.3 false :100 Dunsan-ro Seo-gu Daejeon:
+[9] pp4 34 65.4 true :88 Gongpyeong-ro, Jung-gu, Daegu:
+[10] ppp0 50 72 false :Gwangju Nam-gu Bongseon-dong 21:
+[11] ppp1 51 63.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[12] ppp2 52 54.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[13] ppp3 53 85.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[14] ppp4 54 66.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+[15] pppp0 70 73 true :Gwangju Nam-gu Bongseon-dong 21:
+[16] pppp1 71 64.1 false :Jong-ro 1-gil, Jongno-gu, Seoul:
+[17] pppp2 72 55.2 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[18] pppp3 73 86.3 false :100 Dunsan-ro Seo-gu Daejeon:
+[19] pppp4 74 67.4 true :88 Gongpyeong-ro, Jung-gu, Daegu:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 3
+display(): count 0
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 5
+Input [person information] to insert:
+P 222 88.8 false :Gwangju 21:
+display(): count 1
+[0] P 222 88.8 false :Gwangju 21:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 7
+display(): count 2
+[0] P 222 88.8 false :Gwangju 21:
+[1] PP 242 89.8 true :Gwangju 21:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 7
+display(): count 4
+[0] P 222 88.8 false :Gwangju 21:
+[1] PP 242 89.8 true :Gwangju 21:
+[2] PPP 262 90.8 false :Gwangju 21:
+[3] PPPP 282 91.8 true :Gwangju 21:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 7
+display(): count 8
+[0] P 222 88.8 false :Gwangju 21:
+[1] PP 242 89.8 true :Gwangju 21:
+[2] PPP 262 90.8 false :Gwangju 21:
+[3] PPPP 282 91.8 true :Gwangju 21:
+[4] PPPP 282 91.8 true :Gwangju 21:
+[5] PPPPP 302 92.8 false :Gwangju 21:
+[6] PPPPPP 322 93.8 true :Gwangju 21:
+[7] PPPPPPP 342 94.8 false :Gwangju 21:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 7
+display(): count 16
+[0] P 222 88.8 false :Gwangju 21:
+[1] PP 242 89.8 true :Gwangju 21:
+[2] PPP 262 90.8 false :Gwangju 21:
+[3] PPPP 282 91.8 true :Gwangju 21:
+[4] PPPP 282 91.8 true :Gwangju 21:
+[5] PPPPP 302 92.8 false :Gwangju 21:
+[6] PPPPPP 322 93.8 true :Gwangju 21:
+[7] PPPPPPP 342 94.8 false :Gwangju 21:
+[8] PPPPP 302 92.8 false :Gwangju 21:
+[9] PPPPPP 322 93.8 true :Gwangju 21:
+[10] PPPPPPP 342 94.8 false :Gwangju 21:
+[11] PPPPPPPP 362 95.8 true :Gwangju 21:
+[12] PPPPPPPP 362 95.8 true :Gwangju 21:
+[13] PPPPPPPPP 382 96.8 false :Gwangju 21:
+[14] PPPPPPPPPP 402 97.8 true :Gwangju 21:
+[15] PPPPPPPPPPP 422 98.8 false :Gwangju 21:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 7
+VectorPerson: capacity extended to 40
+display(): count 32
+[0] P 222 88.8 false :Gwangju 21:
+[1] PP 242 89.8 true :Gwangju 21:
+[2] PPP 262 90.8 false :Gwangju 21:
+[3] PPPP 282 91.8 true :Gwangju 21:
+[4] PPPP 282 91.8 true :Gwangju 21:
+[5] PPPPP 302 92.8 false :Gwangju 21:
+[6] PPPPPP 322 93.8 true :Gwangju 21:
+[7] PPPPPPP 342 94.8 false :Gwangju 21:
+[8] PPPPP 302 92.8 false :Gwangju 21:
+[9] PPPPPP 322 93.8 true :Gwangju 21:
+[10] PPPPPPP 342 94.8 false :Gwangju 21:
+[11] PPPPPPPP 362 95.8 true :Gwangju 21:
+[12] PPPPPPPP 362 95.8 true :Gwangju 21:
+[13] PPPPPPPPP 382 96.8 false :Gwangju 21:
+[14] PPPPPPPPPP 402 97.8 true :Gwangju 21:
+[15] PPPPPPPPPPP 422 98.8 false :Gwangju 21:
+[16] PPPPPP 322 93.8 true :Gwangju 21:
+[17] PPPPPPP 342 94.8 false :Gwangju 21:
+[18] PPPPPPPP 362 95.8 true :Gwangju 21:
+[19] PPPPPPPPP 382 96.8 false :Gwangju 21:
+[20] PPPPPPPPP 382 96.8 false :Gwangju 21:
+[21] PPPPPPPPPP 402 97.8 true :Gwangju 21:
+[22] PPPPPPPPPPP 422 98.8 false :Gwangju 21:
+[23] PPPPPPPPPPPP 442 99.8 true :Gwangju 21:
+[24] PPPPPPPPPP 402 97.8 true :Gwangju 21:
+[25] PPPPPPPPPPP 422 98.8 false :Gwangju 21:
+[26] PPPPPPPPPPPP 442 99.8 true :Gwangju 21:
+[27] PPPPPPPPPPPPP 462 100.8 false :Gwangju 21:
+[28] PPPPPPPPPPPPP 462 100.8 false :Gwangju 21:
+[29] PPPPPPPPPPPPPP 482 101.8 true :Gwangju 21:
+[30] PPPPPPPPPPPPPPP 502 102.8 false :Gwangju 21:
+[31] PPPPPPPPPPPPPPPP 522 103.8 true :Gwangju 21:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 0
+PersonManager::run() returned
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_3)                                *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 0
+Good bye!!

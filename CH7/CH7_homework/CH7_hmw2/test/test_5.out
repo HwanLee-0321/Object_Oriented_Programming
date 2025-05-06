@@ -1,0 +1,71 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 5
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser 9.VectorOOL  +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+pv1: count 2
+[0] Hong  0 72.1 true ::
+[1] Mong  1 65.4 true ::
+
+pv2: count 3
+[0] Choon 3 56.7 true ::
+[1] Soon  2 87.6 true ::
+[2] Chung 4 67.8 true ::
+
+
++++++++++++++ Vector Operator Overload ++++++++++++++
++ 0.Exit 1.operator[] 2.operator! 3.CopyConstructor +
++ 4.operator= 5.operator+ 6.operator=+              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 5
+pv3 = pv1 + pv2
+pv3: count 5
+[0] Hong  0 72.1 true ::
+[1] Mong  1 65.4 true ::
+[2] Choon 3 56.7 true ::
+[3] Soon  2 87.6 true ::
+[4] Chung 4 67.8 true ::
+
+pv3 = pv2 + pv2 + pv3
+VectorPerson::operator = : capacity extended to 11
+pv3: count 11
+[0] Choon 3 56.7 true ::
+[1] Soon  2 87.6 true ::
+[2] Chung 4 67.8 true ::
+[3] Choon 3 56.7 true ::
+[4] Soon  2 87.6 true ::
+[5] Chung 4 67.8 true ::
+[6] Hong  0 72.1 true ::
+[7] Mong  1 65.4 true ::
+[8] Choon 3 56.7 true ::
+[9] Soon  2 87.6 true ::
+[10] Chung 4 67.8 true ::
+
+
++++++++++++++ Vector Operator Overload ++++++++++++++
++ 0.Exit 1.operator[] 2.operator! 3.CopyConstructor +
++ 4.operator= 5.operator+ 6.operator=+              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser 9.VectorOOL  +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 0
+Good bye!!

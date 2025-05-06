@@ -1,0 +1,108 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 5
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser 9.VectorOOL  +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 9
+pv1: count 2
+[0] Hong  0 72.1 true ::
+[1] Mong  1 65.4 true ::
+
+pv2: count 3
+[0] Choon 3 56.7 true ::
+[1] Soon  2 87.6 true ::
+[2] Chung 4 67.8 true ::
+
+
++++++++++++++ Vector Operator Overload ++++++++++++++
++ 0.Exit 1.operator[] 2.operator! 3.CopyConstructor +
++ 4.operator= 5.operator+ 6.operator=+              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+PersonManager::run() starts
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 1
+display(): count 5
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[3] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[4] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 4
+user name: p0
+password: 
+
++++++++++++++++++++++ Current User Menu ++++++++++++++++++++++++
++ 0.Logout 1.Display 2.Getter 3.Setter 4.Set 5.WhatAreYouDoing +
++ 6.IsSame 7.InputPerson 8.ChangePasswd(4_2) 9.ManageMemo(4_3) +
++ 10.DefaultParameter(6_1) 11.StaticMember(6_1)                +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 6
+Index to delete? 0
+display(): count 4
+[0] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[1] p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+[2] p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[3] p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 3
+display(): count 0
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2)                                   =
+=================================================================
+Menu item number? 0
+PersonManager::run() returned
+
++++++++++++++ Vector Operator Overload ++++++++++++++
++ 0.Exit 1.operator[] 2.operator! 3.CopyConstructor +
++ 4.operator= 5.operator+ 6.operator=+              +
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
++++++++++++++++++++ Operator Overload +++++++++++++++++
++ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +
++ 6.Shift 7.TypeConversion 8.CurrentUser 9.VectorOOL  +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7)                                                 *
+***************************************************************************
+Menu item number? 0
+Good bye!!
