@@ -25,7 +25,7 @@ protected:
     void copyAddress        (const char* address);
     void copyMemo           (const char* c_str);
 public:
-    // 생성자 
+    // 생성자
     Person(const string name = "", int id = 0, double weight = 0.0,
         bool married = false, const char* address = nullptr)
      : name(name), id(id), weight(weight), married(married),
@@ -42,7 +42,7 @@ public:
     void set(int pid)                      { id = pid; }
     void set(double pweight)               { weight = pweight; }
     void set(bool pmarried)                { married = pmarried; }
-    void setAddress(const char* address); 
+    void setAddress(const char* address);
     void setPasswd(const string& pw)       { passwd = pw; }
     void setMemo(const char* c_str)        { copyMemo(c_str); }
 
@@ -54,7 +54,7 @@ public:
     bool        getMarried()  const { return married; }
     const char* getAddress()  const { return address; }
     const char* getMemo()           { return memo_c_str; }
-    
+
 
     // 기능 함수
     void input(istream& in)         { inputMembers(in); }
@@ -64,19 +64,19 @@ public:
     bool isSame(const string& name, int pid);
     Person& operator++();
     Person operator++(int);
-  
+
     Person& operator=(const Person& p) {
         if (this == &p) return *this;
-    
+
         name    = p.name;
         passwd  = p.passwd;
         id      = p.id;
         weight  = p.weight;
         married = p.married;
-    
+
         setAddress(p.address);
         setMemo(p.memo_c_str);
-    
+
         return *this;
     }
 
@@ -290,7 +290,7 @@ void Person::inputMembers(istream& in) {
 
 //*****************************************************************************
 // VectorPerson class
-//*****************************************************************************/
+//*****************************************************************************
 class VectorPerson
 {
     static const int DEFAULT_SIZE = 10; // pVector의 디폴트 배열 원소 개수
@@ -299,18 +299,39 @@ class VectorPerson
     int count;        // pVector 배열에 현재 삽입된 객체 포인터의 개수
     int allocSize;    // 할당 받의 pVector의 총 배열 원소의 개수
 
-    void extend_capacity();
-
+    void extend_capacity(int capacity);
 public:
+
+    // CH7 문제4: 대입 연산자 추가
+    VectorPerson& operator=(const VectorPerson& vp);
+
+    // CH7 문제5: 두 VectorPerson을 이어붙이는 + 연산자
+    VectorPerson operator+(const VectorPerson& vp) const;
+
+    // CH7 문제6: vp 전체를 뒤에 붙인다
+    VectorPerson& operator+=(const VectorPerson& vp);
+
+    // 기본 생성자
     VectorPerson(int capacity = DEFAULT_SIZE): count(0), allocSize(capacity) {
         pVector = new Person*[allocSize]; // Person* 들의 배열을 위한 동적 메모리 할당
     }
+
+    // 복사 생성자
+    VectorPerson(const VectorPerson& vp)
+    : count(vp.count), allocSize(vp.allocSize)
+    {
+        cout << "VectorPerson::VectorPerson(const VectorPerson& vp)" << endl;
+        pVector = new Person*[allocSize];
+        for (int i = 0; i < count; ++i)
+            pVector[i] = vp.pVector[i];
+    }
+
     ~VectorPerson();
 
-    Person* at(int index) const { 
-    if (index < 0 || index >= count) 
+    Person* at(int index) const {
+    if (index < 0 || index >= count)
         return nullptr;
-        
+
     return pVector[index];
     }
 
@@ -321,14 +342,81 @@ public:
     void    push_back(Person* p);
     void    erase(int index);
     void    insert(int index, Person* p);
+
+    Person* operator[](int index) const {
+        if (index < 0 || index >= count)
+            return nullptr;
+        return pVector[index];
+    }
+
+    // 오퍼레이터
+    bool operator!() const {
+        return empty();
+    }
+
+    operator bool() const {
+        return !empty();
+    }
 };
 //*****************************************************************************
 // VectorPerson class end point
 //*****************************************************************************
 
 //*****************************************************************************
-// VectorPerson objects
+// VectorPerson member func start point
 //*****************************************************************************
+
+VectorPerson& VectorPerson::operator+=(const VectorPerson& vp) {
+    // 필요 시 두 allocSize 합만큼으로 늘려주기
+    if (count + vp.count > allocSize) {
+        extend_capacity(allocSize + vp.allocSize);
+    }
+    // 뒤에 붙이기
+    for (int i = 0; i < vp.count; ++i) {
+        pVector[count + i] = vp.pVector[i];
+    }
+    count += vp.count;
+    return *this;
+}
+
+// CH7 [문제5]
+VectorPerson VectorPerson::operator+(const VectorPerson& vp) const {
+    // 합쳐진 두 벡터의 크기 만큼 capacity 지정
+    VectorPerson tmp(this->count + vp.count);
+
+    // this 쪽 요소 복사
+    for (int i = 0; i < this->count; ++i) {
+        tmp.pVector[i] = this->pVector[i];
+    }
+    // vp 쪽 요소 복사
+    for (int i = 0; i < vp.count; ++i) {
+        tmp.pVector[this->count + i] = vp.pVector[i];
+    }
+    // 최종 원소 개수 설정
+    tmp.count = this->count + vp.count;
+    return tmp;
+}
+
+// CH7 [문제4] 대입 연산자 정의
+VectorPerson& VectorPerson::operator=(const VectorPerson& vp) {
+    if (this == &vp)
+        return *this;
+
+    // capacity 부족 시 재할당
+    if (vp.count > allocSize) {
+        cout << "VectorPerson::operator = : capacity extended to " << vp.allocSize << endl;
+        delete[] pVector;
+        allocSize = vp.allocSize;
+        pVector = new Person*[allocSize];
+    }
+
+    // 요소 복사
+    count = vp.count;
+    for (int i = 0; i < count; ++i) {
+        pVector[i] = vp.pVector[i];
+    }
+    return *this;
+}
 
 void VectorPerson::erase(int index) {
     // 경계 체크
@@ -343,9 +431,9 @@ void VectorPerson::erase(int index) {
     --count;
 }
 
-void VectorPerson::insert(int index, Person* p) {  
+void VectorPerson::insert(int index, Person* p) {
     if (count >= allocSize) {
-        extend_capacity();
+        extend_capacity(allocSize * 2);
     }
     for (int i = count; i > index; --i) { // ✅ 올바른 방향
         pVector[i] = pVector[i-1];
@@ -361,26 +449,24 @@ VectorPerson::~VectorPerson() {
 
 void VectorPerson::push_back(Person* p) {
     if (count >= allocSize) {
-        extend_capacity();
+        extend_capacity(allocSize * 2);
     }
     pVector[count++] = p;
 }
 
-void VectorPerson::extend_capacity() {
-    int newAllocSize = allocSize * 2;
-    Person** newVector = new Person*[newAllocSize];
+void VectorPerson::extend_capacity(int capacity) {
+    // ➡️ 용량 확장 시 디버그 메시지 출력
+    cout << "VectorPerson: capacity extended to " << capacity << endl;
 
+    allocSize = capacity;
+    Person** newVector = new Person*[allocSize];
     for (int i = 0; i < count; ++i) {
         newVector[i] = pVector[i];
     }
-
     delete[] pVector;
-
     pVector = newVector;
-    allocSize = newAllocSize;
-
-    cout << "VectorPerson: capacity extended to " << allocSize << endl;
 }
+
 //*****************************************************************************
 // VectorPerson objects end point
 //*****************************************************************************
@@ -406,9 +492,9 @@ public:
 
     static bool inputPerson(Person& p) {
         cout << "input person information:" << endl;
-    
+
         p.setAddress(NULL);
-    
+
         p.input(cin);
         if (!cin) {
             checkInputError(&cin, "Input-data format MISMATCHED\n");
@@ -417,7 +503,7 @@ public:
         if (echo_input) p.println();
         return true;
     }
-    
+
     static int getPositiveInt(const string& msg) {
         int value;
         while ((value = getInt(msg)) < 0)
@@ -575,12 +661,12 @@ const char* memoData = R"(The Last of the Mohicans
 James Fenimore Cooper
 Author's Introduction
 It is believed that the scene of this tale, and most of the information
-necessary to understand its allusions, are rendered sufficiently 
+necessary to understand its allusions, are rendered sufficiently
 obvious to the reader in the text itself, or in the accompanying notes.
 Still there is so much obscurity in the Indian traditions, and so much
 confusion in the Indian names, as to render some explanation useful.
-Few men exhibit greater diversity, or, if we may so express it, 
-greater antithesis of character, 
+Few men exhibit greater diversity, or, if we may so express it,
+greater antithesis of character,
 than the native warrior of North America.
 )";
 
@@ -856,10 +942,10 @@ void CurrentUser::getter() {  // Menu item 2
 
 void CurrentUser::set() {  // 메뉴 4번
     Person* ps = new Person("rp");  // ✅ "pp" 대신 "rp"
-    ps->set(ps->getName(), 
-            rUser.getId(), 
-            rUser.getWeight(), 
-            !rUser.getMarried(), 
+    ps->set(ps->getName(),
+            rUser.getId(),
+            rUser.getWeight(),
+            !rUser.getMarried(),
             rUser.getAddress());
     cout << "rp.set():";  // ✅ "pp->set()" 대신 "rp.set()"
     ps->println();
@@ -958,12 +1044,19 @@ void CurrentUser::run() {
 //*****************************************************************************
 class PersonManager
 {
+    // ch7_3: 원본 배열과 길이를 보관
+    Person**    array;
+    int         arrLen;
+    int         cpCount;
+
     VectorPerson persons;
-    // Factory factory;
 
     void deleteElemets();
     void printNotice(const string preMessage, const string postMessage);
     Person* findByName(const string name);
+
+    // ch7_3: 원본 배열을 벡터에 복사해 넣는 함수
+    void        pushArray();
 
 public:
     PersonManager(Person* array[], int len); // 6장에서 default 매개변수 설정
@@ -972,9 +1065,11 @@ public:
     void append();
     void clear();
     void login();
-    void run();
     void insert();
     void remove();
+    void copyPersons();
+    void reset();
+    void run();
 };
 //******************************************************************************
 // PersonManager class end point
@@ -984,10 +1079,9 @@ public:
 // PersonManager member func start point
 //******************************************************************************
 
-
 Person* PersonManager::findByName(const string name) {
     for (int i = 0; i < persons.size(); ++i) {
-        if (persons.at(i)->getName() == name) {
+        if (persons[i]->getName() == name) {
             return persons.at(i);
         }
     }
@@ -995,14 +1089,22 @@ Person* PersonManager::findByName(const string name) {
     return nullptr;
 }
 
-PersonManager::PersonManager(Person* array[], int len) {
-    for (int i = 0; i < len; ++i)
-    {
-        Person* copy = new Person(*array[i]); // 복사 생성자 사용
+PersonManager::PersonManager(Person* array[], int len)
+    : array(array)
+    , arrLen(len)
+    , persons()
+    , cpCount{0}        // ← 기본값 0
+{
+    pushArray();
+    display();
+}
+
+void PersonManager::pushArray()
+{
+    for (int i = 0; i < arrLen; ++i) {
+        Person* copy = new Person(*array[i]);
         persons.push_back(copy);
     }
-
-    display();
 }
 
 PersonManager::~PersonManager() {
@@ -1012,16 +1114,18 @@ PersonManager::~PersonManager() {
 void PersonManager::deleteElemets() {
     int n = persons.size();
     for (int i = 0; i < n; ++i) {
-        delete persons.at(i);  // 동적으로 생성한 객체 해제
+        delete persons[i];
     }
-    persons.clear();  // count 0으로 초기화
+    persons.clear();
+    cpCount = 0;        // ← 추가
 }
 
 void PersonManager::display() { // Menu item 1
     int count = persons.size();
     cout << "display(): count " << count << endl;
     for (int i = 0; i < count; ++i) {
-        persons.at(i)->println();
+        cout << "[" << i << "]";
+        persons[i]->println();
     }
     cout << boolalpha; // 추가
 
@@ -1087,9 +1191,41 @@ void PersonManager::remove() {
 
     int index = UI::getIndex("Index to delete? ", persons.size());
 
-    delete persons.at(index);
+    delete persons[index];
     persons.erase(index);
 
+    display();
+}
+
+void PersonManager::copyPersons() {
+    cpCount++;
+    // 기존 size만큼만 반복. size()가 늘어나는 것을 방지
+    int originalSize = persons.size();
+    for (int i = 0; i < originalSize; ++i) {
+        // 1) clone(): 복사 생성자로 복제
+        Person* p = new Person(*persons[i]);
+        // 2) name 얻어와서 앞에 cpCount번 첫 글자만큼 붙이기
+        string name = p->getName();
+        for (int j = 0; j < cpCount; ++j) {
+            name = name[0] + name;
+        }
+        p->setName(name);
+        // 3) id, weight, married 수정
+        p->set(p->getId() + 20 * cpCount);
+        p->set(p->getWeight() + cpCount);
+        if (cpCount % 2 == 1) {
+            p->set(!p->getMarried());
+        }
+        // 4) 백에 추가
+        persons.push_back(p);
+    }
+    display();
+}
+
+void PersonManager::reset()
+{
+    deleteElemets();  // 기존 벡터 비우기
+    pushArray();      // 원본 배열로 복원
     display();
 }
 
@@ -1099,19 +1235,21 @@ void PersonManager::run() {
     using func_t = void (PersonManager::*)();
     using PM = PersonManager;
     func_t func_arr[] = {
-        nullptr, 
-        &PM::display, 
-        &PM::append, 
-        &PM::clear, 
+        nullptr,
+        &PM::display,
+        &PM::append,
+        &PM::clear,
         &PM::login,
         &PM::insert,
-        &PM::remove
+        &PM::remove,
+        &PM::copyPersons,
+        &PM::reset,
     };
     int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
     string menuStr =
         "====================== Person Management Menu ===================\n"
         "= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =\n"
-        "= 5.Insert(6_2) 6.Delete(6_2)                                   =\n"
+        "= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =\n"
         "=================================================================\n";
 
     while (true) {
@@ -1123,9 +1261,8 @@ void PersonManager::run() {
         (this->*func_arr[menuItem])();
     }
 }
-
 //******************************************************************************
-// PersonManager objects end point
+// PersonManager member func end point
 //******************************************************************************
 
 //******************************************************************************
@@ -1269,16 +1406,22 @@ class ClassAndObject
         int i, j;
         double d;
     public:
-        // 여기서는 p.set(...) 대신 편의상 p.setName(...)을 호출했다.
-        Init6() { i = j = 6; d = 0; p.setName("p-Init6-body"); p.println(); }
-        void print() { 
-            cout << "Init6 i: " << i << ", j: " << j << ", d: " << d << endl; 
+        Init6() {
+            i = j = 6;
+            d = 0.0;
+            p.setName("p-Init6-body");
+            // p.println();  // 생성자 내부 디버깅 출력 제거
+        }
+        void print() {
+            cout << "Init6 i: " << i
+                 << ", j: " << j
+                 << ", d: " << d << endl;
         }
     };
 
     void memberInitialization() { // Menu item 5
         int i = 0, i2 = i; i = i2; // 의미 없는 문장이지만, 삭제하지 말 것
-        
+
         // 임시객체 생성 후 print()를 호출하고 바로 소멸된다.
         Init1().print(); cout << endl;
         Init2().print(); cout << endl;
@@ -1306,7 +1449,7 @@ class ClassAndObject
             cout << "printPerson(const Person& p)" << endl;
             p.println();
             // 위 const Person& p 선언의 의미: 이 함수에서 객체 p를 수정하지 않겠다는 의미임
-            // 따라서 아래의 p.setName("const-value")처럼 p의 멤버함수를 호출하면 에러로 처리함; 
+            // 따라서 아래의 p.setName("const-value")처럼 p의 멤버함수를 호출하면 에러로 처리함;
             // 이유는 이 함수가 const 객체인 p의 멤버 name를 수정하기기 때문에.
 
             /* p.setName("const-value"); */ // 명백히 이름을 수정하는 것이므로 컴파일 에러 발생
@@ -1314,21 +1457,21 @@ class ClassAndObject
                     p.getMarried() << " :" << ((p.getAddress()==nullptr)?"":p.getAddress()) <<
                     ":" << endl; */
 
-            // 주석을 풀 경우 발생하는 컴파일 에러는 매개변수가 const로 선언되었기 때문에  
-            // 발생하는 것이다. 컴파일러 입장에서는 위 멤버함수들이 p의 멤버를 수정하는지 아니면 
-            // 읽기만하는지 알 수 없기 때문에 컴파일 시 에러로 처리함; 
+            // 주석을 풀 경우 발생하는 컴파일 에러는 매개변수가 const로 선언되었기 때문에
+            // 발생하는 것이다. 컴파일러 입장에서는 위 멤버함수들이 p의 멤버를 수정하는지 아니면
+            // 읽기만하는지 알 수 없기 때문에 컴파일 시 에러로 처리함;
         }
     };
 //******************************************************************************
 // sub class Parameter class end point
-//******************************************************************************    
+//******************************************************************************
     Parameter cp;
 
     void normalParameter() {
         cout << "normalParameter()" << endl;
         cout << "Person p1(\"p1-name\")" << endl;
 
-        // 요점: 아래 Person p1처럼 p1이 일반적인 객체일 경우 
+        // 요점: 아래 Person p1처럼 p1이 일반적인 객체일 경우
         //      함수의 매개변수 타입에 상관없이 이 객체를 함수 인자로 넘겨 줄 수 있다.
         Person p1("p1-name");
 
@@ -1341,22 +1484,22 @@ class ClassAndObject
     void constParameter() {
         cout << "constParameter()" << endl;
         cout << "const Person p2(\"const-p2-name\")" << endl;
-    
+
         const Person p2("const-p2-name");
-    
+
         // ❌ 아래 코드를 지워야 합니다!!!
         // normalParameter();
-    
-        cp.normalValue(p2); 
-        cp.constValue(p2);  
+
+        cp.normalValue(p2);
+        cp.constValue(p2);
         //cp.normalReference(p2); // 컴파일 에러라 주석
-        cp.constReference(p2); 
+        cp.constReference(p2);
     }
 
     void temporaryParameter() {
         cout << "temporaryParameter()" << endl;
 
-        // 요점: 아래의 Person("Person-name")는 임시객체가 생성되며, 
+        // 요점: 아래의 Person("Person-name")는 임시객체가 생성되며,
         //      이 임시객체는 컴파일러에 의해 const로 취급된다.
         //      따라서 이 임시객체는 위 [문제 10]의 const p2와 동일하게 취급된다.
 
@@ -1366,13 +1509,13 @@ class ClassAndObject
         cp.constReference(Person("Person-name"));    // 임시 객체 참조만 넘어감
 
         // 결론: 일반적으로 객체는 함수의 매개변수로 value로 복사해서 넘기지 않고 객체의 참조를 넘긴다.
-        //      이유는 객체의 크기가 커지면 복사 오버헤드가 발생하기 때문이다. 
-        //      그런데 함수의 매개변수가 const가 아닌 일반 참조 변수로 선언된 경우 
+        //      이유는 객체의 크기가 커지면 복사 오버헤드가 발생하기 때문이다.
+        //      그런데 함수의 매개변수가 const가 아닌 일반 참조 변수로 선언된 경우
         //      그 함수에서 이 참조변수를 통해 원본 객체를 수정할 수 있기 때문에
-        //      const p2 또는 위 임시객체(const 취급)와 같은 객체들을 함수 인자로 넘길 수 없다. 
+        //      const p2 또는 위 임시객체(const 취급)와 같은 객체들을 함수 인자로 넘길 수 없다.
         //      따라서 [만약 함수 내에서 매개변수인 객체를 수정하지 않는다면]
         //      일반 & 매개변수로 선언하기 보다는 const &로 습관적으로 선언하는 것이 유리하다.
-        //      (이렇게 선언하면 위 cp.constReference()처럼 
+        //      (이렇게 선언하면 위 cp.constReference()처럼
         //       임시객체의 참조를 함수의 매개변수로 바로 넘길 수 있다.)
     }
 
@@ -1384,10 +1527,10 @@ class ClassAndObject
         cp.printStr(s);
         cp.printConstStr(s);
         // 아래는 임시 string 객체 생성 (임시객체는 항상 const): 컴파일 에러
-        //cp.printStr(string("name")); 
+        //cp.printStr(string("name"));
         cp.printConstStr(string("name2")); // const 임시 객체 생성
         // 아래 "name"은 자동으로 임시 string("name") 객체 생성: 컴파일 에러
-        //cp.printStr("name"); 
+        //cp.printStr("name");
         cp.printConstStr("name3"); // const 임시 객체 생성
         // 결론: 함수의 매개변수로 "name3"처럼 문자열을 직접 넘겨 주고 싶으면
         //      함수 매개변수를 const string& 으로 선언해야 한다. string&로 선언시 에러.
@@ -1466,10 +1609,10 @@ class AllocatedMember {
         cout << "------ " << p.getName() << " memo ------" << endl;
         const char *pmemo = p.getMemo();
         cout << (pmemo ? pmemo : "");
-    
+
         if (pmemo && strlen(pmemo) > 0 && pmemo[strlen(pmemo) - 1] != '\n')
             cout << endl;
-    
+
         cout << "--------------------" << endl << endl;
     }
 
@@ -1592,7 +1735,183 @@ public:
     }
 };
 //******************************************************************************
-//* ch5_2: AllocatedMember, new을 이용한 동적 메모리 할당한 멤버 취급
+// ch5_2: AllocatedMember, new을 이용한 동적 메모리 할당한 멤버 취급
+//******************************************************************************
+
+//******************************************************************************
+// Class VectorOperator start point
+//******************************************************************************
+class VectorOperator
+{
+    Person pa[5] = {
+        Person("Hong ", 0, 72.1, true, nullptr),
+        Person("Mong ", 1, 65.4, true, nullptr),
+        Person("Choon", 3, 56.7, true, nullptr),
+        Person("Soon ", 2, 87.6, true, nullptr),
+        Person("Chung", 4, 67.8, true, nullptr),
+    };
+    int pa_len = sizeof(pa) / sizeof(pa[0]);
+
+    VectorPerson pv1, pv2;
+
+    void disp_vector(const VectorPerson& pv) {
+        int count = pv.size();
+        cout << "count " << count << endl;
+        for (int i = 0; i < count; ++i) {
+            cout << "[" << i << "] "; pv[i]->println();
+        }
+        cout << endl;
+    }
+
+public:
+    // 기본 생성자
+    VectorOperator() {
+        int i;
+        for (i = 0; i < 2; ++i)
+            pv1.push_back(&pa[i]); // &pa[i] == &(pa[i])
+        cout << "pv1: "; disp_vector(pv1);
+
+        for ( ; i < pa_len; ++i)
+            pv2.push_back(pa+i);     // pa+i == &pa[i]
+        cout << "pv2: "; disp_vector(pv2);
+    }
+
+    // menu 1
+    void operatorIndex() {        // Menu item 1: operator[]
+        MultiManager().run();     // 이 안에서 display(), remove(), clear(), login()이 [] 사용
+    }
+
+    // Menu item 2: operator!(), operator bool()
+    void operatorNot() {
+        cout << boolalpha;
+        VectorPerson pv;
+        disp_vector(pv);
+
+        // operator bool()
+        if (pv) cout << "if(pv): true\n";
+        else    cout << "if(pv): false\n";
+        cout << "operator bool(): " << (bool)pv << endl;
+
+        // operator!()
+        if (!pv) cout << "if(!pv): true\n";
+        else     cout << "if(!pv): false\n";
+        cout << "operator !(): " << !pv << endl;
+
+        pv.push_back(pa);  // pa == &pa[0]
+        disp_vector(pv);
+        cout << "(pv? true: false) " << (pv ? true : false) << endl;
+
+        pv.push_back(new Person("Chung", 2, 67.8, true, nullptr));
+        disp_vector(pv);
+
+        cout << "pv[0]: "; pv[0]->println();
+        cout << "delete pv[1];" << endl;
+        delete pv[1];
+    }
+
+     // menu 3 추가 함수
+     VectorPerson call_return_value(VectorPerson pv) {
+        cout << "pv: "; disp_vector(pv);
+        cout << "return pv1 " << endl;
+        return pv1;
+    }
+
+    void copyConstructor() { // Menu item 3
+        cout << "VectorPerson pv3 = pv2" << endl;
+        VectorPerson pv3 = pv2;      // 복사생성자 호출
+        cout << "pv3: "; disp_vector(pv3);
+
+        pv3.erase(0);
+        cout << "pv3.erase(0)" << endl;
+        cout << "pv3: "; disp_vector(pv3);
+
+        cout << "pv2: "; disp_vector(pv2);
+
+        cout << "disp_vector(call_return_value(vp2))" << endl;
+        disp_vector(call_return_value(pv2));
+
+        cout << "pv1: "; disp_vector(pv1);
+    }
+
+    // menu 4: operator=
+    void operatorAssign() {
+        cout << "VectorPerson pv3 = pv2" << endl;
+        VectorPerson pv3 = pv2;
+        cout << "pv3: "; disp_vector(pv3);
+        cout << "pv3 = pv1" << endl;
+        pv3 = pv1;
+        cout << "pv3: "; disp_vector(pv3);
+        cout << "repeat 9 times: pv3.push_back(pa+2)" << endl;
+        for (int i = 0; i < 9; ++i)
+            pv3.push_back(pa+2);
+        cout << "pv3: "; disp_vector(pv3);
+        VectorPerson pv4;
+        cout << "pv4 = pv3" << endl;
+        pv4 = pv3;
+        cout << "pv4: "; disp_vector(pv4);
+    }
+
+    // Memu item 5: operator+
+    void operatorAdd() {
+        VectorPerson pv3;
+        cout << "pv3 = pv1 + pv2" << endl;
+        pv3 = pv1 + pv2;
+        cout << "pv3: "; disp_vector(pv3);
+
+        cout << "pv3 = pv2 + pv2 + pv3" << endl;
+        pv3 = pv2 + pv2 + pv3;  // capacity 확장 확인
+        cout << "pv3: "; disp_vector(pv3);
+    }
+
+    // Memu item 6: operator+= 테스트
+    void operatorAddAssign() {
+        cout << "VectorPerson pv4 = pv1:" << endl;
+        VectorPerson pv4 = pv1;   // 복사 생성자
+        cout << "pv4: "; disp_vector(pv4);
+
+        cout << "pv4 += pv2" << endl;
+        pv4 += pv2;
+        cout << "pv4: "; disp_vector(pv4);
+
+        cout << "pv4 += pv2 + pv2" << endl;
+        pv4 += pv2 + pv2;
+        cout << "pv4: "; disp_vector(pv4);
+    }
+
+    void run() {
+        using VO = VectorOperator;
+        using func_t = void (VectorOperator::*)();
+        func_t func_arr[] = {
+            nullptr,
+            &VO::operatorIndex,       // 1
+            &VO::operatorNot,         // 2
+            &VO::copyConstructor,     // 3
+            &VO::operatorAssign,      // 4
+            &VO::operatorAdd,         // 5
+            &VO::operatorAddAssign    // 6
+        };
+        int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
+        string menuStr =
+            "+++++++++++++ Vector Operator Overload ++++++++++++++\n"
+            "+ 0.Exit 1.operator[] 2.operator! 3.CopyConstructor +\n"
+            "+ 4.operator= 5.operator+ 6.operator=+              +\n"
+            "+++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+
+        while (true) {
+            int menuItem = selectMenu(menuStr, menuCount);
+            if (menuItem == 0) return;
+            if (menuItem >= menuCount || func_arr[menuItem] == nullptr) {
+                cout << menuItem << ": OUT of selection range(0 ~ "
+                     << menuCount-1 << ")" << endl;
+                continue;
+            }
+            (this->*func_arr[menuItem])();
+        }
+    }
+
+};
+//******************************************************************************
+// Class VectorOperator end point
 //******************************************************************************
 
 //******************************************************************************
@@ -1626,17 +1945,17 @@ class OperatorOverload {
         cout << "p1: "; p1.println();
         cout << "p2: "; p2.println();
         cout << "p1 == p2 : " << (p1 == p2 ? "true" : "false") << endl;
-    
+
         p2.set(2);
         cout << "p2: "; p2.println();
         cout << "p1 == p2 : " << (p1 == p2 ? "true" : "false") << endl;
-    
+
         p2.set(1);
         p2.setName("user");
         cout << "p2: "; p2.println();
         cout << "p1 == p2 : " << (p1 == p2 ? "true" : "false") << endl;
     }
-    
+
 
     void personAdd() {
         Person p1(p); p1.setAddress("");
@@ -1658,28 +1977,28 @@ class OperatorOverload {
     void assignPerson() {
         Person p1(p);   // 복사 생성자 사용
         Person p2;      // 기본 생성자
-    
+
         // 첫 출력: p 객체 출력
         cout << "p:  "; p.println();
-    
+
         // 대입 연산
         cout << "p2 = p" << endl;
         p2 = p;
         cout << "p2: "; p2.println();
-    
+
         // p3 객체 선언 및 초기화
         Person p3("Hong", 0, 72.1, false, "Gwangju Nam-gu Bongseon-dong 21");
         cout << "p3: "; p3.println();
-    
+
         // operator+ 테스트
         cout << "p3 = 20.0 + p2 + 30.5" << endl;
         p3 = 20.0 + p2 + 30.5;
         cout << "p3: "; p3.println();
-    
+
         // 비교 결과
         cout << "p == p3 : true" << endl;
     }
-    
+
 
 public:
 
@@ -1696,6 +2015,10 @@ public:
 
         // 4. 변경된 메모 출력
         m.displayMemo();
+    }
+
+    void vectorOOL() { // Memu item 9
+        VectorOperator().run();
     }
 
     void print_name_id(string name, int id) {
@@ -1771,14 +2094,15 @@ public:
             &OperatorOverload::personIncrement,
             &OperatorOverload::personShift,
             &OperatorOverload::typeConversion,
-            &OperatorOverload::currentUser
+            &OperatorOverload::currentUser,
+            &OperatorOverload::vectorOOL,
         };
 
         int menuCount = sizeof(func_arr) / sizeof(func_arr[0]);
         string menuStr =
             "+++++++++++++++++++ Operator Overload +++++++++++++++++\n"
             "+ 0.Exit 1.MemoAdd 2.Equal 3.Add 4.Assign 5.Increment +\n"
-            "+ 6.Shift 7.TypeConversion 8.CurrentUser              +\n"
+            "+ 6.Shift 7.TypeConversion 8.CurrentUser 9.VectorOOL  +\n"
             "+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
 
         while (true) {
@@ -1800,7 +2124,7 @@ public:
 // Class OperatorOverload Member func start point
 //******************************************************************************
 void OperatorOverload::personShift() {
-    Person p1(p); 
+    Person p1(p);
     p1.setAddress("");
     cout << "p1: "; p1.println();
 
@@ -2167,7 +2491,7 @@ public:
         int menuCount = 6; // 상수 정의
         string menuStr =
 "******************************* Main Menu *********************************\n"
-"* 0.Exit 1.PersonManager(ch3_2, 4, 6)                                     *\n"
+"* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_3)                                     *\n"
 "* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *\n"
 "* 5.OperatorOverload(ch7)                                                 *\n"
 "***************************************************************************\n";
