@@ -1,0 +1,13 @@
+1
+1
+2
+7
+P p3 11 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+S s3 12 71.5 false :Gwangju Nam-gu Bongseon-dong 21: Computer 3.3 2
+W w3 13 65 true :Jong-ro 1-gil, Jongno-gu, Seoul: Kia CEO
+A a3 14 54 false :Dong-gu, Incheon: Physics 3.8 1 Kakao Manager :SK, LG, KAI: true
+S s4 15 80 true :1001, Jungang-daero, Yeonje-gu, Busan: Biology 3.8 3
+W w4 16 77 false :Buk-ro 3, Kangdong-gu, Seoul: Naver Department-Head
+A a4 17 88 true :Kangdong-gu, Daejeon: Electronics 3.4 2 NC Developer :CU, GS: false
+0
+0

@@ -1,0 +1,80 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_2, 8)                             *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7_1) 6.Inheritance(ch8)                            *
+***************************************************************************
+Menu item number? 6
+Person::Person(...):s1 1 65.4 true :Jongno-gu Seoul:
+Student::Student(...): Physics 3.8 1
+Person::Person(...):w1 3 33.3 false :Kangnam-gu Seoul:
+Worker::Worker(...): Samsung Director
+Person::Person(...):a1 5 55.5 true :Dong-gu Incheon:
+Student::Student(...): Computer 3.5 2
+Worker::Worker(...): Hyundai Labor
+StudentWorker::StudentWorker(...): :CU KangNam,Seven Eleven,GSStore Suwon: false
+
++++++++++++++ Inheritance Menu ++++++++++++++
++ 0.Exit 1.Student 2.Worker 3.StudentWorker +
++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 3
+Person::Person(const Person&):a1 5 55.5 true :Dong-gu Incheon:
+Student::Student(const Student& s): Computer 3.5 2
+Worker::Worker(const Worker& w): Hyundai Labor
+StudentWorker::StudentWorker(const StudentWorker& a): :CU KangNam,Seven Eleven,GSStore Suwon: false
+sw1: a1 5 55.5 true :Dong-gu Incheon: Computer 3.5 2 Hyundai Labor :CU KangNam,Seven Eleven,GSStore Suwon: false
+Person::Person(const Person&):a1 5 55.5 true :Dong-gu Incheon:
+Student::Student(const Student& s): Computer 3.5 2
+Worker::Worker(const Worker& w): Hyundai Labor
+StudentWorker::StudentWorker(const StudentWorker& a): :CU KangNam,Seven Eleven,GSStore Suwon: false
+sw2: a1 5 55.5 true :Dong-gu Incheon: Computer 3.5 2 Hyundai Labor :CU KangNam,Seven Eleven,GSStore Suwon: false
+sw1 == sw2 : true
+sw2: a2 6 61.05 false :Dong-gu Incheon: Computer-Electronics 4.5 3 Hyundai-Hyundai Labor-Manager :CU KangNam,Seven Eleven,GSStore Suwon, Hi-Mart: true
+sw1: a1 5 55.5 true :Dong-gu Incheon: Computer 3.5 2 Hyundai Labor :CU KangNam,Seven Eleven,GSStore Suwon: false
+sw1 == sw2 : false
+########### StudentWorker::whatAreYouDoing() ##############
+a2 is studying as a 3-year student in Computer-Electronics
+a2 works in Hyundai-Hyundai as Labor-Manager
+a2 took several courses and got GPA 4.5
+a2 is now enjoying his(her) vacation
+###########################################################
+Person::Person(const Person&):a1 5 55.5 true :Dong-gu Incheon:
+Student::Student(const Student& s): Computer 3.5 2
+Worker::Worker(const Worker& w): Hyundai Labor
+StudentWorker::StudentWorker(const StudentWorker& a): :CU KangNam,Seven Eleven,GSStore Suwon: false
+p3 : a1 5 55.5 true :Dong-gu Incheon:
+sw1: a1 5 55.5 true :Dong-gu Incheon: Computer 3.5 2 Hyundai Labor :CU KangNam,Seven Eleven,GSStore Suwon: false
+p3 == sw1 : true
+input alba: a1 5 66.6 false :Nam-gu Busan: Computer 2 3 Hyundai Labor :CU,E-mart,GS: false
+sw2: a1 5 66.6 false :Nam-gu Busan: Computer 2 3 Hyundai Labor :CU,E-mart,GS: false
+sw1: a1 5 55.5 true :Dong-gu Incheon: Computer 3.5 2 Hyundai Labor :CU KangNam,Seven Eleven,GSStore Suwon: false
+sw2 == sw1 : false
+StudentWorker::~StudentWorker(): :CU,E-mart,GS: false
+Worker::~Worker(): Hyundai Labor
+Student::~Student(): Computer 2 3
+Person::~Person():a1 5 66.6 false :Nam-gu Busan:
+StudentWorker::~StudentWorker(): :CU KangNam,Seven Eleven,GSStore Suwon: false
+Worker::~Worker(): Hyundai Labor
+Student::~Student(): Computer 3.5 2
+Person::~Person():a1 5 55.5 true :Dong-gu Incheon:
+
++++++++++++++ Inheritance Menu ++++++++++++++
++ 0.Exit 1.Student 2.Worker 3.StudentWorker +
++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+StudentWorker::~StudentWorker(): :CU KangNam,Seven Eleven,GSStore Suwon: false
+Worker::~Worker(): Hyundai Labor
+Student::~Student(): Computer 3.5 2
+Person::~Person():a1 5 55.5 true :Dong-gu Incheon:
+Worker::~Worker(): Samsung Director
+Person::~Person():w1 3 33.3 false :Kangnam-gu Seoul:
+Student::~Student(): Physics 3.8 1
+Person::~Person():s1 1 65.4 true :Jongno-gu Seoul:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_2, 8)                             *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7_1) 6.Inheritance(ch8)                            *
+***************************************************************************
+Menu item number? 0
+Good bye!!

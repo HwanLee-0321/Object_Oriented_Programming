@@ -1,0 +1,136 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_2, 8)                             *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7_1) 6.Inheritance(ch8)                            *
+***************************************************************************
+Menu item number? 1
+Person::Person(...):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...):p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...):p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...):p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::Person(...):s1 1 65.4 true :Jongno-gu Seoul:
+Student::Student(...): Physics 3.8 1
+Person::Person(...):s2 2 54.3 false :Yeonje-gu Busan:
+Student::Student(...): Electronics 2.5 4
+Person::Person(...):w1 3 33.3 false :Kangnam-gu Seoul:
+Worker::Worker(...): Samsung Director
+Person::Person(...):w2 4 44.4 true :Dobong-gu Kwangju:
+Worker::Worker(...): Hyundai Manager
+Person::Person(...):a1 5 55.5 true :Dong-gu Incheon:
+Student::Student(...): Computer 3.5 2
+Worker::Worker(...): Hyundai Labor
+StudentWorker::StudentWorker(...): :CU KangNam,Seven Eleven,GSStore Suwon: false
+Person::Person(...):a2 6 66.6 false :Sasang-gu Sejong:
+Student::Student(...): History 3.1 1
+Worker::Worker(...): Kia CEO
+StudentWorker::StudentWorker(...): :Seven Eveven,eMart Jinju,CU Bongsun: true
+Person::Person(const Person&):p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(const Person&):p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(const Person&):s1 1 65.4 true :Jongno-gu Seoul:
+Person::Person(const Person&):s2 2 54.3 false :Yeonje-gu Busan:
+Person::Person(const Person&):w1 3 33.3 false :Kangnam-gu Seoul:
+Person::Person(const Person&):w2 4 44.4 true :Dobong-gu Kwangju:
+Person::Person(const Person&):a1 5 55.5 true :Dong-gu Incheon:
+Person::Person(const Person&):a2 6 66.6 false :Sasang-gu Sejong:
+PersonManager::run() starts
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 1
+display(): count 8
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] s1 1 65.4 true :Jongno-gu Seoul:
+[3] s2 2 54.3 false :Yeonje-gu Busan:
+[4] w1 3 33.3 false :Kangnam-gu Seoul:
+[5] w2 4 44.4 true :Dobong-gu Kwangju:
+[6] a1 5 55.5 true :Dong-gu Incheon:
+[7] a2 6 66.6 false :Sasang-gu Sejong:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 2
+The number of persons to append? 7
+Input 7 [delimiter(P, S, W, or A)] [person information] :
+Person::Person(...): 0 0 false ::
+P p3 11 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::Person(...): 0 0 false ::
+Student::Student(...):  0 0
+S s3 12 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+Person::Person(...): 0 0 false ::
+Worker::Worker(...):  
+W w3 13 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::Person(...): 0 0 false ::
+Student::Student(...):  0 0
+Worker::Worker(...):  
+StudentWorker::StudentWorker(...): :: false
+A a3 14 54 false :Dong-gu, Incheon:
+Person::Person(...): 0 0 false ::
+Student::Student(...):  0 0
+S s4 15 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::Person(...): 0 0 false ::
+Worker::Worker(...):  
+W w4 16 77 false :Buk-ro 3, Kangdong-gu, Seoul:
+Person::Person(...): 0 0 false ::
+Student::Student(...):  0 0
+Worker::Worker(...):  
+StudentWorker::StudentWorker(...): :: false
+A a4 17 88 true :Kangdong-gu, Daejeon:
+display(): count 15
+[0] p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+[1] p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[2] s1 1 65.4 true :Jongno-gu Seoul:
+[3] s2 2 54.3 false :Yeonje-gu Busan:
+[4] w1 3 33.3 false :Kangnam-gu Seoul:
+[5] w2 4 44.4 true :Dobong-gu Kwangju:
+[6] a1 5 55.5 true :Dong-gu Incheon:
+[7] a2 6 66.6 false :Sasang-gu Sejong:
+[8] p3 11 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+[9] s3 12 71.5 false :Gwangju Nam-gu Bongseon-dong 21:
+[10] w3 13 65 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+[11] a3 14 54 false :Dong-gu, Incheon:
+[12] s4 15 80 true :1001, Jungang-daero, Yeonje-gu, Busan:
+[13] w4 16 77 false :Buk-ro 3, Kangdong-gu, Seoul:
+[14] a4 17 88 true :Kangdong-gu, Daejeon:
+
+====================== Person Management Menu ===================
+= 0.Exit 1.Display 2.Append 3.Clear 4.Login(CurrentUser, ch6)   =
+= 5.Insert(6_2) 6.Delete(6_2) 7.CopyPersons(7_3) 8.Reset(7_3)   =
+=================================================================
+Menu item number? 0
+PersonManager::run() returned
+StudentWorker::~StudentWorker(): :Seven Eveven,eMart Jinju,CU Bongsun: true
+Worker::~Worker(): Kia CEO
+Student::~Student(): History 3.1 1
+Person::~Person():a2 6 66.6 false :Sasang-gu Sejong:
+StudentWorker::~StudentWorker(): :CU KangNam,Seven Eleven,GSStore Suwon: false
+Worker::~Worker(): Hyundai Labor
+Student::~Student(): Computer 3.5 2
+Person::~Person():a1 5 55.5 true :Dong-gu Incheon:
+Worker::~Worker(): Hyundai Manager
+Person::~Person():w2 4 44.4 true :Dobong-gu Kwangju:
+Worker::~Worker(): Samsung Director
+Person::~Person():w1 3 33.3 false :Kangnam-gu Seoul:
+Student::~Student(): Electronics 2.5 4
+Person::~Person():s2 2 54.3 false :Yeonje-gu Busan:
+Student::~Student(): Physics 3.8 1
+Person::~Person():s1 1 65.4 true :Jongno-gu Seoul:
+Person::~Person():p4 14 64.4 false :88 Gongpyeong-ro, Jung-gu, Daegu:
+Person::~Person():p3 13 83.3 true :100 Dunsan-ro Seo-gu Daejeon:
+Person::~Person():p2 12 52.2 false :1001, Jungang-daero, Yeonje-gu, Busan:
+Person::~Person():p1 11 61.1 true :Jong-ro 1-gil, Jongno-gu, Seoul:
+Person::~Person():p0 10 70 false :Gwangju Nam-gu Bongseon-dong 21:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_2, 8)                             *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7_1) 6.Inheritance(ch8)                            *
+***************************************************************************
+Menu item number? 0
+Good bye!!

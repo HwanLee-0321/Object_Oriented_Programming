@@ -1,0 +1,61 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_2, 8)                             *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7_1) 6.Inheritance(ch8)                            *
+***************************************************************************
+Menu item number? 6
+Person::Person(...):s1 1 65.4 true :Jongno-gu Seoul:
+Student::Student(...): Physics 3.8 1
+Person::Person(...):w1 3 33.3 false :Kangnam-gu Seoul:
+Worker::Worker(...): Samsung Director
+
++++++++++++++ Inheritance Menu ++++++++++++++
++ 0.Exit 1.Student 2.Worker                 +
++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 1
+Person::Person(const Person&):s1 1 65.4 true :Jongno-gu Seoul:
+Student::Student(const Student& s): Physics 3.8 1
+s1: s1 1 65.4 true :Jongno-gu Seoul: Physics 3.8 1
+Person::Person(const Person&):s1 1 65.4 true :Jongno-gu Seoul:
+Student::Student(const Student& s): Physics 3.8 1
+s2: s1 1 65.4 true :Jongno-gu Seoul: Physics 3.8 1
+s1 == s2 : true
+s2: s2 2 71.94 false :Jongno-gu Seoul: Physics-Electronics 4.8 2
+s1 == s2 : false
+~~~~~~~~~~~~~~~~ Student::whatAreYouDoing() ~~~~~~~~~~~~~~~~
+s2 is studying as a 2-year student in Physics-Electronics
+s2 took several courses and got GPA 4.8
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Person::Person(const Person&):s1 1 65.4 true :Jongno-gu Seoul:
+Student::Student(const Student& s): Physics 3.8 1
+s3: s1 1 65.4 true :Jongno-gu Seoul: Physics 3.8 1
+s1: s1 1 65.4 true :Jongno-gu Seoul: Physics 3.8 1
+s3 == s1 : true
+Student::~Student(): Physics 3.8 1
+Person::~Person():s1 1 65.4 true :Jongno-gu Seoul:
+input student: s1 1 66.6 false :Kangnam-gu Seoul: Physics 3 1
+s2: s1 1 66.6 false :Kangnam-gu Seoul: Physics 3 1
+s1: s1 1 65.4 true :Jongno-gu Seoul: Physics 3.8 1
+s2 == s1 : true
+Student::~Student(): Physics 3 1
+Person::~Person():s1 1 66.6 false :Kangnam-gu Seoul:
+Student::~Student(): Physics 3.8 1
+Person::~Person():s1 1 65.4 true :Jongno-gu Seoul:
+
++++++++++++++ Inheritance Menu ++++++++++++++
++ 0.Exit 1.Student 2.Worker                 +
++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Worker::~Worker(): Samsung Director
+Person::~Person():w1 3 33.3 false :Kangnam-gu Seoul:
+Student::~Student(): Physics 3.8 1
+Person::~Person():s1 1 65.4 true :Jongno-gu Seoul:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_2, 8)                             *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7_1) 6.Inheritance(ch8)                            *
+***************************************************************************
+Menu item number? 0
+Good bye!!

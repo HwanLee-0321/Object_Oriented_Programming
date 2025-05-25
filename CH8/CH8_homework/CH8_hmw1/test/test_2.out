@@ -1,0 +1,61 @@
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_2, 8)                             *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7_1) 6.Inheritance(ch8)                            *
+***************************************************************************
+Menu item number? 6
+Person::Person(...):s1 1 65.4 true :Jongno-gu Seoul:
+Student::Student(...): Physics 3.8 1
+Person::Person(...):w1 3 33.3 false :Kangnam-gu Seoul:
+Worker::Worker(...): Samsung Director
+
++++++++++++++ Inheritance Menu ++++++++++++++
++ 0.Exit 1.Student 2.Worker                 +
++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 2
+Person::Person(const Person&):w1 3 33.3 false :Kangnam-gu Seoul:
+Worker::Worker(const Worker& w): Samsung Director
+w1: w1 3 33.3 false :Kangnam-gu Seoul: Samsung Director
+Person::Person(const Person&):w1 3 33.3 false :Kangnam-gu Seoul:
+Worker::Worker(const Worker& w): Samsung Director
+w2: w1 3 33.3 false :Kangnam-gu Seoul: Samsung Director
+w1 == w2 : true
+w2: w2 4 36.63 true :Kangnam-gu Seoul: Samsung-Hyundai Director-Manager
+w1 == w2 : false
+!!!!!!!!!!!!!!!! Worker::whatAreYouDoing()!!!!!!!!!!!!!!!!!
+w2 works in Samsung-Hyundai as Director-Manager
+w2 is now enjoying his(her) vacation
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Person::Person(const Person&):w1 3 33.3 false :Kangnam-gu Seoul:
+Worker::Worker(const Worker& w): Samsung Director
+w3: w1 3 33.3 false :Kangnam-gu Seoul: Samsung Director
+w1: w1 3 33.3 false :Kangnam-gu Seoul: Samsung Director
+w3 == w1 : true
+Worker::~Worker(): Samsung Director
+Person::~Person():w1 3 33.3 false :Kangnam-gu Seoul:
+input worker: w1 3 44.4 true :Jongno-gu Seoul: Samsung Director
+w2: w1 3 44.4 true :Jongno-gu Seoul: Samsung Director
+w1: w1 3 33.3 false :Kangnam-gu Seoul: Samsung Director
+w2 == w1 : true
+Worker::~Worker(): Samsung Director
+Person::~Person():w1 3 44.4 true :Jongno-gu Seoul:
+Worker::~Worker(): Samsung Director
+Person::~Person():w1 3 33.3 false :Kangnam-gu Seoul:
+
++++++++++++++ Inheritance Menu ++++++++++++++
++ 0.Exit 1.Student 2.Worker                 +
++++++++++++++++++++++++++++++++++++++++++++++
+Menu item number? 0
+Worker::~Worker(): Samsung Director
+Person::~Person():w1 3 33.3 false :Kangnam-gu Seoul:
+Student::~Student(): Physics 3.8 1
+Person::~Person():s1 1 65.4 true :Jongno-gu Seoul:
+
+******************************* Main Menu *********************************
+* 0.Exit 1.PersonManager(ch3_2, 4, 6, 7_2, 8)                             *
+* 2.Class:Object(ch3_1) 3.CopyConstructor(ch5_1) 4.AllocatedMember(ch5_2) *
+* 5.OperatorOverload(ch7_1) 6.Inheritance(ch8)                            *
+***************************************************************************
+Menu item number? 0
+Good bye!!
