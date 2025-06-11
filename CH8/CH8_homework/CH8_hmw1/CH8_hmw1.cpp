@@ -5,7 +5,7 @@
 #include <iomanip> // For boolalpha
 #include <limits>  // Required for std::numeric_limits
 
-#define AUTOMATIC_ERROR_CHECK false
+#define AUTOMATIC_ERROR_CHECK true
 using namespace std;
 
 /*
@@ -85,7 +85,7 @@ public:
 
 
     // 기능 함수
-    virtual void input(istream& in)       { inputMembers(in); }
+    virtual void input(istream& in_stream);
     virtual void print(ostream& out) const;
     void println() const;
     virtual void whatAreYouDoing();
@@ -130,6 +130,10 @@ public:
 // *********************************************************
 // Person member func start point
 // *********************************************************
+void Person::input(istream& in_stream) {
+    this->inputMembers(in_stream);
+}
+
 Person& Person::operator<<(const std::string& name_val) {
     this->name = name_val;
     return *this;
@@ -280,46 +284,20 @@ Person::Person(const Person& p)
     cout << "Person::Person(const Person& p):"; printMembers(cout); cout << endl;
 }
 
-void Person::inputMembers(istream& in_stream) {
-    string line_buf;
+void Person::inputMembers(istream& in_stream) { // 이제 in_stream은 cin일 수도, istringstream일 수도 있습니다.
+    // 로컬 변수 선언은 그대로 둡니다.
     string t_name;
     string t_married_str;
     char colon_char;
     int t_id;
     double t_weight;
     bool t_married_val;
-
-    getline(in_stream, line_buf);
-
-    if (!in_stream && line_buf.empty()){
-        // This case means getline failed and read nothing, potentially due to previous error or EOF.
-        // if (!in_stream.eof()) { // If not EOF, it's a more serious error.
-             in_stream.clear(); // Clear error flags like failbit or badbit.
-             in_stream.setstate(ios::failbit); // Explicitly set failbit.
-        // } else {
-        //     // It was EOF and an empty line, which might be a valid end of input.
-        //     // The caller should check in_stream.eof() if this distinction is important.
-        //     in_stream.clear(); // Clear eof for now.
-        // }
-         return;
-    }
-
-    // If getline hit EOF but still read some characters (or an empty line before EOF),
-    // clear the eof state so that istringstream can parse the content of line_buf.
-    if (in_stream.eof()) {
-        in_stream.clear();
-    }
-
-    rawInput = line_buf;
-    istringstream iss(line_buf);
     string addrPart;
 
-    if (!(iss >> t_name >> t_id >> t_weight >> t_married_str >> colon_char) || colon_char != ':') {
-        if (!line_buf.empty() || (iss.fail() && !iss.eof()) ) {
-             // If line_buf was not empty (meaning getline read something) but parsing failed,
-             // or if iss itself failed for reasons other than EOF on the iss,
-             // then propagate error to the original stream.
-            in_stream.setstate(ios::failbit);
+    if (!(in_stream >> t_name >> t_id >> t_weight >> t_married_str >> colon_char) || colon_char != ':') {
+        if (!in_stream.eof()) {
+           in_stream.clear();
+           in_stream.setstate(ios::failbit);
         }
         return;
     }
@@ -333,11 +311,7 @@ void Person::inputMembers(istream& in_stream) {
         return;
     }
 
-    getline(iss >> std::ws, addrPart, ':');
-
-    const int MAX_ADDRESS_LEN = 100;
-    if (addrPart.length() >= MAX_ADDRESS_LEN)
-        addrPart = addrPart.substr(0, MAX_ADDRESS_LEN - 1);
+    getline(in_stream >> std::ws, addrPart, ':');
 
     this->setName(t_name);
     this->set(t_id);
@@ -345,9 +319,6 @@ void Person::inputMembers(istream& in_stream) {
     this->set(t_married_val);
     this->setAddress(addrPart.c_str());
 
-    if (iss.fail() && !iss.eof()) {
-        in_stream.setstate(ios::failbit);
-    }
 }
 // *********************************************************
 // Person member func end point
@@ -424,9 +395,9 @@ void Student::print(ostream& out) const {
 bool Student::operator==(const Student& s) {
     return (static_cast<const Person&>(*this) == s) &&
            this->department == s.department &&
+           this->GPA == s.GPA &&  // ✅ GPA 비교 조건을 추가합니다.
            this->year == s.year;
 }
-
 // [문제 4]
 int Student::getYear() const { return year; }
 double Student::getGPA() const { return GPA; }
@@ -458,33 +429,31 @@ Person* Student::clone() {
 
 // [문제 7].2
 void Student::input(istream& in_stream) {
-    Person::inputMembers(in_stream);
-    // Check the original stream's state. If Person::inputMembers failed (and set in_stream's failbit), return.
-    // If Person::inputMembers read an empty line successfully (e.g. at EOF for interactive input),
-    // in_stream might be good but subsequent read for Student parts might fail.
-    if (!in_stream && !in_stream.eof()) { // If failed and not just EOF
+    string line;
+    getline(in_stream, line); // 1. 여기서 한 줄을 통째로 읽습니다.
+
+    if (!in_stream && line.empty()){ // 입력 실패 시 처리
+        in_stream.clear();
+        in_stream.setstate(ios::failbit);
         return;
     }
-    // If Person::inputMembers successfully read a line which ALSO contained student data,
-    // its internal istringstream (iss) would have the student data.
-    // However, 'this->inputMembers(in_stream)' will try to read from the original 'in_stream'.
-    // If 'in_stream' was 'cin', Person::inputMembers already consumed the line from 'cin'.
-    // This part of the logic is problematic if all data (Person + Student) is on a single line
-    // AND Person::inputMembers consumes the whole line from the passed stream.
-    // For this to work as intended by the problem structure (base call then derived call on same stream),
-    // Person::inputMembers should ideally only parse its part from an istringstream of the line,
-    // and the public input method should manage the getline and pass the istringstream.
-    // Or Person::inputMembers uses in_stream and only reads its part.
 
-    // Assuming the problem implies Person::inputMembers leaves 'in_stream' (if it's an istringstream)
-    // ready for Student specific parts.
-    if (in_stream.good()){ // Only proceed if stream is still good
-         this->inputMembers(in_stream);
+    istringstream iss(line); // 2. 읽어들인 한 줄로 string stream을 만듭니다.
+
+    Person::inputMembers(iss); // 3. 부모 클래스의 파싱 함수에 string stream을 넘겨줍니다.
+
+    if (iss.fail()) { // 부모 파싱 중 실패했다면 에러 처리
+        in_stream.setstate(ios::failbit);
+        return;
     }
-    if (in_stream.fail() && !in_stream.eof()){
-        // Error during Student input
+
+    this->inputMembers(iss); // 4. 자식 클래스의 파싱 함수에 이어서 string stream을 넘겨줍니다.
+
+    if (iss.fail() && !iss.eof()) { // 자식 파싱 중 실패했다면 에러 처리
+        in_stream.setstate(ios::failbit);
     }
 }
+
 
 // [문제 7].3
 void Student::inputMembers(istream& in_stream) {
@@ -592,15 +561,28 @@ Person* Worker::clone() {
 
 // [문제 8].2
 void Worker::input(istream& in_stream) {
-    Person::inputMembers(in_stream);
-    if (in_stream.fail() && !in_stream.eof()) {
+    string line;
+    getline(in_stream, line); // 1. 여기서 한 줄을 통째로 읽습니다.
+
+    if (!in_stream && line.empty()){ // 입력 실패 시 처리
+        in_stream.clear();
+        in_stream.setstate(ios::failbit);
         return;
     }
-    if(in_stream.good()){
-        this->inputMembers(in_stream);
+
+    istringstream iss(line); // 2. 읽어들인 한 줄로 string stream을 만듭니다.
+
+    Person::inputMembers(iss); // 3. 부모 클래스의 파싱 함수에 string stream을 넘겨줍니다.
+
+    if (iss.fail()) { // 부모 파싱 중 실패했다면 에러 처리
+        in_stream.setstate(ios::failbit);
+        return;
     }
-     if (in_stream.fail() && !in_stream.eof()){
-        // Error
+
+    this->inputMembers(iss); // 4. 자식 클래스의 파싱 함수에 이어서 string stream을 넘겨줍니다.
+
+    if (iss.fail() && !iss.eof()) { // 자식 파싱 중 실패했다면 에러 처리
+        in_stream.setstate(ios::failbit);
     }
 }
 
@@ -1743,7 +1725,72 @@ public:
 //******************************************************************************
 // AllocatedMember class (as provided in original)
 //******************************************************************************
-class AllocatedMember { Person u; Memo memo; void set_print_address(Person&p, const char*a){cout<<"p.setAddress("<<(a?a:"")<<")"<<endl;p.setAddress(a);p.println();cout<<endl;} void print_memo(Person&p){cout<<"------ "<<p.getName()<<" memo ------"<<endl;const char*pm=p.getMemo();cout<<(pm?pm:"");if(pm&&strlen(pm)>0&&pm[strlen(pm)-1]!='\n')cout<<endl;cout<<"--------------------"<<endl<<endl;} void set_print_memo(Person&p,const char*m){cout<<"p.setMemo(memo)"<<endl;p.setMemo(m);print_memo(p);} void changeAddress(){Person p_loc("p",1,70,true,"Gwangju");set_print_address(p_loc,"short address");set_print_address(p_loc,"middle length Address, Seoul");set_print_address(p_loc,"long length Address Seoul Mapo-gu Korea");set_print_address(p_loc,u.getAddress());} void changeMemo(){Person p_loc("p",1,70,true,"Gwangju");set_print_memo(p_loc,"short memo\n");set_print_memo(p_loc,"middle long memo: The Last of the Mohicans\n");set_print_memo(p_loc,u.getMemo());} void manageMemo(){memo.c_str(u.getMemo());memo.run();cout<<"\nmemo.run() returned"<<endl;u.setMemo(memo.c_str());print_memo(u);} Person call_by_value_and_return_value(Person p_val){cout<<"p.setName(p)"<<endl;p_val.setName("p");cout<<"p2: ";return p_val;} void copyConstructor(){cout<<"u: ";u.println();print_memo(u);cout<<"Person p1(u)"<<endl;cout<<"p1: ";Person p1(u);p1.setName("p1");p1.println();print_memo(p1);cout<<"Person p2 = call_by_value_and_return_value(p1)"<<endl;cout<<"p: ";Person p2=call_by_value_and_return_value(p1);cout<<"call_by_value_and_return_value(p1) returned\n"<<endl;cout<<"p2.setName(p2)"<<endl;p2.setName("p2");p2.println();print_memo(p2);cout<<"copyConstructor() returns"<<endl;} void nullptrMember(){u.println();print_memo(u);cout<<"set address = memo_c_str = nullptr"<<endl;u.setAddress(nullptr);u.setMemo(nullptr);u.println();print_memo(u);cout<<"memo.c_str(u.getMemo())"<<endl;memo.c_str(u.getMemo());memo.displayMemo();cout<<endl<<"u.setMemo(memo.c_str())"<<endl;u.setMemo(memo.c_str());print_memo(u);} void inputPerson(){cout<<"u: ";u.println();while(!inputPersonFromUser(&u));cout<<"u: ";u.println();} public: AllocatedMember():u("u",1,70,true,"NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA"){u.setMemo("It is believed that the Aborigines of the American continent");} void run(){using func_t=void(AllocatedMember::*)();func_t func_arr[]={nullptr,&AllocatedMember::changeAddress,&AllocatedMember::changeMemo,&AllocatedMember::manageMemo,&AllocatedMember::copyConstructor,&AllocatedMember::nullptrMember,&AllocatedMember::inputPerson};int menuCount=sizeof(func_arr)/sizeof(func_arr[0]);string menuStr="++++++++++++++++ Allocated Member Menu ++++++++++++++++\n+ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +\n+ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";while(true){int menuItem=UI::selectMenu(menuStr,menuCount);if(menuItem==0)return;if(menuItem>=menuCount||func_arr[menuItem]==nullptr){cout<<menuItem<<": OUT of selection range(0 ~ "<<menuCount-1<<")"<<endl;continue;}(this->*func_arr[menuItem])();}}};
+class AllocatedMember {
+    Person u;
+    Memo memo;
+    void set_print_address(Person&p, const char*a){
+        cout<<"p.setAddress("<<(a?a:"")<<")"<<endl;
+        p.setAddress(a);p.println();cout<<endl;
+    }
+    void print_memo(Person&p){
+        cout<<"------ "<<p.getName()<<" memo ------"<<endl;
+        const char*pm=p.getMemo();cout<<(pm?pm:"");
+        if(pm&&strlen(pm)>0&&pm[strlen(pm)-1]!='\n')cout<<endl;
+        cout<<"--------------------"<<endl<<endl;
+    }
+    void set_print_memo(Person&p,const char*m){
+        cout<<"p.setMemo(memo)"<<endl;
+        p.setMemo(m);print_memo(p);
+    }
+    void changeAddress(){
+        Person p_loc("p",1,70,true,"Gwangju");
+        set_print_address(p_loc,"short address");
+        set_print_address(p_loc,"middle length Address, Seoul");
+        set_print_address(p_loc,"long length Address Seoul Mapo-gu Korea");
+        set_print_address(p_loc,u.getAddress());
+    }
+    void changeMemo(){
+        Person p_loc("p",1,70,true,"Gwangju");
+        set_print_memo(p_loc,"short memo\n");
+        set_print_memo(p_loc,"middle long memo: The Last of the Mohicans\n");
+        set_print_memo(p_loc,u.getMemo());
+    }
+    void manageMemo(){memo.c_str(u.getMemo());memo.run();
+        cout<<"\nmemo.run() returned"<<endl;
+        u.setMemo(memo.c_str());print_memo(u);
+    }
+    Person call_by_value_and_return_value(Person p_val){
+        cout<<"p.setName(p)"<<endl;p_val.setName("p");
+        cout<<"p2: ";return p_val;
+    }
+    void copyConstructor(){
+        cout<<"u: ";
+        u.println();
+        print_memo(u);
+        cout<<"Person p1(u)"<<endl;cout<<"p1: ";
+        Person p1(u);p1.setName("p1");
+        p1.println();print_memo(p1);
+        cout<<"Person p2 = call_by_value_and_return_value(p1)"<<endl;
+        cout<<"p: ";
+        Person p2=call_by_value_and_return_value(p1);
+        cout<<"call_by_value_and_return_value(p1) returned\n"<<endl;
+        cout<<"p2.setName(p2)"<<endl;p2.setName("p2");
+        p2.println();print_memo(p2);
+        cout<<"copyConstructor() returns"<<endl;
+    }
+    void nullptrMember(){
+        u.println();
+        print_memo(u);
+        cout<<"set address = memo_c_str = nullptr"<<endl;
+        u.setAddress(nullptr);
+        u.setMemo(nullptr);
+        u.println();
+        print_memo(u);
+        cout<<"memo.c_str(u.getMemo())"<<endl;
+        memo.c_str(u.getMemo());
+        memo.displayMemo();
+        cout<<endl<<"u.setMemo(memo.c_str())"<<endl;
+        u.setMemo(memo.c_str());print_memo(u);} void inputPerson(){cout<<"u: ";u.println();while(!inputPersonFromUser(&u));cout<<"u: ";u.println();} public: AllocatedMember():u("u",1,70,true,"NAMDAEMUN-RO 123, JONGNO-GU, SEOUL, KOREA"){u.setMemo("It is believed that the Aborigines of the American continent");} void run(){using func_t=void(AllocatedMember::*)();func_t func_arr[]={nullptr,&AllocatedMember::changeAddress,&AllocatedMember::changeMemo,&AllocatedMember::manageMemo,&AllocatedMember::copyConstructor,&AllocatedMember::nullptrMember,&AllocatedMember::inputPerson};int menuCount=sizeof(func_arr)/sizeof(func_arr[0]);string menuStr="++++++++++++++++ Allocated Member Menu ++++++++++++++++\n+ 0.Exit 1.ChangeAddress 2.ChangeMemo 3.UsingMemoMenu +\n+ 4.CopyConstructor 5.NullptrMember 6.inputPerson     +\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";while(true){int menuItem=UI::selectMenu(menuStr,menuCount);if(menuItem==0)return;if(menuItem>=menuCount||func_arr[menuItem]==nullptr){cout<<menuItem<<": OUT of selection range(0 ~ "<<menuCount-1<<")"<<endl;continue;}(this->*func_arr[menuItem])();}}};
 
 //******************************************************************************
 // VectorOperator class (as provided in original)
@@ -2040,6 +2087,7 @@ class Inheritance
     Worker  w { "w1", 3, 33.3, false, "Kangnam-gu Seoul",  "Samsung", "Director" };
 
     void student() {
+        cout << boolalpha;
         // [문제 2] 코드 삽입
         Student s1(s);
         cout << "s1: "; s1.println();
@@ -2076,11 +2124,6 @@ class Inheritance
 
         // [문제 7] 코드 추가
         cout << "input student: ";
-        // Clear the input buffer robustly before calling getline-based input
-        // This is crucial if the previous input was 'cin >> menu_item'
-        // and UI::getInt() didn't fully consume the newline.
-        cin.clear(); // Clear any error flags on cin first.
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         s2.input(cin); // This calls Person::inputMembers which uses getline
 
@@ -2091,6 +2134,7 @@ class Inheritance
     }
 
     void worker() {
+        cout << boolalpha;
         // [문제 8].1 코드 삽입
         Worker w1(w);
         cout << "w1: "; w1.println();
@@ -2120,8 +2164,6 @@ class Inheritance
         }
 
         cout << "input worker: ";
-        cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         w2.input(cin);
         if (UI::echo_input) { cout << "echo w2: "; w2.println(); }
@@ -2206,13 +2248,8 @@ void run() {
 
 int main() {
 #if AUTOMATIC_ERROR_CHECK
-    // evaluate(false);
-    cout << "AUTOMATIC_ERROR_CHECK is true, but evaluate() is not available." << endl;
-    cout << "Running program normally." << endl;
-    run();
+    evaluate(false);   // 각 문제에 대해 단순히 O, X만 확인하고자 할 때는 false
 #else
-    // UI::echo_input = true; // Uncomment for debugging input
     run();
 #endif
-    return 0;
 }
