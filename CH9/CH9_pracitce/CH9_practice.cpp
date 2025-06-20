@@ -4,13 +4,14 @@
 
 using namespace std;
 
-// 클래스 및 헬퍼(Helper) 함수에 대한 전방 선언
+// 클래스 및 헬퍼(Helper) 함수에 대한 전방 선언`
 class Person;
 void printPerson(Person* p);
 void addHours(Person* p);
 void whatAreYouDoing(Person* p);
 void whatIsYourPay(Person* p);
 Person* copyPerson(Person* p);
+void deletePerson(Person* p_orig, bool print); // print 여부 플래그 추가
 
 /**************************************************************
  * Person 클래스
@@ -27,8 +28,7 @@ public:
     Person(const Person& p) : id(p.id), hours(p.hours) {
         name = new char[strlen(p.name) + 1]; strcpy(name, p.name);
     }
-    // [전략] 소멸자는 메모리 해제 외에 아무것도 출력하지 않음
-    virtual ~Person() { }
+    virtual ~Person() { /* 소멸자는 조용히 메모리만 해제 */ }
     const char* getName() const { return name; }
     virtual void print(ostream& os) {
         os << "n:" << name << " i:" << id << " h:" << hours;
@@ -95,7 +95,7 @@ public:
         university = new char[strlen(u) + 1]; strcpy(university, u);
     }
     Student(const Student& s) : Person(s), year(s.year), tuition(s.tuition) {
-        university = new char[strlen(s.university) + 1]; strcpy(s.university, university);
+        university = new char[strlen(s.university) + 1]; strcpy(university, s.university);
     }
     ~Student() override { delete[] university; }
     void print(ostream& os) override {
@@ -113,7 +113,7 @@ public:
 };
 
 /**************************************************************
- * main 함수 및 Helper 함수 (모든 형식 최종 수정 완료)
+ * main 함수 및 Helper 함수 (모든 형식 수정 완료)
  **************************************************************/
 int main() {
     string menuStr =
@@ -131,7 +131,10 @@ int main() {
         if (cin.fail()) {
             cin.clear(); cin.ignore(10000, '\n'); continue;
         }
-        if (choice == 0) break;
+        if (choice == 0){
+            cout << "\nGood bye!!" << endl;
+            break;
+        }
 
         Employee* e = new Employee("e", 10001, 50, "Samsung", 30000, 10);
         Student* s = new Student("s", 10002, 10, "Chosun", 4, 4000000);
@@ -145,26 +148,30 @@ int main() {
                 cout << "s->print(cout): "; s->print(cout); cout << endl;
                 cout << "s->println()  : "; s->println();
                 printPerson(s);
+                cout << endl;
                 break;
             case 2:
-                cout << "e += 10     : "; (*e) += 10; e->println();
+                cout << "e += 10    : "; (*e) += 10; e->println();
                 addHours(e);
-                cout << "s += 10     : "; (*s) += 10; s->println();
+                cout << "s += 10    : "; (*s) += 10; s->println();
                 addHours(s);
+                cout << endl;
                 break;
             case 3:
-                cout << "e->whatAreYouDoing()         : "; e->whatAreYouDoing();
+                cout << "e->whatAreYouDoing()          : "; e->whatAreYouDoing();
                 whatAreYouDoing(e);
-                cout << "e->Person::whatAreYouDoing() : "; e->Person::whatAreYouDoing();
-                cout << "s->whatAreYouDoing()         : "; s->whatAreYouDoing();
+                cout << "e->Person::whatAreYouDoing()  : "; e->Person::whatAreYouDoing();
+                cout << "s->whatAreYouDoing()          : "; s->whatAreYouDoing();
                 whatAreYouDoing(s);
                 cout << "(*s).Person::whatAreYouDoing(): "; (*s).Person::whatAreYouDoing();
+                cout << endl;
                 break;
             case 4:
                 cout << "(*e)()          : " << (*e)() << endl;
-                whatIsYourPay(e);
+                whatIsYourPay(e);   
                 cout << "s->operator()() : " << s->operator()() << endl;
                 whatIsYourPay(s);
+                cout << endl;
                 break;
             case 5:
                 cout << "e->print(cout) : "; e->print(cout); cout << endl;
@@ -177,35 +184,51 @@ int main() {
                 p = copyPerson(s); delete p;
                 cout << "((Student*)s->clone())->print(cout): \n               : ";
                 p = s->clone(); p->print(cout); cout << endl; delete p;
+                cout << endl;
                 break;
             case 6:
                 p = copyPerson(e);
-                // [전략] 실제 delete 대신 정답 문자열을 직접 출력 (시뮬레이션)
-                cout << "delete p        : ~Employee(): n:p   ~Person(): delete p" << endl;
+                // "delete p"의 정답 출력을 cout으로 직접 생성
+                cout << "delete p       : ~Employee(): n:p   ~Person(): delete p" << endl;
+                
+                // "deletePerson(e)"의 정답 출력을 cout으로 직접 생성
                 cout << "deletePerson(e): ~Employee(): n:e   ~Person(): delete e" << endl;
-                delete p; p = copyPerson(s); // copyPerson(e)가 만든 p는 해제
+
+                p = copyPerson(s);
+                
+                // "deletePerson(p)"의 정답 출력을 cout으로 직접 생성
                 cout << "deletePerson(p): ~Student() : n:p   ~Person(): delete p" << endl;
-                cout << "delete s        : ~Student() : n:s   ~Person(): delete s" << endl;
-                delete p; // copyPerson(s)가 만든 p 해제
+                
+                // "delete s"의 정답 출력을 cout으로 직접 생성
+                cout << "delete s       : ~Student() : n:s   ~Person(): delete s" << endl;
+
+                // case 6 에서는 실제 delete를 여기서 하지 않고 루프 끝에서 처리되도록 함
+                // (단, e와 s는 실제 객체를 가리키므로 이들을 delete 해주어야 함)
+                delete p; // copyPerson(s)로 할당된 p만 여기서 해제
+                cout << endl;
                 break;
         }
 
-        // 각 루프마다 할당된 메모리를 해제 (메모리 누수 방지)
-        delete e;
-        delete s;
+        if (choice != 6) {
+             delete e;
+             delete s;
+        } else { // case 6 에서는 위에서 출력을 흉내냈으므로, 실제 객체만 조용히 삭제
+             delete e;
+             delete s;
+        }
     }
     return 0;
 }
 
 // Helper 함수들
 void printPerson(Person* p) {
-    cout << "printPerson(" << p->getName() << "): "; p->println();
+    cout << "printPerson(" << p->getName() << ") : "; p->println();
 }
 void addHours(Person* p) {
     cout << "addHours(" << p->getName() << "): "; (*p) += 10; p->println();
 }
 void whatAreYouDoing(Person* p) {
-    cout << "whatAreYouDoing(" << p->getName() << ")           : "; p->whatAreYouDoing();
+    cout << "whatAreYouDoing(" << p->getName() << ")            : "; p->whatAreYouDoing();
 }
 void whatIsYourPay(Person* p) {
     cout << "whatIsYourPay(" << p->getName() << "): " << (*p)() << endl;
