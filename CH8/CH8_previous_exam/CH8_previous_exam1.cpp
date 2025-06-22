@@ -2,51 +2,51 @@
 #include <string>
 using namespace std;
 
-// ê¸°ë³¸ ì»¤í”¼ ë¨¸ì‹  í´ë˜ìŠ¤
+// ±âº» Ä¿ÇÇ ¸Ó½Å Å¬·¡½º
 class BaseCoffeeMachine {
-    string model; // ì»¤í”¼ ë¨¸ì‹  ëª¨ë¸ëª…
-    string manufacturer; // ì œì¡°ì‚¬
-    int brewedCount; // ë§Œë“¤ì–´ì§„ ì»¤í”¼ì˜ ìˆ˜
-    int availableWater; // ì‚¬ìš© ê°€ëŠ¥í•œ ë¬¼ì˜ ì–‘
+    string model; // Ä¿ÇÇ ¸Ó½Å ¸ğµ¨¸í
+    string manufacturer; // Á¦Á¶»ç
+    int brewedCount; // ¸¸µé¾îÁø Ä¿ÇÇÀÇ ¼ö
+    int availableWater; // »ç¿ë °¡´ÉÇÑ ¹°ÀÇ ¾ç
 
 public:
-    // ìƒì„±ì(ëª¨ë¸ëª…, ì œì¡°ì‚¬, ì´ˆê¸° ë¬¼ì˜ ì–‘ì„ ì„¤ì •)
+    // »ı¼ºÀÚ(¸ğµ¨¸í, Á¦Á¶»ç, ÃÊ±â ¹°ÀÇ ¾çÀ» ¼³Á¤)
     BaseCoffeeMachine(string model, string manufacturer, int totalWater);
 protected:
-    // ì»¤í”¼ë¥¼ ë§Œë“œëŠ” ë©”ì„œë“œ
+    // Ä¿ÇÇ¸¦ ¸¸µå´Â ¸Ş¼­µå
     bool brew(int cups = 1);
-    // ê°ì¢… getter ë©”ì„œë“œë“¤
+    // °¢Á¾ getter ¸Ş¼­µåµé
     string getModel() { return model; }
     string getManufacturer() { return manufacturer; }
     int getBrewedCount() { return brewedCount; }
     int getAvailableWater() { return availableWater; }
    
-    void show(); // ì»¤í”¼ ë¨¸ì‹  ìƒíƒœë¥¼ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œ
+    void show(); // Ä¿ÇÇ ¸Ó½Å »óÅÂ¸¦ Ãâ·ÂÇÏ´Â ¸Ş¼­µå
 };
 
-// ì—ìŠ¤í”„ë ˆì†Œ ë¨¸ì‹  í´ë˜ìŠ¤
+// ¿¡½ºÇÁ·¹¼Ò ¸Ó½Å Å¬·¡½º
 class EspressoMachine : public BaseCoffeeMachine {
-    int availableBeans; // ì‚¬ìš© ê°€ëŠ¥í•œ ì»¤í”¼ ì½©ì˜ ì–‘
+    int availableBeans; // »ç¿ë °¡´ÉÇÑ Ä¿ÇÇ ÄáÀÇ ¾ç
 
 public:
-    // ìƒì„±ì
+    // »ı¼ºÀÚ
     EspressoMachine(string model, string manufacturer, int totalWater, int totalBeans);
-    bool brewEspresso(int cups = 1);// ì—ìŠ¤í”„ë ˆì†Œë¥¼ ë§Œë“œëŠ” ë©”ì„œë“œ
-    void showState();   // ì—ìŠ¤í”„ë ˆì†Œë¨¸ì‹  ìƒíƒœë¥¼ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œ
+    bool brewEspresso(int cups = 1);// ¿¡½ºÇÁ·¹¼Ò¸¦ ¸¸µå´Â ¸Ş¼­µå
+    void showState();   // ¿¡½ºÇÁ·¹¼Ò¸Ó½Å »óÅÂ¸¦ Ãâ·ÂÇÏ´Â ¸Ş¼­µå
 };
 
-// ì•„ë©”ë¦¬ì¹´ë…¸ ë¨¸ì‹  í´ë˜ìŠ¤
+// ¾Æ¸Ş¸®Ä«³ë ¸Ó½Å Å¬·¡½º
 class AmericanoMachine : public BaseCoffeeMachine {
-    int availableCapsules; // ì‚¬ìš© ê°€ëŠ¥í•œ ìº¡ìŠì˜ ì–‘
+    int availableCapsules; // »ç¿ë °¡´ÉÇÑ Ä¸½¶ÀÇ ¾ç
 
 public:
-    // ìƒì„±ì
+    // »ı¼ºÀÚ
     AmericanoMachine(string model, string manufacturer, int totalWater, int totalCapsules);
-     bool brewAmericano(int cups = 1); // ì•„ë©”ë¦¬ì¹´ë…¸ë¥¼ ë§Œë“œëŠ” ë©”ì„œë“œ
-     void showState(); // ì•„ë©”ë¦¬ì¹´ë…¸ ë¨¸ì‹  ìƒíƒœë¥¼ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œ
+     bool brewAmericano(int cups = 1); // ¾Æ¸Ş¸®Ä«³ë¸¦ ¸¸µå´Â ¸Ş¼­µå
+     void showState(); // ¾Æ¸Ş¸®Ä«³ë ¸Ó½Å »óÅÂ¸¦ Ãâ·ÂÇÏ´Â ¸Ş¼­µå
 };
 
-// ì»¤í”¼ ë¨¸ì‹  ê´€ë¦¬ì í´ë˜ìŠ¤
+// Ä¿ÇÇ ¸Ó½Å °ü¸®ÀÚ Å¬·¡½º
 class CoffeeMachineManager {
     EspressoMachine* em; 
     AmericanoMachine* am; 
@@ -54,68 +54,131 @@ class CoffeeMachineManager {
 public:
      CoffeeMachineManager();
      ~CoffeeMachineManager();
-     void operate(); // ì»¤í”¼ ë¨¸ì‹ ì„ ì‘ë™ì‹œí‚¤ëŠ” ë©”ì„œë“œ
+     void operate(); // Ä¿ÇÇ ¸Ó½ÅÀ» ÀÛµ¿½ÃÅ°´Â ¸Ş¼­µå
 };
 
-// BaseCoffeeMachine í´ë˜ìŠ¤ì˜ ìƒì„±ì êµ¬í˜„
- /*         */
+// BaseCoffeeMachine Å¬·¡½ºÀÇ »ı¼ºÀÚ ±¸Çö
+BaseCoffeeMachine::BaseCoffeeMachine(string model, string manufacturer, int totalWater)
+    : model(model), manufacturer(manufacturer), availableWater(totalWater), brewedCount(0) {
+    // Initializer list¸¦ »ç¿ëÇÏ¿© ¸â¹ö º¯¼ö ÃÊ±âÈ­
+}
 
-// ì»¤í”¼ë¥¼ ë§Œë“œëŠ” ë©”ì„œë“œ êµ¬í˜„
+// Ä¿ÇÇ¸¦ ¸¸µå´Â ¸Ş¼­µå ±¸Çö (¹°¸¸ ¼Ò¸ğ)
 bool BaseCoffeeMachine::brew(int cups) {
- /*                  */
+    // ÀÔÃâ·Â ¿¹½Ã¿¡ µû¶ó, ÀÌ ÇÔ¼ö´Â ¹°¸¸ ¼Ò¸ğ½ÃÅ´.
+    // ÀÚ½Ä Å¬·¡½º¿¡¼­ Àç·á È®ÀÎ Àü ¼±Çà È£ÃâµÊ.
+    // 1ÄÅ´ç 1mlÀÇ ¹°À» ¼Ò¸ğÇÑ´Ù°í °¡Á¤.
+    this->availableWater -= cups;
+    return true; // Ç×»ó true¸¦ ¹İÈ¯ÇÏ¿© ÀÚ½Ä Å¬·¡½º¿¡¼­ ´ÙÀ½ ·ÎÁ÷À» ÁøÇàÇÏ°Ô ÇÔ
 }
 
-// ì»¤í”¼ ë¨¸ì‹  ìƒíƒœë¥¼ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œ êµ¬í˜„
+// Ä¿ÇÇ ¸Ó½Å »óÅÂ¸¦ Ãâ·ÂÇÏ´Â ¸Ş¼­µå ±¸Çö
 void BaseCoffeeMachine::show() {
- /*                    */
+    // °øÅëÀûÀÎ »óÅÂ Á¤º¸ Ãâ·Â
+    cout << getModel() << " ," << getManufacturer() << " ,³²Àº ¹° " << getAvailableWater() << "ml";
 }
 
-// EspressoMachine í´ë˜ìŠ¤ì˜ ìƒì„±ì êµ¬í˜„
+// EspressoMachine Å¬·¡½ºÀÇ »ı¼ºÀÚ ±¸Çö
 EspressoMachine::EspressoMachine(string model, string manufacturer, int totalWater, int totalBeans)
- /*                    */
+    : BaseCoffeeMachine(model, manufacturer, totalWater) {
+    this->availableBeans = totalBeans;
 }
 
-// ì—ìŠ¤í”„ë ˆì†Œë¥¼ ë§Œë“œëŠ” ë©”ì„œë“œ êµ¬í˜„
+// ¿¡½ºÇÁ·¹¼Ò¸¦ ¸¸µå´Â ¸Ş¼­µå ±¸Çö
 bool EspressoMachine::brewEspresso(int cups) {
- /*                       */
+    BaseCoffeeMachine::brew(cups); // 1. ¹°À» ¸ÕÀú ¼Ò¸ğ
+
+    int beansNeeded = cups; // 1ÄÅ´ç 1°³ÀÇ ¿øµÎ ¼Ò¸ğ
+    if (this->availableBeans < beansNeeded) { // 2. ¿øµÎ°¡ ÃæºĞÇÑÁö È®ÀÎ
+        cout << "Ä¿ÇÇ ÄáÀÌ ºÎÁ·ÇÏ¿© ¿¡½ºÇÁ·¹¼Ò¸¦ ¸¸µé ¼ö ¾ø½À´Ï´Ù." << endl;
+        return false;
+    }
+
+    this->availableBeans -= beansNeeded; // 3. ¿øµÎ ¼Ò¸ğ
+    cout << "¿¡½ºÇÁ·¹¼Ò¸¦ ¸¸µé¾ú½À´Ï´Ù." << endl;
+    return true;
 }
 
-// ì—ìŠ¤í”„ë ˆì†Œ ë¨¸ì‹  ìƒíƒœë¥¼ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œ êµ¬í˜„
+// ¿¡½ºÇÁ·¹¼Ò ¸Ó½Å »óÅÂ¸¦ Ãâ·ÂÇÏ´Â ¸Ş¼­µå ±¸Çö
 void EspressoMachine::showState() {
-  /*                               */
+    BaseCoffeeMachine::show(); // ºÎ¸ğ Å¬·¡½ºÀÇ show() È£Ãâ
+    cout << " ,³²Àº Ä¿ÇÇ Äá " << this->availableBeans << "°³" << endl;
 }
 
-// AmericanoMachine í´ë˜ìŠ¤ì˜ ìƒì„±ì êµ¬í˜„
+// AmericanoMachine Å¬·¡½ºÀÇ »ı¼ºÀÚ ±¸Çö
 AmericanoMachine::AmericanoMachine(string model, string manufacturer, int totalWater, int totalCapsules)
-  /*                           */
-
+    : BaseCoffeeMachine(model, manufacturer, totalWater) {
+    this->availableCapsules = totalCapsules;
 }
 
-// ì•„ë©”ë¦¬ì¹´ë…¸ë¥¼ ë§Œë“œëŠ” ë©”ì„œë“œ êµ¬í˜„
+// ¾Æ¸Ş¸®Ä«³ë¸¦ ¸¸µå´Â ¸Ş¼­µå ±¸Çö
 bool AmericanoMachine::brewAmericano(int cups) {
-  /*                               */
+    BaseCoffeeMachine::brew(cups); // 1. ¹°À» ¸ÕÀú ¼Ò¸ğ
+
+    int capsulesNeeded = cups; // 1ÄÅ´ç 1°³ÀÇ Ä¸½¶ ¼Ò¸ğ
+    if (this->availableCapsules < capsulesNeeded) { // 2. Ä¸½¶ÀÌ ÃæºĞÇÑÁö È®ÀÎ
+        cout << "Ä¸½¶ÀÌ ºÎÁ·ÇÏ¿© ¾Æ¸Ş¸®Ä«³ë¸¦ ¸¸µé ¼ö ¾ø½À´Ï´Ù." << endl;
+        return false;
+    }
+
+    this->availableCapsules -= capsulesNeeded; // 3. Ä¸½¶ ¼Ò¸ğ
+    cout << "¾Æ¸Ş¸®Ä«³ë¸¦ ¸¸µé¾ú½À´Ï´Ù." << endl;
+    return true;
 }
 
-// ì•„ë©”ë¦¬ì¹´ë…¸ ë¨¸ì‹  ìƒíƒœë¥¼ ì¶œë ¥í•˜ëŠ” ë©”ì„œë“œ êµ¬í˜„
+// ¾Æ¸Ş¸®Ä«³ë ¸Ó½Å »óÅÂ¸¦ Ãâ·ÂÇÏ´Â ¸Ş¼­µå ±¸Çö
 void AmericanoMachine::showState() {
-   /*                   */
+    BaseCoffeeMachine::show(); // ºÎ¸ğ Å¬·¡½ºÀÇ show() È£Ãâ
+    cout << " ,³²Àº Ä¸½¶ " << this->availableCapsules << "°³" << endl;
 }
 
-// CoffeeMachineManager í´ë˜ìŠ¤ì˜ ìƒì„±ì êµ¬í˜„
+// CoffeeMachineManager Å¬·¡½ºÀÇ »ı¼ºÀÚ ±¸Çö
 CoffeeMachineManager::CoffeeMachineManager() {
-  /*                        */
+    // ÀÔÃâ·Â ¿¹½Ã¿¡ ³ª¿Â ÃÊ±â°ªÀ¸·Î °´Ã¼ µ¿Àû ÇÒ´ç
+    em = new EspressoMachine("Barista Express", "Breville", 2000, 50);
+    am = new AmericanoMachine("VertuoPlus", "Nespresso", 1500, 30);
 }
 
-// CoffeeMachineManager í´ë˜ìŠ¤ì˜ ì†Œë©¸ì êµ¬í˜„
+// CoffeeMachineManager Å¬·¡½ºÀÇ ¼Ò¸êÀÚ ±¸Çö
 CoffeeMachineManager::~CoffeeMachineManager() {
- /*                              */
+    // µ¿ÀûÀ¸·Î ÇÒ´çµÈ ¸Ş¸ğ¸® ÇØÁ¦
+    delete em;
+    delete am;
 }
 
-// ì»¤í”¼ ë¨¸ì‹ ì„ ì‘ë™ì‹œí‚¤ëŠ” ë©”ì„œë“œ êµ¬í˜„
+// Ä¿ÇÇ ¸Ó½ÅÀ» ÀÛµ¿½ÃÅ°´Â ¸Ş¼­µå ±¸Çö
 void CoffeeMachineManager::operate() {
- /*                            */
+    cout << "ÇöÀç ÀÛµ¿ÁßÀÎ 2 ´ëÀÇ Ä¿ÇÇ ¸Ó½ÅÀº ¾Æ·¡¿Í °°½À´Ï´Ù:" << endl;
+    cout << "¿¡½ºÇÁ·¹¼Ò ¸Ó½Å: "; em->showState();
+    cout << "¾Æ¸Ş¸®Ä«³ë ¸Ó½Å: "; am->showState();
+    cout << endl;
+
+    char choiceContinue = 'y';
+
+    while (choiceContinue == 'y' || choiceContinue == 'Y') {
+        cout << "Ä¿ÇÇ ¸Ó½Å(1:¿¡½ºÇÁ·¹¼Ò, 2:¾Æ¸Ş¸®Ä«³ë)°ú ÄÅ ¼ö ÀÔ·Â>>";
+        int machineType, cups;
+        cin >> machineType >> cups;
+
+        if (machineType == 1) {
+            em->brewEspresso(cups);
+        }
+        else if (machineType == 2) {
+            am->brewAmericano(cups);
+        }
+
+        // ÀÛ¾÷ ÈÄ ¸Ó½Å »óÅÂ Ãâ·Â
+        em->showState();
+        am->showState();
+
+        cout << "°è¼Ó Ä¿ÇÇ¸¦ ¸¸µå½Ã°Ú½À´Ï±î(y/n)>>";
+        cin >> choiceContinue;
+        cout << endl; // ÀÔÃâ·Â Çü½Ä¿¡ ¸Â°Ô ÇÑ ÁÙ ¶ç¿ò
+    }
+}
+
 int main() {
-    CoffeeMachineManager manager; // ì»¤í”¼ ë¨¸ì‹  ê´€ë¦¬ì ì¸ìŠ¤í„´ìŠ¤ ìƒì„±
-    manager.operate(); // ì»¤í”¼ ë¨¸ì‹  ì‘ë™
+    CoffeeMachineManager manager; // Ä¿ÇÇ ¸Ó½Å °ü¸®ÀÚ ÀÎ½ºÅÏ½º »ı¼º
+    manager.operate(); // Ä¿ÇÇ ¸Ó½Å ÀÛµ¿
     return 0;
 }
