@@ -37,18 +37,18 @@ bool Person::operator ! () const {
 Person operator + (char c, const Person& p) {
     // 1. 새로운 name 문자열 생성: c + "+" + p.name
     string newName = c + string("+") + p.name;
-    
+
     // 2. 새로운 address 문자열 생성: c + p.address
     string newAddress = c + p.address;
-    
+
     // 3. 계산된 name과 address로 새 Person 객체를 생성하여 반환
     return Person(newName, newAddress);
 }
 
 Person& Person::operator<<(char c) {
-    // 1. 이름(name) 변경: (name += "<<") += c
-    (this->name += " << ") += c;  
-    
+    // 1. 이름(name) 변경: (name += " << ") += c
+    (this->name += " << ") += c;
+
     // 2. 주소(address) 변경: address += c
     this->address += c;
 
