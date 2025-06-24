@@ -39,13 +39,11 @@ public:
     // 다른 패키지와의 크기를 비교하는 메서드 (compareTo 구현)
     int compareTo(const AbstractItem* other) const override {
         if (this->getSize() > other->getSize()) {
-            return 1; // 현재 객체가 더 크면 1 반환
-        }
-        else if (this->getSize() < other->getSize()) {
-            return -1; // 현재 객체가 더 작으면 -1 반환
-        }
-        else {
-            return 0; // 크기가 같으면 0 반환
+            return 1; // 현재 객체가 더 큼
+        } else if (this->getSize() < other->getSize()) {
+            return -1; // 현재 객체가 더 작음
+        } else {
+            return 0; // 크기가 같음
         }
     }
 };
